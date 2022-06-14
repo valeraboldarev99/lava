@@ -1,7 +1,7 @@
 <header class="header">
     <div class="header__left">
         <div class="logo">
-            <a href="{{ route('main_page') }}">
+            <a href="{{ home() }}">
                 <img src="/img/logo.png" alt="logo">
             </a>
         </div>

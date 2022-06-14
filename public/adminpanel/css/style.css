@@ -1,0 +1,54 @@
+/*auth admin page*/
+.auth_page {
+	background: url(../img/bg-auth2.jpg) 0 0 no-repeat;
+	height: 100vh;
+	background-size: cover;
+	font-size: 14px;
+}
+
+.wrapper {
+	width: 1280px;
+	overflow: hidden;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.auth-container {
+	display: inline-block;
+	margin-top: 75px;
+	background: #fff;
+	width: 50%;
+	border-radius: 20px;
+	padding: 25px;
+	text-align: left;
+}
+
+.form__item {
+	margin: 15px 0;
+	width: 100%;
+}
+
+.auth-label {
+	display: inline-block;
+	font-weight: 700;
+	width: 20%;
+}
+
+.auth-input {
+	width: 75%;
+    height: 34px;
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.auth-input:focus {
+    border-color: #66afe9;
+    outline: 0;
+}
+
+.auth-btn {
+	margin-left: 21%;
+}

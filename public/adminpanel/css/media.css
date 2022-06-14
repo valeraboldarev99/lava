@@ -1,0 +1,49 @@
+@media screen and (max-width:1300px) {
+	/*auth admin page*/
+	.wrapper {
+		width: 768px;
+	}
+
+	.auth-container {
+		width: 80%;
+		border-radius: 10px;
+		padding: 25px;
+	}
+
+	.form__item {
+		margin: 10px 0;
+	}
+}
+
+@media screen and (max-width:780px) {
+	.auth_page {
+		font-size: 12px;
+	}
+
+	.wrapper {
+		width: 320px;
+	}
+
+	.auth-container {
+		width: 95%;
+		padding: 10px;
+	}
+
+	.auth-label {
+		font-weight: 700;
+		width: 20%;
+	}
+
+	.auth-input {
+		width: 75%;
+		height: 25px;
+		padding: 6px;
+	}
+
+	.auth-btn {
+		margin-left: 21%;
+		height: 25px;
+		font-size: 12px;
+		padding: 4px 15px;
+	}
+}
