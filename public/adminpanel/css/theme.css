@@ -1,0 +1,37 @@
+/*ADMIN PANEL*/
+/*admin panel header*/
+.admin-panel-page {
+	background: #E2E2E2;
+}
+
+.header__items {
+	background-color: #3c8dbc;
+	color: #fff;
+}
+
+.header__menu_item a {
+	color: #fff;
+}
+
+/*admin panel sidebar and main*/
+
+.main-sidebar {
+	background: #222D32;
+	color: #b8c7ce;
+}
+
+.main-sidebar a {
+	color: #b8c7ce;
+}
+
+.content-header {
+	background-color: #ECF0F5;
+}
+
+.content-wrapper {
+	background-color: #fff;
+}
+
+.content-main {
+	border-top: 3px solid #3c8dbc;
+}

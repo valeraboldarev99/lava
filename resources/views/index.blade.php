@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
-@section('page_content')
+@section('content')
     <h2>Главная</h2>
 @endsection

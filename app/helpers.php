@@ -5,3 +5,10 @@ if (!function_exists('home')) {
         return url('/');
     }
 }
+
+if (!function_exists('modules_all')) {
+    function modules_all()
+    {
+        return array_diff(scandir(config('modules.path')), array('.','..'));
+    }
+}

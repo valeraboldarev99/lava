@@ -13,7 +13,7 @@ class ModulesServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         //получаем список модулей, которые надо подгрузить
-        $modules = array_diff(scandir(config('modules.path')), array('.','..'));
+        $modules = modules_all();
 
         if($modules) {
             foreach ($modules as $module) {

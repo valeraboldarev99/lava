@@ -13,10 +13,17 @@ Route::namespace('App\Modules\Users\Http\Controllers')
 // admin auth
     Route::get(config('cms.url.admin_auth'), 'Auth\LoginController@showAdminLoginForm')->name('adminpanel');
 
-//admin
-
 // user
     Route::group(['middleware' => ['auth']], function() {
     	Route::get('/user/index', 'IndexController@index');
     });
+
+//admin
+	Route::group(['middleware' => ['auth', 'status'], 
+			'prefix' => config('cms.url.admin_prefix'), 
+			'as' => config('cms.admin_prefix'),
+			'namespace' => 'Admin'], function() {
+
+		Route::resource('users', 'IndexController');
+	});
 });
