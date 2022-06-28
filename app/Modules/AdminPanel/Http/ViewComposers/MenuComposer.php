@@ -16,7 +16,9 @@ class MenuComposer
 				$items = config($module . '.settings.menu_items');
 				if($items)
 				{
-					$menuItems[] = $items;
+					foreach ($items as $item) {
+						$menuItems[] = $item;
+					}
 				}
 			}
 		}

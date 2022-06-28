@@ -1,10 +1,12 @@
 <?php
 return [
 	'menu_items' => [
-		'icon' 		=> 'fa fa-list',
-		'route' 	=> 'admin.settings.index',
-		'title' 	=> trans('Settings::adminpanel.settings_list'),
-		'priority' 	=> 1,
+		[
+			'icon' 		=> 'fa fa-list',
+			'route' 	=> 'admin.settings.index',
+			'title' 	=> trans('Settings::adminpanel.settings_list'),
+			'priority' 	=> 1,
+		],
 	],
 	'providers'	=> [
 		// 'App\Modules\AdminPanel\Http\ViewComposers\MenuComposer22' => ['AdminPanel::main'],

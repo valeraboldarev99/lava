@@ -16,4 +16,11 @@ class IndexController extends MainController
     {
         return new Settings();
     }
+
+    public function getRules($request, $id = false)
+    {
+        return [
+        	'slug' => 'required'
+        ];
+    }
 }

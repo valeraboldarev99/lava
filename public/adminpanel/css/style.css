@@ -10,7 +10,6 @@
 	width: 1280px;
 	overflow: hidden;
 	margin: 0 auto;
-	text-align: center;
 }
 
 .auth-container {
@@ -90,7 +89,7 @@
 .main {
 	display: flex;
 	justify-content: center;
-	height: 100vh;
+	min-height: 100vh;
 }
 
 .main-sidebar {
@@ -117,6 +116,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 10000;
 }
 
 /*main*/
@@ -147,12 +147,12 @@
 }
 
 .entities__list th {
-	font-weight: 700;
-	font-size: 15px;
+	font-weight: 500;
+	font-size: 13px;
 }
 
 .entities__list th,
 .entities__list td {
 	border: 1px solid #e9e9e9;
-	padding: 5px 3px;
+	padding: 7px;
 }

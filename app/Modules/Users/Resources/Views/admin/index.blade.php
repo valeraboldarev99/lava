@@ -7,7 +7,7 @@
 @section('th')
     <th>@sortablelink('name', 'Имя')</th>
     <th>@sortablelink('email', 'Email')</th>
-    <th>Control</th>
+    <th width="150">Control</th>
 @endsection
 
 @section('td')

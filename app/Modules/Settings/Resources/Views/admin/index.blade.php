@@ -20,12 +20,8 @@
                 {{ $entity->slug }}
             </td>
             <td>
-                <div class="btn btn-default">
-                	<i class="fa fa-pencil"></i>
-                </div>
-                <div class="btn btn-default">
-                	<i class="fa fa-fw fa-close text-danger delete"></i>
-                </div>
+               @include('AdminPanel::controls.edit')
+               @include('AdminPanel::controls.destroy')
             </td>
         </tr>
     @endforeach
