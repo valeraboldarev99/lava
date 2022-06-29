@@ -19,13 +19,8 @@
             <td>
                 {{ $entity->email }}
             </td>
-            <td>
-                <div class="btn btn-default">
-                	<i class="fa fa-pencil"></i>
-                </div>
-                <div class="btn btn-default">
-                	<i class="fa fa-fw fa-close text-danger delete"></i>
-                </div>
+            <td class="controls">
+                @include('AdminPanel::controls.entity_all')
             </td>
         </tr>
     @endforeach

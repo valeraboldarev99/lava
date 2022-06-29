@@ -12,7 +12,7 @@
     <div class="panel-body">
         @include('AdminPanel::common.errors')
 
-    @if(isset($entity))
+    @if(isset($entity->id))
         <form method="POST" action="{{ route($routePrefix . 'update', $entity->id) }}">
             @method('PATCH')
     @else

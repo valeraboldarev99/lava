@@ -7,7 +7,7 @@
 @section('th')
     <th>@sortablelink('name', 'Имя')</th>
     <th>@sortablelink('email', 'Slug')</th>
-    <th>Control</th>
+    <th>Управление</th>
 @endsection
 
 @section('td')
@@ -19,9 +19,8 @@
             <td>
                 {{ $entity->slug }}
             </td>
-            <td>
-               @include('AdminPanel::controls.edit')
-               @include('AdminPanel::controls.destroy')
+            <td class="controls">
+               @include('AdminPanel::controls.entity_all')
             </td>
         </tr>
     @endforeach
