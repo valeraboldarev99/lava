@@ -38,13 +38,13 @@ abstract class MainController extends Controller
 
     public function store(Request $request)
     {
-        // $this->validate($request, $this->getRules($request), $this->getMessages(), $this->getAttributes());
+        $this->validate($request, $this->getRules($request), $this->getMessages(), $this->getAttributes());
 
         $entity = $this->getModel()->create($request->all());
 
         $this->after($entity);
 
-        return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.store'));
+        return redirect()->route($this->routePrefix . 'edit', $entity->id)->with('message', trans('AdminPanel::adminpanel.messages.store'));
     }
 
     public function edit($id)
@@ -64,7 +64,7 @@ abstract class MainController extends Controller
 
         $this->after($entity);
 
-        return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.update'));
+        return redirect()->route($this->routePrefix . 'edit', $entity->id)->with('message', trans('AdminPanel::adminpanel.messages.update'));
     }
 
     public function destroy($id)

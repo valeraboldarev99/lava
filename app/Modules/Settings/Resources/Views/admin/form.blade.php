@@ -7,17 +7,24 @@
 @section('form_content')
     <div class="box-body">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group has-feedback">
                     <label for="name">Наименование</label>
                     <input type="text" name="name" class="form-control" value="{{ adminform_value($entity, $entity->name) }}">
                     <span class="glyphicon form-control-feedback"></span>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group has-feedback">
                     <label for="slug">Адресное имя</label>
                     <input type="text" name="slug" class="form-control" value="{{ adminform_value($entity, $entity->slug) }}">
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group has-feedback">
+                    <label for="description">Описание</label>
+                    <input type="text" name="description" class="form-control" value="{{ adminform_value($entity, $entity->description) }}">
                     <span class="glyphicon form-control-feedback"></span>
                 </div>
             </div>
