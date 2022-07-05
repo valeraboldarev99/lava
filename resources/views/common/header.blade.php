@@ -9,13 +9,13 @@
     <div class="header__right">
         <div class="header__info">
             <div class="header__menu">
-                {{-- @include('Admins::main') --}}
+                @include('Users::main')
             </div>
         </div>
         <nav class="header__menu">
-            <ul class="nav navbar-nav">
-{{--                 <li><a href="/test">Test</a></li>
-                <li><a href="/news">News</a></li> --}}
+            <ul>
+                <li><a href="/users">Users</a></li>
+                <li><a href="/settings">Settings</a></li>
             </ul>
         </nav>
     </div>

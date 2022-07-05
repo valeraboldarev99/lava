@@ -13,4 +13,7 @@ Route::group(['namespace' => $namespace, 'middleware' => ['web']], function() {
 
 		Route::resource('/settings', 'IndexController');
 	});
+
+//user
+	Route::resource('/settings', 'IndexController');
 });

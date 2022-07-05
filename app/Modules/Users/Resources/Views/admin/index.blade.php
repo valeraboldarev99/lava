@@ -20,7 +20,8 @@
                 {{ $entity->email }}
             </td>
             <td class="controls">
-                @include('AdminPanel::controls.entity_all')
+                @include('AdminPanel::controls.edit')
+                @include('AdminPanel::controls.destroy')
             </td>
         </tr>
     @endforeach

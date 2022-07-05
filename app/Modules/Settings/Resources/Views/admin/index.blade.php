@@ -12,7 +12,7 @@
 
 @section('td')
     @foreach ($entities as $entity)
-        <tr>
+        <tr {!! $entity->active == 1 ?: 'style="background:#f2dede;"' !!}>
             <td>
                 {{ $entity->name }}
             </td>

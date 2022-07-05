@@ -42,8 +42,6 @@ abstract class MainController extends Controller
 
         $entity = $this->getModel()->create($request->all());
 
-        $this->after($entity);
-
         return redirect()->route($this->routePrefix . 'edit', $entity->id)->with('message', trans('AdminPanel::adminpanel.messages.store'));
     }
 
@@ -62,17 +60,13 @@ abstract class MainController extends Controller
         $entity = $this->getModel()->findOrFail($id);
         $entity->update($request->all());
 
-        $this->after($entity);
-
-        return redirect()->route($this->routePrefix . 'edit', $entity->id)->with('message', trans('AdminPanel::adminpanel.messages.update'));
+        return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.update'));
     }
 
     public function destroy($id)
     {
         $entity = $this->getModel()->find($id);
         $entity->delete();
-
-        $this->after($entity);
 
         return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.destroy'));
     }
@@ -97,11 +91,6 @@ abstract class MainController extends Controller
     protected function getCustomAttributes() : array
     {
         return [];
-    }
-
-    protected function after($entity)
-    {
-        //
     }
 
     protected function getIndexViewName()

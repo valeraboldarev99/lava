@@ -10,7 +10,7 @@ class MyForm
 	{
 		$entity = $attr['entity'];
 		$method = $attr['method'];
-		$store = $attr['store'];
+		isset($attr['store']) ? $store = $attr['store'] : $store = '';
 		$update = $attr['update'];
 		$methodInput = '';
 
@@ -218,9 +218,14 @@ class MyForm
 		return $block;
 	}
 
-	public function hidden($name, $label = null, $value = null, $options = [])
+	public function hidden($name, $value = null, $options = [])
 	{
-		return MyForm::input('hidden', $name, $label, $value, $options);
+		// return MyForm::input('hidden', $name, $label = null, $value, $options);
+		return $input = '<input type="hidden"
+							id="' . $name . '"
+							name="' . $name . '"
+							value="' . $value . '"
+									' . implode($options, ' ') .'>';
 	}
 
 	public function button($type, $name, $options = [])
