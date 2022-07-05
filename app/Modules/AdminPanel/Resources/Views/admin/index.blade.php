@@ -26,6 +26,6 @@
         {{ $entities->links() }}
 
     @else
-        <p>@lang('admin::admin.no_records')</p>
+        <p style="text-align: center;">@lang('AdminPanel::adminpanel.no_records')</p>
     @endif
 @endsection

@@ -34,5 +34,8 @@
             @include('AdminPanel::common.footer')
         </div>
     </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="/adminpanel/js/app.js"></script>
 </body>
 </html>

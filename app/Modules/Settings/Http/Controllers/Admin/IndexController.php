@@ -20,7 +20,8 @@ class IndexController extends MainController
     public function getRules($request, $id = false)
     {
         return [
-        	'slug' => 'required'
+            'name' => 'required',
+            'slug' => 'required',
         ];
     }
 }

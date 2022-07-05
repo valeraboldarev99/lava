@@ -13,7 +13,7 @@ class CreateSettingsTable extends Migration
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->tinyInteger('active')->default(1);
-            $table->enum('type', ['html', 'wysiwyg'])->index();
+            $table->enum('type', ['html', 'wysiwyg'])->default('html');
             $table->text('content')->nullable();
             $table->text('description')->nullable();
         });

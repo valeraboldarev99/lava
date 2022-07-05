@@ -14,4 +14,14 @@ class Settings extends Model
     protected $guarded = ['id'];
 
     public $timestamps = false;
+
+    const TYPE = [
+        'html'			=> 'Текст',
+        'wysiwyg'		=> 'Визуальный редактор'
+    ];
+
+    public function getType()
+    {
+        return self::TYPE;
+    }
 }

@@ -5,29 +5,42 @@
 @endsection
 
 @section('form_content')
-    <div class="box-body">
+    {!! MyForm::open([
+        'entity' => $entity,
+        'method' => 'POST',
+        'store' => $routePrefix . 'store',
+        'update' => $routePrefix . 'update',
+        'autocomplete' => true]) !!}
+
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group has-feedback">
-                    <label for="name">Наименование</label>
-                    <input type="text" name="name" class="form-control" value="{{ adminform_value($entity, $entity->name) }}">
-                    <span class="glyphicon form-control-feedback"></span>
-                </div>
+                {!! MyForm::text('name', trans('AdminPanel::fields.name') , $entity->name) !!}
             </div>
+
+            <div class="col-md-4">
+                {!! MyForm::text('slug', trans('AdminPanel::fields.slug') , $entity->slug) !!}
+            </div>
+
+            <div class="col-md-2">
+                {!! MyForm::checkbox('active', trans('AdminPanel::fields.active'), $entity->active) !!}
+            </div>
+
+            <div class="clearfix"></div>
+
             <div class="col-md-6">
-                <div class="form-group has-feedback">
-                    <label for="slug">Адресное имя</label>
-                    <input type="text" name="slug" class="form-control" value="{{ adminform_value($entity, $entity->slug) }}">
-                    <span class="glyphicon form-control-feedback"></span>
-                </div>
+                {!! MyForm::select('type', trans('Settings::adminpanel.type'), $entity->getType()) !!}
             </div>
+
+            <div class="clearfix"></div>
+
             <div class="col-md-12">
-                <div class="form-group has-feedback">
-                    <label for="description">Описание</label>
-                    <input type="text" name="description" class="form-control" value="{{ adminform_value($entity, $entity->description) }}">
-                    <span class="glyphicon form-control-feedback"></span>
-                </div>
+                {!! MyForm::textarea('description', trans('AdminPanel::fields.description'), $entity->description, ['rows="5"']) !!}
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="col-md-12">
+                {!! MyForm::textarea('content', trans('AdminPanel::fields.content'), $entity->content, ['rows="8"']) !!}
             </div>
         </div>
-    </div>
 @endsection

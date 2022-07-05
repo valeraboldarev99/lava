@@ -35,3 +35,11 @@
 .content-main {
 	border-top: 3px solid #3c8dbc;
 }
+
+.form-error {
+	color: red;
+}
+
+.help__block {
+	color: #777;
+}
