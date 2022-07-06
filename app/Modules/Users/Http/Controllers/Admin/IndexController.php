@@ -3,18 +3,102 @@
 namespace App\Modules\Users\Http\Controllers\Admin;
 
 use Auth;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Modules\Users\Models\User;
+use App\Modules\Users\Models\Users;
+use App\Modules\Users\Models\Role;
+use App\Modules\Users\Models\UserRole;
 use App\Http\Controllers\Controller;
 use App\Modules\AdminPanel\Http\Controllers\MainController;
 
 class IndexController extends MainController
 {
-	protected $viewPrefix = 'Users::';
+    protected $viewPrefix = 'Users::';
     protected $routePrefix = 'admin.users.';
 
-	public function getModel()
-	{
-		return new User();
-	}
+    public function getModel()
+    {
+        return new Users();
+    }
+
+    public function index()
+    {
+        $users = Users::join('user_roles', 'users.id', 'user_roles.user_id')
+                        ->join('roles', 'user_roles.role_id', 'roles.id')
+                        ->select('users.*', 'roles.name as role_name')
+                        ->paginate($this->perPage);
+
+        return view($this->getIndexViewName(), [
+            'entities' => $users
+        ]);
+    }
+
+    public function create()
+    {
+        $entity = $this->getModel();
+        $roles = Role::pluck('name', 'id');
+
+        return view($this->getFormViewName(), [
+            'entity'    => $entity,
+            'roles'     => $roles,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, $this->getRules($request), $this->getMessages(), $this->getAttributes());
+
+        $user = Users::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'remember_token' => Str::random(100),
+        ]);
+
+        if (!$user) {
+            return back()->withErrors(['msg' => "Ошибка создания"])->withInput();
+        } else {
+            $user_role = UserRole::create([
+                'user_id' => $user->id,
+                'role_id' => (int)$request['role'],
+            ]);
+            if (!$user_role) {
+                return back()->withErrors(['msg' => "Ошибка создания Роли пользователя"])->withInput();
+            } else {
+                return redirect()->route($this->routePrefix . 'edit', $user->id)->with('message', trans('AdminPanel::adminpanel.messages.store'));
+            }
+        }
+    }
+
+    public function edit($id)
+    {
+        $roles = Role::pluck('name', 'id');
+        $entity = $this->getModel()->findOrFail($id);
+        $entity->role = UserRole::where('user_id', $id)->pluck('role_id')->first();
+
+        return view($this->getFormViewName(), [
+            'routePrefix'   => $this->routePrefix,
+            'entity'        => $entity,
+            'roles'         => $roles,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, $this->getRules($request, $id), $this->getMessages(), $this->getAttributes());
+
+        $user = $this->getModel()->findOrFail($id);
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $request['password'] == null ?: $user->password = bcrypt($request['password']);
+        $save = $user->save();
+
+        if (!$save) {
+            return back()->withErrors(['msg' => "Ошибка сохранения"])->withInput();
+        } else {
+            UserRole::where('user_id', $user->id)->update(['role_id' => (int)$request['role']]);
+
+            return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.update'));
+        }
+    }
 }

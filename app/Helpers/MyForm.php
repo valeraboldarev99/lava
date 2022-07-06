@@ -346,7 +346,7 @@ class MyForm
 	// {!! MyForm::reset('Reset') !!}
 
 // Select
-	// {!! MyForm::select('select_name', 'SELECT_LABEL', $entity->getType()) !!}
+	// {!! MyForm::select('select_name', 'SELECT_LABEL', $entity->getType()) !!}  For correct operation in entity there must be a field the same as the field name
 
 	// {!! MyForm::helpText('text under input') !!}
 	// {!! MyForm::simpleText('same text', 'TEXT_LABEL') !!}

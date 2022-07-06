@@ -5,8 +5,9 @@
 @endsection
 
 @section('th')
-    <th>@sortablelink('name', 'Имя')</th>
-    <th>@sortablelink('email', 'Email')</th>
+    <th>@sortablelink('name', trans('AdminPanel::fields.name'))</th>
+    <th>@sortablelink('email', trans('AdminPanel::fields.email'))</th>
+    <th>@sortablelink('role', trans('Users::adminpanel.role'))</th>
     <th width="150">Control</th>
 @endsection
 
@@ -18,6 +19,9 @@
             </td>
             <td>
                 {{ $entity->email }}
+            </td>
+            <td>
+                {{ $entity->role_name }}
             </td>
             <td class="controls">
                 @include('AdminPanel::controls.edit')

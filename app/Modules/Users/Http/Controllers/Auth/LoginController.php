@@ -5,7 +5,7 @@ namespace App\Modules\Users\Http\Controllers\Auth;
 use Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Modules\Users\Models\User;
+use App\Modules\Users\Models\Users;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 // use App\Modules\Users\Http\Requests\AuthRequest;
 use Illuminate\Http\Request;

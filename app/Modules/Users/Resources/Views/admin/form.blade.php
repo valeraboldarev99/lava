@@ -5,22 +5,26 @@
 @endsection
 
 @section('form_content')
-    <div class="box-body">
+    {!! MyForm::open([
+        'entity' => $entity,
+        'method' => 'POST',
+        'store' => $routePrefix . 'store',
+        'update' => $routePrefix . 'update',
+        'autocomplete' => true]) !!}
+
         <div class="row">
-            <div class="col-md-4">
-                <div class="form-group has-feedback">
-                    <label for="name">Имя</label>
-                    <input type="text" name="name" class="form-control" value="{{ adminform_value($entity, $entity->name) }}">
-                    <span class="glyphicon form-control-feedback"></span>
-                </div>
+            <div class="col-md-6">
+                {!! MyForm::text('name', trans('AdminPanel::fields.name'), $entity->name) !!}
             </div>
-            <div class="col-md-4">
-                <div class="form-group has-feedback">
-                    <label for="email">E-mail</label>
-                    <input type="text" name="email" class="form-control" value="{{ adminform_value($entity, $entity->email) }}">
-                    <span class="glyphicon form-control-feedback"></span>
-                </div>
+            <div class="col-md-6">
+                {!! MyForm::text('email', trans('AdminPanel::fields.email'), $entity->email) !!}
+            </div>
+            <div class="col-md-6">
+                {!! MyForm::password('password', trans('AdminPanel::fields.password'), '', 
+                            [ $entity->id ? 'placeholder="' . trans('Users::adminpanel.want_change_pass') . '"' : '']) !!}
+            </div>
+            <div class="col-md-6">
+                {!! MyForm::select('role', trans('Users::adminpanel.role'), $roles) !!}
             </div>
         </div>
-    </div>
 @endsection
