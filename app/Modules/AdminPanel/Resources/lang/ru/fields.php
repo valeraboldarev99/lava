@@ -14,6 +14,7 @@ return [
     'email'                 => 'Электронная почта',
     'name'                  => 'Имя',
     'password'              => 'Пароль',
+    'password_confirmation' => 'Подтверждение пароля',
     'message'               => 'Сообщение',
     'created_at'            => 'Дата создания',
     'updated_at'            => 'Дата обновления',

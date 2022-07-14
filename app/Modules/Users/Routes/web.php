@@ -15,7 +15,8 @@ Route::namespace('App\Modules\Users\Http\Controllers')
 
 // user
     Route::group(['middleware' => ['auth']], function() {
-    	Route::get('/user/index', 'IndexController@index');
+    	// Route::get('/user/index', 'IndexController@index');
+		Route::resource('users', 'IndexController');
     });
 
 //admin

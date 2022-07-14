@@ -11,6 +11,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css"/>
+    @stack('css')
 </head>
 <body>
     <div class="page page_inner">
@@ -27,5 +28,6 @@
             </section>
         </div>
     </div>
+    @stack('js')
 </body>
 </html>

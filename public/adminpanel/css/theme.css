@@ -13,6 +13,10 @@
 	color: #fff;
 }
 
+.panel-name a {
+	color: #fff;
+}
+
 /*admin panel sidebar and main*/
 
 .main-sidebar {
@@ -42,4 +46,8 @@
 
 .help__block {
 	color: #777;
+}
+
+.user__drop {
+	background: #3c8dbc;
 }

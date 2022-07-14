@@ -4,6 +4,20 @@
 	<h2>Создать пользователя</h2>
 @endsection
 
+@section('topmenu')
+    @include('AdminPanel::controls.header_all')
+@endsection
+
+@section('form_js')
+    @if($entity->type == 'wysiwyg')
+        @include('AdminPanel::common.forms.ckeditor', [
+            'fields' => ['content']
+        ])
+    @else
+        @section('js')@endsection
+    @endif
+@endsection
+
 @section('form_content')
     {!! MyForm::open([
         'entity' => $entity,
@@ -29,12 +43,6 @@
 
             <div class="col-md-6">
                 {!! MyForm::select('type', trans('Settings::adminpanel.type'), $entity->getType()) !!}
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="col-md-12">
-                {!! MyForm::textarea('description', trans('AdminPanel::fields.description'), $entity->description, ['rows="5"']) !!}
             </div>
 
             <div class="clearfix"></div>

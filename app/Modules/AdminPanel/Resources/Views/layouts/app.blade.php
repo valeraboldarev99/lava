@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="/adminpanel/css/style.css">
     <link rel="stylesheet" href="/adminpanel/css/theme.css">
     <link rel="stylesheet" href="/adminpanel/css/media.css">
+    @stack('css')
+    @yield('css')
 </head>
 <body>
     <div class="admin-panel-page">
@@ -37,5 +39,7 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="/adminpanel/js/app.js"></script>
+    @stack('js')
+    @yield('js')
 </body>
 </html>

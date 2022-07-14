@@ -13,6 +13,37 @@
 	.form__item {
 		margin: 10px 0;
 	}
+
+	.panel-name {
+		font-size: 18px;
+		width: 180px;
+	}
+
+	.panel-name a {
+		font-size: 18px;
+	}
+
+	.header__menu_item {
+		margin: 0 15px;
+	}
+
+	/*admin panel sidebar and main*/
+	.main-sidebar {
+		width: 180px;
+	}
+
+	.sidebar__item {
+		padding: 8px 10px;
+	}
+
+	/*main*/
+	.content-header {
+		font-size: 22px;
+	}
+
+	.content-wrapper {
+		width: 588px;
+	}
 }
 
 @media screen and (max-width:780px) {
@@ -45,5 +76,48 @@
 		height: 25px;
 		font-size: 12px;
 		padding: 4px 15px;
+	}
+
+	/*ADMIN PANEL*/
+	/*admin panel header*/
+	.header__items {
+		font-size: 12px;
+	}
+
+	.panel-name {
+		font-size: 18px;
+		text-align: center;
+		width: 40%;
+	}
+
+	.header__menu_item a {
+		margin: 0 5px;
+		padding: 20px 0;
+	}
+
+	.panel-name a {
+		font-size: 16px;
+		text-decoration: none;
+	}
+
+	/*admin panel sidebar and main*/
+
+	.main-sidebar {
+		display: none;
+	}
+
+	.content-wrapper {
+		width: 100%;
+	}
+
+	.entities__list th,
+	.entities__list td {
+		font-size: 12px;
+		padding: 2px 5px;
+	}
+
+	.controls {
+		text-align: center;
+		width: 70px;
 	}
 }

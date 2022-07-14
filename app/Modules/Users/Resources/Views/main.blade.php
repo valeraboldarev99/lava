@@ -4,9 +4,9 @@
     	@if(Auth::user()->isAdmin())
         	<a class="btn btn-primary" href="{{ route('admin_panel') }}">В админ панель</a>
     	@elseif(Auth::user()->isUser())
-        	<a class="btn btn-primary" href="#">В кабинет</a>
+        	<a class="btn btn-primary" href="{{ route('users.show', Auth::id()) }}">В кабинет</a>
     	@elseif(Auth::user()->isDisabled())
-        	<p class="text-danger">Вы заблокированы</p>
+        	<span class="text-danger">- Вы заблокированы</span>
     	@endif
         <a class="btn btn-default" href="{{ route('logout') }}">Выйти</a>
     @else

@@ -4,4 +4,5 @@ return [
     'password'  => 'Пароль',
     'login'		=> 'Войти',
     'logout'	=> 'Выйти',
+    'profile'	=> 'Профиль',
 ];

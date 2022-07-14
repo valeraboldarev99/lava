@@ -62,7 +62,6 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	overflow: hidden;
 }
 
 .panel-name {
@@ -84,6 +83,14 @@
 .header__menu_item a {
 	text-decoration: none;
 	margin: 0 5px;
+	padding: 20px 0;
+}
+
+.panel-name a {
+	padding: 0;
+	margin: 0;
+	font-size: 22px;
+	text-decoration: none;
 }
 
 /*admin panel sidebar and main*/
@@ -199,4 +206,26 @@
 .form-group_block .form-check-input {
 	margin-bottom: 8px;
 	margin-right: 4px;
+}
+
+.ck-editor__editable_inline {
+	min-height: 300px;
+}
+
+.header__menu_user {
+	position: relative;
+}
+
+.user__drop {
+	display: none;
+	position: absolute;
+	content: '';
+	bottom: -105px;
+	left: -40px;
+	padding: 15px;
+	width: 130px;
+}
+
+.header__menu_user:hover .user__drop {
+	display: block;
 }

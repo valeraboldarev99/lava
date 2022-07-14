@@ -5,20 +5,32 @@ namespace App\Modules\Users\Http\Controllers\Admin;
 use Auth;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Modules\Users\Models\Users;
 use App\Modules\Users\Models\Role;
 use App\Modules\Users\Models\UserRole;
 use App\Http\Controllers\Controller;
-use App\Modules\AdminPanel\Http\Controllers\MainController;
+use App\Modules\AdminPanel\Http\Controllers\Admin\AdminMainController;
 
-class IndexController extends MainController
+class IndexController extends AdminMainController
 {
-    protected $viewPrefix = 'Users::';
+    protected $viewPrefix = 'Users';
     protected $routePrefix = 'admin.users.';
 
     public function getModel()
     {
         return new Users();
+    }
+
+    public function getRules($request, $id = false)
+    {
+        return [
+            'name' => 'sometimes|required',
+            'email' => [
+                'required', 'max:255', 'email',
+                Rule::unique('users')->ignore($id)
+            ],
+        ];
     }
 
     public function index()
@@ -48,12 +60,7 @@ class IndexController extends MainController
     {
         $this->validate($request, $this->getRules($request), $this->getMessages(), $this->getAttributes());
 
-        $user = Users::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
-            'remember_token' => Str::random(100),
-        ]);
+        $user = $this->getModel()->create($request->all());
 
         if (!$user) {
             return back()->withErrors(['msg' => "Ошибка создания"])->withInput();
@@ -88,12 +95,9 @@ class IndexController extends MainController
         $this->validate($request, $this->getRules($request, $id), $this->getMessages(), $this->getAttributes());
 
         $user = $this->getModel()->findOrFail($id);
-        $user->name = $request['name'];
-        $user->email = $request['email'];
-        $request['password'] == null ?: $user->password = bcrypt($request['password']);
-        $save = $user->save();
+        $user->update($request->all());
 
-        if (!$save) {
+        if (!$user) {
             return back()->withErrors(['msg' => "Ошибка сохранения"])->withInput();
         } else {
             UserRole::where('user_id', $user->id)->update(['role_id' => (int)$request['role']]);

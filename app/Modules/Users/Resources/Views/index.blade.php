@@ -1,8 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.wide')
 
 @section('content')
-	{{ $user->name }}
-	@if($user->isAdmin())
-		<a href="{{ route('admin_panel') }}">Перейти в панель управления</a>
-	@endif
+	<div class="users__block">
+		<div class="users">
+			<div class="user user__header">
+				<div class="user__item">ID</div>
+				<div class="user__item">Name</div>
+				<div class="user__item">E-mail</div>
+			</div>
+			@foreach($items as $user)
+				<div class="user">
+					<div class="user__item">{{ $user->id }}</div>
+					<div class="user__item">{{ $user->name }}</div>
+					<div class="user__item">{{ $user->email }}</div>
+					<a href="{{ route('users.show', $user->id) }}" class="mask"></a>
+				</div>
+			@endforeach
+		</div>
+	</div>
 @endsection

@@ -15,7 +15,6 @@ class CreateSettingsTable extends Migration
             $table->tinyInteger('active')->default(1);
             $table->enum('type', ['html', 'wysiwyg'])->default('html');
             $table->text('content')->nullable();
-            $table->text('description')->nullable();
         });
     }
 

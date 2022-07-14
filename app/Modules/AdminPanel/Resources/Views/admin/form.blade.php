@@ -8,6 +8,12 @@
     @include('AdminPanel::controls.header_all')
 @endsection
 
+@section('form_js')
+    @include('AdminPanel::common.forms.ckeditor', [
+        'fields' => ['content']
+    ])
+@endsection
+
 @section('content')
     <div class="panel-body">
         @include('AdminPanel::common.errors')
