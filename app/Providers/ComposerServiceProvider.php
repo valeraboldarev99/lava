@@ -17,14 +17,16 @@ class ComposerServiceProvider extends ServiceProvider
                 $providers = config($module . '.settings.providers');
                 if($providers)
                 {
-                    $providersItems[] = $providers;
+                    foreach ($providers as $key => $value) {
+                        View::composer($value, $key);
+                    }
                 }
             }
         }
 
-        View::composers([
-            'App\Modules\AdminPanel\Http\ViewComposers\MenuComposer' => ['AdminPanel::common.sidebar'],
-        ]);
+        // View::composers([
+        //     // 'App\Modules\AdminPanel\Http\ViewComposers\MenuComposer' => ['AdminPanel::common.sidebar'],
+        // ]);
 
         // Использование построителей на основе класса...
 

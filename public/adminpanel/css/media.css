@@ -120,4 +120,22 @@
 		text-align: center;
 		width: 70px;
 	}
+
+	.control__item {
+		display: block;
+		margin: 5px auto;
+		width: 36px;
+		height: 30px;
+	}
+
+	.control__item .btn-sm {
+		width: 100%;
+		height: 100%;
+	}
+
+	.main-footer {
+		height: 40px;
+		padding: 10px;
+		font-size: 10px;
+	}
 }

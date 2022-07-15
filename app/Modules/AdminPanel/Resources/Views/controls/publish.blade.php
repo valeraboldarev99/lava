@@ -1,4 +1,4 @@
-<form action="{{ route($routePrefix . 'update', $entity->id) }}" method="POST" style="display: inline-block">
+<form action="{{ route($routePrefix . 'update', $entity->id) }}" method="POST" class="control__item">
 	@csrf
 	@method('PATCH')
 
