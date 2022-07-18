@@ -9,6 +9,8 @@ Route::namespace('App\Modules\Users\Http\Controllers')
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login');
     Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+    Route::get('register', 'Auth\RegisterController@registerForm')->name('registerForm');
+    Route::post('register', 'Auth\RegisterController@store')->name('register');
 
 // admin auth
     Route::get(config('cms.url.admin_auth'), 'Auth\LoginController@showAdminLoginForm')->name('adminpanel');

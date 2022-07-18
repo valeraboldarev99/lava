@@ -1,6 +1,7 @@
 <?php
 return [
 	'login'		=> 'Вход',
+	'register'	=> 'Регистрация',
 	'edit'		=> 'Редактировать данные',
 	'name'		=> 'Имя',
 	'e-mail'	=> 'E-mail',
