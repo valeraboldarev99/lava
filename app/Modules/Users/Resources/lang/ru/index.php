@@ -9,4 +9,5 @@ return [
 	'password_confirmation'		=> 'Подтверждение пароля',
 	'submit'	=> 'Войти',
 	'send'		=> 'Отправить',
+	'forgotPass' => 'Забыли пароль?',
 ];

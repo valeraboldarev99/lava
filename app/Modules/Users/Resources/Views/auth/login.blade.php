@@ -17,6 +17,13 @@
             <div class="form__item">
                 {!! MyForm::password('password', trans('Users::index.password')) !!}
             </div>
+            @if (Route::has('password.request'))
+                <div class="form__item">
+                    <a href="{{ route('password.request') }}" style="text-decoration: none;">
+                        @lang('Users::index.forgotPass')
+                    </a>
+                </div>
+            @endif
             <div class="form__item">
                 {!! MyForm::button('submit',trans('Users::index.submit'), ['class="btn btn-primary"']) !!}
             </div>
