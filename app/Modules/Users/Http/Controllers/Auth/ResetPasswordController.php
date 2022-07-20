@@ -22,17 +22,17 @@ class ResetPasswordController extends Controller
         );
     }
 
-    protected function resetPassword($user, $password)
-    {
-        $this->setUserPassword($user, $password);
-
-        $user->save();
-
-        $this->guard()->login($user);
-    }
-
     protected function setUserPassword($user, $password)
     {
-        $user->password = bcrypt($password);
+        $user->password = $password;
+    }
+
+    protected function rules()
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => ['required', 'confirmed'],
+        ];
     }
 }
