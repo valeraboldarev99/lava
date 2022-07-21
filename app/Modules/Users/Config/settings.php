@@ -6,7 +6,7 @@ return [
 			'group'		=> 'main_group',
 			'route' 	=> 'admin.users.index',
 			'title' 	=> trans('Users::adminpanel.users'),
-			'priority' 	=> 5,
+			'priority' 	=> 30,
 		],
 	],
 ];

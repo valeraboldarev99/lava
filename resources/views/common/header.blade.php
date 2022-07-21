@@ -12,11 +12,6 @@
                 @include('Users::main')
             </div>
         </div>
-        <nav class="header__menu">
-            <ul>
-                <li><a href="/users">Users</a></li>
-                <li><a href="/settings">Settings</a></li>
-            </ul>
-        </nav>
+        @include('Structure::menu_main')
     </div>
 </header>

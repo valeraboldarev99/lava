@@ -7,7 +7,7 @@ return [
 			'route' 	=> 'admin.settings.index',
 			'group'		=> 'main_group',
 			'title' 	=> trans('Settings::adminpanel.settings_list'),
-			'priority' 	=> 1,
+			'priority' 	=> 50,
 		],
 	],
 ];

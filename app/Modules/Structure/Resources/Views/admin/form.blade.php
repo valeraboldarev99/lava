@@ -1,21 +1,11 @@
 @extends('AdminPanel::admin.form')
 
 @section('title')
-	<h2>Настройки</h2>
+	<h2>Структура сайтая</h2>
 @endsection
 
 @section('topmenu')
     @include('AdminPanel::controls.header_all')
-@endsection
-
-@section('form_js')
-    @if($entity->type == 'wysiwyg')
-        @include('AdminPanel::common.forms.ckeditor', [
-            'fields' => ['content']
-        ])
-    @else
-        @section('js')@endsection
-    @endif
 @endsection
 
 @section('form_content')
@@ -28,7 +18,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                {!! MyForm::text('name', trans('AdminPanel::fields.name') , $entity->name) !!}
+                {!! MyForm::text('title', trans('AdminPanel::fields.name') , $entity->title) !!}
             </div>
 
             <div class="col-md-4">
@@ -42,7 +32,7 @@
             <div class="clearfix"></div>
 
             <div class="col-md-6">
-                {!! MyForm::select('type', trans('Settings::adminpanel.type'), $entity->getType()) !!}
+                {!! MyForm::select('parent_id', trans('Structure::adminpanel.parent'), $parents) !!}
             </div>
 
             <div class="clearfix"></div>
