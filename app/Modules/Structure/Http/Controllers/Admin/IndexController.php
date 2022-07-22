@@ -38,7 +38,8 @@ class IndexController extends AdminMainController
     public function create()
     {
         $entity = $this->getModel();
-        $parents = Structure::whereNull('parent_id')->get();
+        $parents = Structure::whereNull('parent_id')->pluck('title', 'id');
+        $parents = ['' => trans('Structure::adminpanel.withoutParent')] + $parents->toArray();
 
         return view($this->getFormViewName(), [
             'entity' => $entity,
@@ -50,7 +51,7 @@ class IndexController extends AdminMainController
     {
         $entity = $this->getModel()->findOrFail($id);
         $parents = Structure::whereNull('parent_id')->pluck('title', 'id');
-// dd($parents);
+        $parents = ['' => trans('Structure::adminpanel.withoutParent')] + $parents->toArray();
 
         return view($this->getFormViewName(), [
             'routePrefix'   => $this->routePrefix,

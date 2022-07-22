@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Modules\Structure\Models\Structure;
 
 $namespace = 'App\Modules\Structure\Http\Controllers';
 
@@ -16,5 +17,9 @@ Route::group(['namespace' => $namespace, 'middleware' => ['web']], function() {
 
 //user
 	Route::resource('/structure', 'IndexController');
-	// Route::get('{page:slug}', 'IndexController')->name('page');
+
+//generate page routes
+	foreach (Structure::getPagesRoutes() as $route) {
+		Route::get($route, 'IndexController@show')->name($route);
+	}
 });
