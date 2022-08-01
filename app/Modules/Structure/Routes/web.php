@@ -20,6 +20,6 @@ Route::group(['namespace' => $namespace, 'middleware' => ['web']], function() {
 
 //generate page routes
 	foreach (Structure::getPagesRoutes() as $route) {
-		Route::get($route, 'IndexController@show')->name($route);
+		Route::get($route->slug, 'IndexController@index')->name($route->route_name);
 	}
 });

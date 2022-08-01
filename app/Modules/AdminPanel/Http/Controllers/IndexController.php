@@ -12,7 +12,9 @@ class IndexController extends Controller
     protected $viewPrefix  = '';
     protected $routePrefix = '';
 
-    // abstract public function getModel();
+    public function __construct() {
+        $this->share();
+    }
 
     public function index()
     {
@@ -60,5 +62,10 @@ class IndexController extends Controller
     protected function getCustomAttributes() : array
     {
         return [];
+    }
+
+    protected function share()
+    {
+        View::share('page', getPage());
     }
 }

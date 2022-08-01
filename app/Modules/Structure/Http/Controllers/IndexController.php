@@ -2,10 +2,11 @@
 
 namespace App\Modules\Structure\Http\Controllers;
 
+use URL;
 use Route;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Modules\Structure\Models\Structure;
+use App\Modules\AdminPanel\Http\Controllers\IndexController as Controller;
 
 class IndexController extends Controller
 {
@@ -14,15 +15,10 @@ class IndexController extends Controller
         return new Structure();
     }
 
-    public function show()
+    public function index()
     {
-        $slug = Route::currentRouteName();
-        $str = strpos($slug, "/");
-        if ($str) {
-            $slug = substr($slug, $str + 1, strlen($slug));
-        }
-        $page = Structure::where('slug', $slug)->first();
+        $page = getPage();
 
-        return view('Structure::show', compact('page'));
+        return view('Structure::index', compact('page'));
     }
 }

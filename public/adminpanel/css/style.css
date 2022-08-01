@@ -278,3 +278,7 @@
 .header__menu_user:hover .user__drop {
 	display: block;
 }
+
+.child_page {
+	padding-left: 30px!important;
+}

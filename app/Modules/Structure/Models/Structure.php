@@ -13,8 +13,6 @@ class Structure extends Model
 
     protected $guarded = ['id'];
 
-    public $timestamps = false;
-
     public function children() {
         return $this->hasMany(Structure::class, 'parent_id');
     }
@@ -24,18 +22,57 @@ class Structure extends Model
     }
 
     public function getPagesRoutes() {
-        $pages = Structure::where('active', 1)->get();
-        foreach ($pages as $page) {
+        $pages = Structure::where('depth', '<>', 0)->where('active', 1)->get();
+
+        foreach ($pages as $key => $page) {
             if($page->parent_id == NULL)
             {
-                $routes[] = $page->slug;
+                if($page->module)
+                {
+                    $page->route_name = $page->slug . '.index';
+                }
+                else {
+                    $page->route_name = $page->slug;
+                }
             }
             else {
                 $parent = Structure::where('id', $page->parent_id)->first();
-                $routes[] = $parent->slug . '/' . $page->slug;
+                if($page->module)
+                {
+                    $page->route_name = $page->slug . '.index';
+                    $page->slug = $page->slug;
+                }
+                else {
+                    $page->slug = $parent->slug . '/' . $page->slug;
+                    $page->route_name = $page->slug;
+                }
             }
         }
 
-        return $routes;
+        return $pages;
+    }
+
+    public function getModules()
+    {
+        $modules = ['' => ''] + config('Structure.settings.modules');
+        return $modules;
+    }
+
+    public function getTemplates()
+    {
+        $templates = config('Structure.settings.templates');
+        return $templates;
+    }
+
+    public function setParentIdAttribute($value)
+    {
+        if ($value == NULL) {
+            $this->attributes['depth'] = 1;
+            $this->attributes['parent_id'] = $value;
+        }
+        else {
+            $this->attributes['depth'] = 2;
+            $this->attributes['parent_id'] = $value;
+        }
     }
 }

@@ -17,4 +17,14 @@ $(document).ready(function () {
 		}
 		return false
 	});
+
+	/*скрывать поле редиректа когда редиректор не выбран*/
+	$('#redirector').on('change', function() {
+		if ($('#redirector').prop('checked')) {
+			$('#js-redirect_url').css('display', 'block');
+		}
+		else {
+			$('#js-redirect_url').css('display', 'none');
+		}
+	});
 });

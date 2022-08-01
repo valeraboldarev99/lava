@@ -7,6 +7,7 @@
 @section('th')
     <th>@sortablelink('name', 'Имя')</th>
     <th>@sortablelink('email', 'Slug')</th>
+    <th width="150">Module</th>
     <th>Управление</th>
 @endsection
 
@@ -19,16 +20,34 @@
             <td>
                 {{ $entity->slug }}
             </td>
+            <td>
+                {{ $entity->module }}
+            </td>
             <td class="controls">
-               @include('AdminPanel::controls.entity_all')
+                @if($entity->depth != 0)
+                    @include('AdminPanel::controls.publish')
+                @endif
+               @include('AdminPanel::controls.edit')
+               @if($entity->depth != 0)
+                    @include('AdminPanel::controls.destroy')
+               @endif
             </td>
         </tr>
         @foreach($entity->children as $child)
             <tr>
-                <td>—{{ $child->title }}</td>
+                <td class="child_page">{{ $child->title }}</td>
                 <td>{{ $child->slug }}</td>
+                <td>
+                    {{ $entity->module }}
+                </td>
                 <td class="controls">
-                   @include('AdminPanel::controls.entity_all', ['entity' => $child])
+                    @if($entity->depth != 0)
+                        @include('AdminPanel::controls.publish', ['entity' => $child])
+                    @endif
+                    @include('AdminPanel::controls.edit', ['entity' => $child])
+                    @if($entity->depth != 0)
+                        @include('AdminPanel::controls.destroy', ['entity' => $child])
+                    @endif
                 </td>
             </tr>
         @endforeach

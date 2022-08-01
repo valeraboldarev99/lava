@@ -1,8 +1,6 @@
-@extends('layouts.app')
+@extends($page->template)
 
 @section('content')
-	{{ $user->name }}
-	@if($user->isAdmin())
-		<a href="{{ route('admin_panel') }}">Перейти в панель управления</a>
-	@endif
+	<h1>{{ $page->title }}</h1>
+    {!! $page->content !!}
 @endsection

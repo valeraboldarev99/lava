@@ -2,6 +2,7 @@
 
 @section('content')
 	<div class="users__block">
+	{!! $page->content !!}
 		<div class="users">
 			<div class="user user__header">
 				<div class="user__item">ID</div>

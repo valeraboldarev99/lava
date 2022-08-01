@@ -3,6 +3,7 @@
 namespace App\Modules\Structure\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Collection;
 use App\Http\Controllers\Controller;
 use App\Modules\Structure\Models\Structure;
@@ -38,7 +39,7 @@ class IndexController extends AdminMainController
     public function create()
     {
         $entity = $this->getModel();
-        $parents = Structure::whereNull('parent_id')->pluck('title', 'id');
+        $parents = Structure::where('depth', '>', 0)->whereNull('parent_id')->pluck('title', 'id');
         $parents = ['' => trans('Structure::adminpanel.withoutParent')] + $parents->toArray();
 
         return view($this->getFormViewName(), [
@@ -50,7 +51,7 @@ class IndexController extends AdminMainController
     public function edit($id)
     {
         $entity = $this->getModel()->findOrFail($id);
-        $parents = Structure::whereNull('parent_id')->pluck('title', 'id');
+        $parents = Structure::where('depth', '>', 0)->whereNull('parent_id')->pluck('title', 'id');
         $parents = ['' => trans('Structure::adminpanel.withoutParent')] + $parents->toArray();
 
         return view($this->getFormViewName(), [
@@ -58,5 +59,22 @@ class IndexController extends AdminMainController
             'entity'        => $entity,
             'parents' => $parents,
         ]);
+    }
+
+    public function destroy($id)
+    {
+        $entity = $this->getModel()->find($id);
+
+        if (count($entity->children()->get()) == 0)
+        {
+            $entity->delete();
+        }
+        else {
+            return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.hasChildren'));
+        }
+
+        $this->after($entity);
+
+        return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.destroy'));
     }
 }
