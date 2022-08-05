@@ -10,6 +10,7 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->enum('lang', ['ru', 'en'])->index();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->tinyInteger('active')->default(1);

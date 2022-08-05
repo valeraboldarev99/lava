@@ -10,4 +10,6 @@ return [
 			'priority' 	=> 50,
 		],
 	],
+
+	'localization'		=> true,
 ];

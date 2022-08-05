@@ -3,13 +3,13 @@
 namespace App\Modules\Structure\Http\ViewComposers;
 
 use Illuminate\View\View;
-use App\Modules\Structure\Models\Structure;
+use App\Helpers\PagesStructure;
 
 class MainMenuComposer
 {
 	public function compose(View $view)
 	{
-		$pages = Structure::getPagesRoutes();
+		$pages = PagesStructure::getPagesRoutes();
 
 		$view->with('items', $pages);
 	}

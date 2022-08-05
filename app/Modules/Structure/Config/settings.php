@@ -10,6 +10,7 @@ return [
 			'priority' 	=> 10,
 		],
 	],
+	'localization'		=> true,
 	'providers' => [
 		'App\Modules\Structure\Http\ViewComposers\MainMenuComposer' => ['Structure::menu_main'],
 	],

@@ -22,7 +22,7 @@ abstract class AdminMainController extends Controller
 
     public function index()
     {
-        $entities = $this->getModel()->paginate($this->perPage);
+        $entities = $this->getModel()->admin()->paginate($this->perPage);
 
         $this->after($entities);
 
@@ -125,5 +125,6 @@ abstract class AdminMainController extends Controller
     protected function share()
     {
         View::share('routePrefix', $this->routePrefix);
+        View::share('model_name', class_basename($this->getModel()));
     }
 }

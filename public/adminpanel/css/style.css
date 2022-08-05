@@ -282,3 +282,40 @@
 .child_page {
 	padding-left: 30px!important;
 }
+
+.localization__block {
+	display: inline-block;
+	width: 100%;
+	text-align: right;
+}
+
+.localization__item {
+	display: inline-block;
+	margin-right: 10px;
+	position: relative;
+}
+
+.localization__item:last-child {
+	margin-right: 0;
+}
+
+.localization__link {
+	display: inline-block;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+.localization__item:after {
+	content: '|';
+	position: absolute;
+	top: 0;
+	right: -9px;
+}
+
+.localization__item:last-child:after {
+	content: '';
+}
+
+.localization__link_act {
+	font-weight: 600;
+}

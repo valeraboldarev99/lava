@@ -8,6 +8,16 @@
     </div>
     <div class="header__right">
         <div class="header__info">
+            <div class="localization__block">
+                @foreach (config('localization.locales') as $locale)
+                    <li class="localization__item">
+                        <a class="localization__link {{ getLang() == $locale ? 'localization__link_act' : '' }}"
+                            href="/{{ $locale }}">
+                            {{ $locale }}
+                        </a>
+                    </li>
+                @endforeach
+            </div>
             <div class="header__menu">
                 @include('Users::main')
             </div>

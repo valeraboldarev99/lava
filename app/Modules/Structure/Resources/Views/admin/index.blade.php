@@ -34,7 +34,7 @@
             </td>
         </tr>
         @foreach($entity->children as $child)
-            <tr>
+            <tr {!! $child->active == 1 ?: 'style="background:#f2dede;"' !!}>
                 <td class="child_page">{{ $child->title }}</td>
                 <td>{{ $child->slug }}</td>
                 <td>

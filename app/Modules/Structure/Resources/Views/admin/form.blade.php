@@ -27,7 +27,7 @@
                 </div>
             @endif
 
-            @if($entity->depth != 0)
+            @if(!$entity->id || $entity->depth != 0)
                 <div class="col-md-4">
                     {!! MyForm::text('slug', trans('AdminPanel::fields.slug') , $entity->slug) !!}
                 </div>

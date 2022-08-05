@@ -5,6 +5,7 @@ namespace App\Modules\AdminPanel\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
+use App\Helpers\PagesStructure;
 
 class IndexController extends Controller
 {
@@ -66,6 +67,6 @@ class IndexController extends Controller
 
     protected function share()
     {
-        View::share('page', getPage());
+        View::share('page', PagesStructure::getPage());
     }
 }

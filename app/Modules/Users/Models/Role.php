@@ -2,7 +2,7 @@
 
 namespace App\Modules\Users\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Modules\AdminPanel\Models\Model;
 
 class Role extends Model
 {

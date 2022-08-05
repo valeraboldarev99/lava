@@ -29,7 +29,7 @@ class IndexController extends AdminMainController
 
     public function index()
     {
-        $entities = Structure::whereNull('parent_id')->with('children')->paginate($this->perPage);
+        $entities = Structure::whereNull('parent_id')->with('children')->admin()->paginate($this->perPage);
 
         return view($this->getIndexViewName(), [
             'entities' => $entities

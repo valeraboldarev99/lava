@@ -58,3 +58,9 @@
 .user__drop {
 	background: #3c8dbc;
 }
+
+.localization__link,
+.localization__link:hover {
+	color: #000;
+	text-decoration: none;
+}

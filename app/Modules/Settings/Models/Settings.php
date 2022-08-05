@@ -3,15 +3,13 @@
 namespace App\Modules\Settings\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Model;
+use App\Modules\AdminPanel\Models\Model;
 
 class Settings extends Model
 {
     use Notifiable;
 
     protected $table = 'settings';
-
-    protected $guarded = ['id'];
 
     public $timestamps = false;
 
@@ -23,5 +21,10 @@ class Settings extends Model
     public function getType()
     {
         return self::TYPE;
+    }
+
+    public function scopeOrder($query)
+    {
+        return $query->orderBy('name');
     }
 }

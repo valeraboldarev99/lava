@@ -6,6 +6,7 @@
 
 @section('topmenu')
     @include('AdminPanel::controls.header_all')
+    @include('AdminPanel::common.localization')
 @endsection
 
 @section('content')
