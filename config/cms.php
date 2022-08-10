@@ -7,5 +7,5 @@ return [
 		'admin_prefix' => 'admin',						//префикс url роутов admin/*****
 	],
 	'admin_prefix' => 'admin.',							//префикс имени роутов admin.*****
-	'version' => '1.4.2',								// версия cms
+	'version' => '1.4.1',								// версия cms
 ];

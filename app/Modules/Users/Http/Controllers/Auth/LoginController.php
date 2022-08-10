@@ -35,7 +35,7 @@ class LoginController extends Controller
             return $this->redirectTo = '/'. config('cms.url.admin_panel');
         }
         else {
-            return url('/');
+            return home();
         }
     }
 
