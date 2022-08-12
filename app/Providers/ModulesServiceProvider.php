@@ -50,7 +50,10 @@ class ModulesServiceProvider extends \Illuminate\Support\ServiceProvider
                     else {
                         foreach ($files as $file)
                         {
-                            $this->mergeConfigFrom($this->getDir($module) . '/Config/'. $file, $module . '.' . basename($file, '.php'));
+                            if(file_get_contents($this->getDir($module) . '/Config/'. $file, $module . '.' . $file . '.php'))
+                            {
+                                $this->mergeConfigFrom($this->getDir($module) . '/Config/'. $file, $module . '.' . basename($file, '.php'));
+                            }
                         }
                     }
                 }
