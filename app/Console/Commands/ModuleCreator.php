@@ -296,7 +296,7 @@ class ModuleCretor extends Command
         $content .= "namespace App\Modules\\" . ucfirst($this->argument('module_name')) . "\\Http\Controllers;" . "\r\n\n";
 
         $content .= "use App\Modules\\" . ucfirst($this->argument('module_name')) . "\\Models\\" . ucfirst($this->argument('module_name')) . ";" . "\r\n";
-        $content .= "use App\Modules\AdminPanel\\Http\Controllers\IndexController as Controller" . "\r\n\n";
+        $content .= "use App\Modules\AdminPanel\\Http\Controllers\IndexController as Controller;" . "\r\n\n";
 
         $content .= "class IndexController extends Controller" . "\r\n";
         $content .= "{" . "\r\n";
