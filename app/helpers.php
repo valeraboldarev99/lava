@@ -88,3 +88,43 @@ if(!function_exists('checkModelLocalization')) {
         return $result;
     }
 }
+
+if(!function_exists('getMethod')) {
+    function getMethod()
+    {
+        $uses_action =  request()->route()->action['uses'];
+        $uses_action = explode('@', $uses_action);
+
+        return  $uses_action[1];
+    }
+}
+
+if(!function_exists('getModule')) {
+    function getModule()
+    {
+        $uses_action =  request()->route()->action['uses'];
+        preg_match('!App\\\Modules\\\(.*)\\\!isU', $uses_action, $res);
+        if (!isset($res[1])) {
+            return false;
+        }
+
+        return $res[1];
+    }
+}
+
+if(!function_exists('getModuleConfig')) {
+    function getModuleConfig($arg, $module = null)
+    {
+        if (!$module) {
+            $module = getModule();
+
+            if (!$module) {
+                return false;
+            }
+        }
+
+        $value = $module . '.' . $arg;
+
+        return config($value);
+    }
+}

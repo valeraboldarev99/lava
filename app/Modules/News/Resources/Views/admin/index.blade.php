@@ -1,7 +1,7 @@
 @extends('AdminPanel::admin.index')
 
 @section('title')
-    <h2>{{ __('News:adminpanel.title') }}</h2>
+    <h2>{{ __('News::adminpanel.title') }}</h2>
 @endsection
 
 @section('th')

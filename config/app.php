@@ -177,7 +177,6 @@ return [
         App\Providers\ModulesServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
-
     ],
 
     /*
@@ -231,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'MyForm' => App\Helpers\MyForm::class,
         'Localization' => App\Helpers\Localization::class,
+        'InterventionImage' => IIntervention\Image\ImageManager::class,
     ],
 
 ];

@@ -371,7 +371,7 @@ class ModuleCretor extends Command
         $content = "@extends('AdminPanel::admin.index')" . "\r\n\n";
 
         $content .= "@section('title')" . "\r\n";
-        $content .= "    <h2>Module_title</h2>" . "\r\n";
+        $content .= "    <h2>{{ __('" . ucfirst($this->argument('module_name')) . "::adminpanel.title') }}</h2>" . "\r\n";
         $content .= "@endsection" . "\r\n\n";
 
         $content .= "@section('th')" . "\r\n";
@@ -400,7 +400,7 @@ class ModuleCretor extends Command
         $content =  "@extends('AdminPanel::admin.form')" . "\r\n\n";
 
         $content .= "@section('title')" . "\r\n";
-        $content .= "    <h2>Module_title</h2>" . "\r\n";
+        $content .= "    <h2>{{ __('" . ucfirst($this->argument('module_name')) . "::adminpanel.title') }}</h2>" . "\r\n";
         $content .= "@endsection" . "\r\n\n";
 
         $content .= "@section('topmenu')" . "\r\n";
