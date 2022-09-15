@@ -6,6 +6,7 @@
 
 @section('th')
     <th>@sortablelink('title', 'Имя')</th>
+    <th width="120">{{ __('AdminPanel::fields.image') }}</th>
     <th>Управление</th>
 @endsection
 
@@ -14,6 +15,9 @@
         <tr {!! $entity->active == 1 ?: 'style="background:#f2dede;"' !!}>
             <td>
                 {{ $entity->title }}
+            </td>
+            <td>
+                <img src="{{ $entity->getImageWebp('image', 'middle') }}" alt="{{ $entity->title }}">
             </td>
             <td class="controls">
                @include('AdminPanel::controls.entity_all')

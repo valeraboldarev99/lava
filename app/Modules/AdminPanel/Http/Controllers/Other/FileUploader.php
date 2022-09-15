@@ -148,15 +148,54 @@ trait FileUploader
     	return $dest;
     }
 
-	protected function getConfigs()
-	{
-	    return module_config('uploads');
-	}
-
 	protected function dir($path)
 	{
 	    if (!File::isDirectory($path)) {
 	        File::makeDirectory($path, 0777, true, true);
 	    }
 	}
+
+    public function deleteFile($id, $field)
+    {
+        $entity  = $this->getModel()->findOrFail($id);
+        $configs = getModuleConfig('uploads');
+        if (array_key_exists($field, $configs)) {
+            if (isset($entity->{$field})) {
+                if ($this->deleteInDirs($entity->{$field}, $configs[$field])) {
+                    $entity->{$field} = null;
+
+                    $entity->save();
+                }
+                else {
+                    $entity->{$field} = null;
+
+                    $entity->save();
+                }
+            }
+        }
+    }
+
+    protected function deleteInDirs($filename, $config)
+    {
+        $baseDir = public_path() . $config['path'];
+        if (!isset($config['sizes']) || empty($config['sizes'])) {
+            @unlink($baseDir . $filename);
+
+            // return true;
+        } else {
+            foreach ($config['sizes'] as $size) {
+                $path = $baseDir . $size['path'] . $filename;
+                if(isset($size['webp']) && $size['webp'] && $size['webp'] > 0)
+                {
+                    $dir = pathinfo($path, PATHINFO_DIRNAME);
+                    $name = pathinfo($path, PATHINFO_FILENAME);
+                    $webpPath = "{$dir}/{$name}.webp";
+                    @unlink($webpPath);
+                }
+                @unlink($path);
+            }
+        }
+
+        // return true;
+    }
 }

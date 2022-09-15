@@ -28,12 +28,25 @@
             <div class="clearfix"></div>
 
             <div class="col-md-6">
-                {!! MyForm::file('image', 'Изображение' , $entity->image) !!}
+                @include('AdminPanel::common.forms.image', [
+                    'field' => 'image',
+                    'label' => 'Изображение',
+                    'helptext' => 'size 1920/780',
+                    'show_img_size' => 'big',
+                ])
             </div>
 
             <div class="col-md-6">
-                {!! MyForm::file('bg', 'Изображени bg' , $entity->bg) !!}
+                @include('AdminPanel::common.forms.image', [
+                    'field' => 'bg',
+                    'label' => 'Изображение bg',
+                    'helptext' => 'size 1920/780',
+                    'show_img_size' => 'big',
+                    'accept' => ['accept="image/*"'],
+                ])
             </div>
+
+            <div class="clearfix"></div>
 
             <div class="col-md-6">
                 {!! MyForm::file('file', 'Файл' , $entity->file) !!}

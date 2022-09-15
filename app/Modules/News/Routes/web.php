@@ -15,6 +15,7 @@ Route::group([
                 'as' => config('cms.admin_prefix'),
                 'namespace' => 'Admin'], function() {
 
+            Route::delete('/news/deleteFile/{id}/{field}', 'IndexController@deleteFile')->name('news.deleteFile');
             Route::resource('/news', 'IndexController');
         });
 

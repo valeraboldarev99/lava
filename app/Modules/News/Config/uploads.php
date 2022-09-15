@@ -38,7 +38,7 @@ return [
             'small'  => [
                 'path'   => 'small/',
                 'webp'   => 100,
-                'width'  => 200,
+                'width'  => 50,
                 'height' => false,
             ]
         ]
