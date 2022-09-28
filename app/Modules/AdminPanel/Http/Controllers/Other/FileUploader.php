@@ -7,6 +7,8 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
 use InterventionImage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 trait FileUploader
 {
@@ -41,6 +43,8 @@ trait FileUploader
         	$fields[] = $key;
         }
 
+        $this->fileValidator($entity, $configs, $fields);                           //file validation
+
         foreach ($fields as $field)
         {
             if (Request::hasFile($field)) {
@@ -52,6 +56,70 @@ trait FileUploader
         }
 
         $entity->save();
+    }
+
+    /**
+        * File validation
+        * @param $entity
+        * @param $config
+        * @param $fields
+    */
+    protected function fileValidator($entity, $configs, $fields)
+    {
+        if(count($fields) == 0)
+        {
+            return [];
+        }
+
+        $rules = [];
+        foreach ($fields as $field) {
+            $rules[$field] = $this->checkMimes($configs[$field]['validator']);
+        }
+
+        $validator = Validator::make(Request::all(), $rules, $this->getUploadMessages(), $this->getUploadAttributes());
+
+        if ($validator->fails()) {
+            foreach ($fields as $field) {
+                if (array_key_exists($field, $validator->errors()->messages())) {
+                    $entity->{$field} = null;
+                }
+            }
+
+            $entity->save();
+
+            throw new ValidationException($validator);
+        }
+
+        return $fields;
+    }
+
+    /**
+        * Check mimes validator
+        * @param $validator - from file upload.php
+    */
+    protected function checkMimes($validator)
+    {
+        if(preg_match('#.*(mimes:[^|]+).*#', $validator)) {
+            return $validator;
+        }
+
+        return 'mimetypes:' . implode(',', config('mimes.' . 'mimetypes')) . '|' . $validator;
+    }
+
+    /**
+        * Receiving validation error messages
+    */
+    protected function getUploadMessages() : array
+    {
+        return [];
+    }
+
+    /**
+        * Getting the names of validation fields
+    */
+    protected function getUploadAttributes() : array
+    {
+        return [];
     }
 
     /**

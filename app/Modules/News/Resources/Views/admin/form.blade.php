@@ -22,6 +22,10 @@
                 {!! MyForm::text('title', trans('AdminPanel::fields.title') , $entity->title) !!}
             </div>
 
+            <div class="col-md-4">
+                {!! MyForm::date('date', trans('AdminPanel::fields.date') , $entity->date) !!}
+            </div>
+
             <div class="col-md-2">
                 {!! MyForm::checkbox('active', trans('AdminPanel::fields.active'), $entity->active) !!}
             </div>

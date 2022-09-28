@@ -17,4 +17,11 @@ class IndexController extends AdminMainController
     {
         return new News();
     }
+
+    // public function getRules($request, $id = false)
+    // {
+    //     return [
+    //         'image' => 'mimes:png'
+    //     ];
+    // }
 }

@@ -1,3 +1,10 @@
+{{-- @include('AdminPanel::common.forms.image', [
+    'field' => 'bg',
+    'label' => 'Изображение bg',
+    'helptext' => 'size 1920/780',
+    'show_img_size' => 'big',
+    'accept' => ['accept="image/*"'],
+]) --}}
 @php
     $imagePath = $entity->getImage($field, isset($show_img_size) ? $show_img_size : 'big');
 @endphp

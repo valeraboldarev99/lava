@@ -45,6 +45,6 @@ return [
     ],
     'file' => [
         'path'      => '/uploads/news/files/',
-        'validator' => 'mimes:jpeg,jpg,png|max:10000',
+        'validator' => 'mimes:doc,docx|max:10000',
     ]
 ];
