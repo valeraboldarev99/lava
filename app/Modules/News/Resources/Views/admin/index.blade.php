@@ -17,7 +17,7 @@
                 {{ $entity->title }}
             </td>
             <td>
-                <img src="{{ $entity->getImageWebp('image', 'middle') }}" alt="{{ $entity->title }}">
+                <img src="{{ $entity->getImageWebpPath('image', 'middle') }}" alt="{{ $entity->title }}">
             </td>
             <td class="controls">
                @include('AdminPanel::controls.entity_all')

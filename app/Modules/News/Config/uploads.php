@@ -45,6 +45,8 @@ return [
     ],
     'file' => [
         'path'      => '/uploads/news/files/',
-        'validator' => 'mimes:doc,docx|max:10000',
+        'validator' => 'max:50000',
+        'field_name' => 'file_name',
+        'field_size' => 'file_size',
     ]
 ];

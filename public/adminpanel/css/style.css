@@ -324,9 +324,15 @@
 .localization__link_act {
 	font-weight: 600;
 }
-
+/*image and form field*/
+.file__field,
 .image__field {
 	margin-bottom: 25px;
+}
+
+.file__block {
+	border: 1px solid #ccc;
+	padding: 5px 10px;
 }
 
 .image__field .image__block img {
@@ -337,6 +343,10 @@
 .image__block {
 	position: relative;
 	width: 70%;
+}
+
+.file__block {
+	position: relative;
 }
 
 .image__block span.del-img {
@@ -353,6 +363,36 @@
 	cursor: pointer;
 }
 
-.image__block span.del-img:hover {
+.file__block span.del-file:hover,
+.image__block span.del-img:hover,
+.download-file:hover {
 	opacity: 1;
+}
+
+.file__name {
+	opacity: 0.7;
+}
+
+.file__block span.del-file {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background: #dd4b39 url('../img/delX_btn.svg') center center no-repeat;
+	width: 20px;
+	height: 20px;
+	background-size: 15px;
+	padding: 15px;
+	cursor: pointer;
+}
+
+.download-file {
+	position: absolute;
+	top: 0px;
+	right: 30px;
+	background: #196D9E url('../img/download_file.svg') center center no-repeat;
+	width: 12px;
+	height: 20px;
+	background-size: 12px;
+	padding: 15px;
+	cursor: pointer;
 }

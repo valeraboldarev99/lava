@@ -1,4 +1,6 @@
 <?php
+// path = AdminPanel::auth
+
 return [
     'email'     => 'Логин',
     'password'  => 'Пароль',

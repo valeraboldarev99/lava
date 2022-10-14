@@ -6,7 +6,6 @@ use Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
-use InterventionImage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -32,7 +31,6 @@ trait FileUploader
     public function upload($entity)
     {
         $configs = getModuleConfig('uploads');                                     //this is the uploads.php file in the module config
-        $fields = [];
 
         if(!isset($configs) || empty($configs))                                    //if uploads.php file is empty
         {
@@ -49,8 +47,13 @@ trait FileUploader
         {
             if (Request::hasFile($field)) {
                 $file = Request::file($field);                                     //getting the file from request
+                $file_size = $file->getSize();
+
                 if ($this->uploader($file, $configs[$field])) {                    //if the file is saved, we will save its name in the database
                     $entity->{$field} = $this->name;
+
+                    !isset($configs[$field]['field_name']) ?: $entity->{$configs[$field]['field_name']} = $file->getClientOriginalName();
+                    !isset($configs[$field]['field_size']) ?: $entity->{$configs[$field]['field_size']} = $file_size;
                 }
             }
         }

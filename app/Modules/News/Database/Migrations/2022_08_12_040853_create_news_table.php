@@ -16,6 +16,8 @@ class CreateNewsTable extends Migration
             $table->string('image')->nullable();
             $table->string('bg')->nullable();
             $table->string('file')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('file_size')->nullable();
             $table->string('preview')->nullable();
             $table->tinyInteger('active')->default(1);
             $table->text('content')->nullable();

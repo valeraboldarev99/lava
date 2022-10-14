@@ -1,4 +1,6 @@
 <?php
+// path = AdminPanel::adminpanel
+
 return [
     'goto_site'		=> 'Назад к сайту',
     'version'		=> 'Version',
@@ -14,8 +16,14 @@ return [
         'no_image_size' => 'В uploads нет такоего размера ":size" изображения',
         'no_image_webp' => 'В uploads нет настроек webp для этих параметров изображения',
     ],
+    'file_sizes' => [
+        'b'      => ' байт',
+        'kb'     => ' Кб',
+        'mb'     => ' Мб',
+    ],
     'form_error' => 'Ошибка при сохранении формы',
     'delete_image_sure' => 'Вы уверены, что хотите удалить изображение?',
+    'delete_file_sure'  => 'Вы уверены, что хотите удалить файл?',
     'no_records' => 'Здесь пока ничего нет',
     'main_group' => 'Главная группа',
     'image_extension_too_large' => 'Расширение изображения слишком большое',

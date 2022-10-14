@@ -1,0 +1,48 @@
+{{-- @include('AdminPanel::common.forms.file', [
+    'field' => 'file',
+    'field_name' => 'file_name',
+    'label' => 'trans('AdminPanel::fields.file'),
+    'helptext' => trans('AdminPanel::fields.file_format', ['formats' => 'docx/doc']),
+]) --}}
+
+@push('js')
+    <script>
+        function deleteFile() {
+            if (confirm("@lang('AdminPanel::adminpanel.delete_file_sure')")) {
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('DELETE', $(this).attr('data-href'));
+                xhr.setRequestHeader('X-CSRF-TOKEN', $(this).attr('data-csrf_token'));
+                xhr.send();
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        location.reload();
+                    }
+                }
+            }
+        }
+    </script>
+@endpush
+
+<div class="file__field">
+    @if($entity->getFilePath($field))
+        <label>{{ (isset($label)) ? $label : trans('AdminPanel::fields.file') }}</label>
+        <div class="file__block">
+            <span class="file__name">{{ $entity->getFileName($field, $size = true) }}</span>
+
+            <a href="{{ $entity->getFilePath($field) }}" class="download-file" target="_blank"></a>
+            <span   class="del-file" 
+                    data-href="{!! route($routePrefix . 'deleteFile', ['id' => $entity->id, 'field' => $field]) !!}" 
+                    data-csrf_token="{{ csrf_token() }}"
+                    onclick="deleteFile.apply(this)">
+            </span>
+        </div>
+        <div class="clearfix"></div>
+    @else
+        {!! MyForm::file($field, (isset($label)) ? $label : trans('AdminPanel::fields.file') , $entity->{$field}) !!}
+        @if(isset($helptext))
+            {!! MyForm::helpText($helptext) !!}
+        @endif
+    @endif
+</div>

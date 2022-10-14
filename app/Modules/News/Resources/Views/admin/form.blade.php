@@ -23,7 +23,7 @@
             </div>
 
             <div class="col-md-4">
-                {!! MyForm::date('date', trans('AdminPanel::fields.date') , $entity->date) !!}
+                {!! MyForm::date('date', trans('AdminPanel::fields.date') , $entity->date ) !!}
             </div>
 
             <div class="col-md-2">
@@ -34,8 +34,8 @@
             <div class="col-md-6">
                 @include('AdminPanel::common.forms.image', [
                     'field' => 'image',
-                    'label' => 'Изображение',
-                    'helptext' => 'size 1920/780',
+                    'label' => trans('AdminPanel::fields.image'),
+                    'helptext' => trans('AdminPanel::fields.optimal_image_size', ['w' => 1920, 'h' => 780]),
                     'show_img_size' => 'big',
                 ])
             </div>
@@ -43,8 +43,8 @@
             <div class="col-md-6">
                 @include('AdminPanel::common.forms.image', [
                     'field' => 'bg',
-                    'label' => 'Изображение bg',
-                    'helptext' => 'size 1920/780',
+                    'label' => trans('AdminPanel::fields.bg_image'),
+                    'helptext' => trans('AdminPanel::fields.optimal_image_size', ['w' => 1920, 'h' => 780]),
                     'show_img_size' => 'big',
                     'accept' => ['accept="image/*"'],
                 ])
@@ -53,7 +53,12 @@
             <div class="clearfix"></div>
 
             <div class="col-md-6">
-                {!! MyForm::file('file', 'Файл' , $entity->file) !!}
+                @include('AdminPanel::common.forms.file', [
+                    'field' => 'file',
+                    'field_name' => 'file_name',
+                    'label' => trans('AdminPanel::fields.file'),
+                    'helptext' => trans('AdminPanel::fields.file_format', ['formats' => 'docx/doc']),
+                ])
             </div>
             <div class="clearfix"></div>
 

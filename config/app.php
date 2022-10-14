@@ -230,7 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'MyForm' => App\Helpers\MyForm::class,
         'Localization' => App\Helpers\Localization::class,
-        'InterventionImage' => IIntervention\Image\ImageManager::class,
+        // 'InterventionImage' => IIntervention\Image\ImageManager::class,
     ],
 
 ];

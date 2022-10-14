@@ -2,6 +2,9 @@
 
 namespace App\Modules\AdminPanel\Models;
 
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+
 trait FileUploader
 {
     /**
@@ -9,7 +12,7 @@ trait FileUploader
         * @param $field
         * @param $size
     */
-    private function imagePath($field, $size)
+    private function getPath($field, $size = null)
     {
         $image = getModuleConfig('uploads.' . $field);
         if(!$image)                                         // there is no such field
@@ -26,12 +29,16 @@ trait FileUploader
             $path = '/' . $path;
         }
 
-        if(!isset($image['sizes'][$size]))  // there is no such size
+        if($size != null)
         {
-            return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.no_image_size', ['size' => $size]));
+            if(!isset($image['sizes'][$size]))  // there is no such size
+            {
+                return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.no_image_size', ['size' => $size]));
+            }
+            return $size_path = $path . $size;
         }
 
-        return $size_path = $path . $size;
+        return $path;
     }
 
     /**
@@ -39,9 +46,9 @@ trait FileUploader
         * @param $field
         * @param $size
     */
-    public function getImage($field, $size)
+    public function getImagePath($field, $size)
     {
-        $path = $this->imagePath($field, $size);
+        $path = $this->getPath($field, $size);
 
         if($this->{$field} == NULL)
         {
@@ -55,9 +62,9 @@ trait FileUploader
         * @param $field
         * @param $size
     */
-    public function getImageWebp($field, $size)
+    public function getImageWebpPath($field, $size)
     {
-        $image = $this->getImage($field, $size);
+        $image = $this->getImagePath($field, $size);
         $uploads_data = getModuleConfig('uploads.' . $field . '.sizes.' . $size);
 
         if(!isset($uploads_data['webp']) || !$uploads_data['webp'] && $uploads_data['webp'] == 0)           //does this image have a webp version
@@ -71,5 +78,57 @@ trait FileUploader
         $webp_image = "{$dir}/{$file_name}.webp";
 
         return $webp_image;
+    }
+
+    /**
+        * Path to the file
+        * @param $field
+        * @param $size
+    */
+    public function getFilePath($field)
+    {
+        $path = $this->getPath($field);
+
+        if($this->{$field} == NULL)
+        {
+            return false;
+        }
+        return $path . $this->{$field};
+    }
+
+    /**
+        * get the file name and size(if needed)
+        * @param $field_name- string
+        * @param $size - bool, nullable
+    */
+    public function getFileName($field, bool $size = null)
+    {
+        if($field_name = getModuleConfig('uploads.' . $field . '.field_name'))
+        {
+            $file_name = $this->{$field_name};                                          //check if there is a field for the file_name in uploads.php and get it
+            if($size && $size != NULL)                                                  //do I need to show the file size
+            {
+                if($field_size = getModuleConfig('uploads.' . $field . '.field_size'))  //check if there is a field for the file_size in uploads.php and get it
+                {
+                    $file_size = $this->getSize($this->{$field_size});
+                    $file_name .= ', ' . $file_size;                                    //add file size to file name
+                }
+            }
+            return $file_name;
+        }
+        return $this->{$field};
+    }
+
+    /**
+        * get the file size in bytes/kilobytes/megabytes
+        * @param $file_size in bytes
+    */
+    public function getSize(int $file_size)
+    {
+        if($file_size < 1000) { $file_size .= trans('AdminPanel::adminpanel.file_sizes.b'); }
+        if($file_size > 1000 && $file_size < 1000000) { $file_size = round($file_size / 1024, 2) . trans('AdminPanel::adminpanel.file_sizes.kb'); }
+        if($file_size > 1000000) {$file_size =  round($file_size / 1024 / 1024, 2) . trans('AdminPanel::adminpanel.file_sizes.mb');}
+
+        return $file_size;
     }
 }
