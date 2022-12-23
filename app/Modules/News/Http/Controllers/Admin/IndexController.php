@@ -2,6 +2,7 @@
 
 namespace App\Modules\News\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use App\Modules\News\Models\News;
 use App\Modules\AdminPanel\Http\Controllers\Other\FileUploader;
 use App\Modules\AdminPanel\Http\Controllers\Admin\AdminMainController;

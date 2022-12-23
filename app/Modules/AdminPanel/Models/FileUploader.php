@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\File;
 
 trait FileUploader
 {
+    // protected $multipleFilesTables = [               //example
+    //     'field_name'  => 'table_name_for_images',
+    // ];
+
     /**
         * Path to the image directory
         * @param $field
@@ -35,7 +39,7 @@ trait FileUploader
             {
                 return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.no_image_size', ['size' => $size]));
             }
-            return $size_path = $path . $size;
+            return $size_path = $path . $size . '/';
         }
 
         return $path;
@@ -46,7 +50,7 @@ trait FileUploader
         * @param $field
         * @param $size
     */
-    public function getImagePath($field, $size)
+    public function getImagePath($field, $size = null)
     {
         $path = $this->getPath($field, $size);
 
@@ -54,7 +58,7 @@ trait FileUploader
         {
             return false;
         }
-        return $path . '/' . $this->{$field};
+        return $path . $this->{$field};
     }
 
     /**
@@ -62,7 +66,7 @@ trait FileUploader
         * @param $field
         * @param $size
     */
-    public function getImageWebpPath($field, $size)
+    public function getImageWebpPath($field, $size = null)
     {
         $image = $this->getImagePath($field, $size);
         $uploads_data = getModuleConfig('uploads.' . $field . '.sizes.' . $size);
@@ -94,6 +98,18 @@ trait FileUploader
             return false;
         }
         return $path . $this->{$field};
+    }
+
+    /**
+        * Path to the multiple image
+        * @param $field
+        * @param $size
+    */
+    public function getPathMultiImage($image_name, $field, $size = null)
+    {
+        $path = $this->getPath($field, $size);
+
+        return $path . $image_name;
     }
 
     /**
@@ -130,5 +146,18 @@ trait FileUploader
         if($file_size > 1000000) {$file_size =  round($file_size / 1024 / 1024, 2) . trans('AdminPanel::adminpanel.file_sizes.mb');}
 
         return $file_size;
+    }
+
+    /**
+        * Get the fields of the multiload files and their tables
+        *
+        * In the model, you need to define the variable "protected $multipleFilesTables", 
+        * in which to register an array of field names and their tables.
+
+        * Example: protected $multipleFilesTables = ['field_name'  => 'table_name_for_images',];
+    */
+    public function getMultipleFilesTables()
+    {
+        return ($this->multipleFilesTables ?: []);
     }
 }

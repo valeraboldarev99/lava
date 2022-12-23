@@ -66,5 +66,14 @@
             <div class="col-md-12">
                 {!! MyForm::textarea('content', trans('AdminPanel::fields.content'), $entity->content, ['rows="8"']) !!}
             </div>
+
+            <div class="col-md-12">
+                @include('AdminPanel::common.forms.images', [
+                    'field' => 'multi_images',
+                    'label' => 'Мультизагрузка изображений',
+                    'helptext' => trans('AdminPanel::fields.optimal_image_size', ['w' => 500, 'h' => 200]),
+                    'show_img_size' => NULL
+                ])
+            </div>
         </div>
 @endsection

@@ -331,7 +331,6 @@
 }
 
 .file__block {
-	border: 1px solid #ccc;
 	padding: 5px 10px;
 }
 
@@ -349,11 +348,10 @@
 	position: relative;
 }
 
-.image__block span.del-img {
+.del-img {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	background: #dd4b39 url('../img/delX_btn.svg') center center no-repeat;
 	width: 20px;
 	height: 20px;
 	background-size: 15px;
@@ -363,8 +361,8 @@
 	cursor: pointer;
 }
 
-.file__block span.del-file:hover,
-.image__block span.del-img:hover,
+.del-file:hover,
+.del-img:hover,
 .download-file:hover {
 	opacity: 1;
 }
@@ -373,11 +371,10 @@
 	opacity: 0.7;
 }
 
-.file__block span.del-file {
+.del-file {
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	background: #dd4b39 url('../img/delX_btn.svg') center center no-repeat;
 	width: 20px;
 	height: 20px;
 	background-size: 15px;
@@ -389,10 +386,42 @@
 	position: absolute;
 	top: 0px;
 	right: 30px;
-	background: #196D9E url('../img/download_file.svg') center center no-repeat;
 	width: 12px;
 	height: 20px;
 	background-size: 12px;
 	padding: 15px;
 	cursor: pointer;
+}
+
+/*multi images*/
+.multi-images__field {
+	width: 100%;
+	border: 1px solid #ccc;
+	padding: 15px;
+	margin-bottom: 15px;
+}
+
+.multi-images__form {
+
+}
+
+.multi-images__form input[type="file"] {
+	display: none;
+	/*opacity: 0.1;*/
+}
+
+.multi-images__items {
+	display: flex;
+	align-items: stretch;
+	flex-wrap: wrap;
+}
+
+.multi-images__item {
+	max-width: 30%;
+	margin: 5px 5px;
+	position: relative;
+}
+
+.multi-images__item img {
+	width: 100%;
 }

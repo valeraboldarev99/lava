@@ -42,9 +42,9 @@
 
 .entities__list th,
 .entities__list td {
-	border-left: 1px solid #e9e9e9;
-	border-right: 1px solid #e9e9e9;
-	border-bottom: 1px solid #e9e9e9;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 }
 
 .form-error {
@@ -63,4 +63,20 @@
 .localization__link:hover {
 	color: #000;
 	text-decoration: none;
+}
+
+.file__block {
+	border: 1px solid #ccc;
+}
+
+.del-img {
+	background: #dd4b39 url('../img/delX_btn.svg') center center no-repeat;
+}
+
+.del-file {
+	background: #dd4b39 url('../img/delX_btn.svg') center center no-repeat;
+}
+
+.download-file {
+	background: #196D9E url('../img/download_file.svg') center center no-repeat;
 }

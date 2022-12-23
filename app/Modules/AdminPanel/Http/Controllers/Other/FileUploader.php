@@ -2,6 +2,7 @@
 
 namespace App\Modules\AdminPanel\Http\Controllers\Other;
 
+use DB;
 use Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
@@ -45,15 +46,40 @@ trait FileUploader
 
         foreach ($fields as $field)
         {
-            if (Request::hasFile($field)) {
-                $file = Request::file($field);                                     //getting the file from request
-                $file_size = $file->getSize();
+            if(isset($configs[$field]['multiple']) && $configs[$field]['multiple'] == true && isset($entity->getMultipleFilesTables()[$field]))                 //multi uploading
+            {
+                $request = Request::all();
 
-                if ($this->uploader($file, $configs[$field])) {                    //if the file is saved, we will save its name in the database
-                    $entity->{$field} = $this->name;
+                if(!empty($request[$field]))
+                {
+                    $multi_files = $request[$field];                                        //get all files from field
+                    $multipleTable = \DB::table($entity->getMultipleFilesTables()[$field]); //table where files will be uploaded
+                    //write it in your model: protected $multipleFilesTables = ['field_name'  => 'table_name_for_images',];
 
-                    !isset($configs[$field]['field_name']) ?: $entity->{$configs[$field]['field_name']} = $file->getClientOriginalName();
-                    !isset($configs[$field]['field_size']) ?: $entity->{$configs[$field]['field_size']} = $file_size;
+                    foreach ($multi_files as $file) {
+                        if ($this->uploader($file, $configs[$field])) {                    //if the file is saved, we will save its name in the database
+                            $entity->{$field} = $this->name;                                //write filename to main table
+
+                            $multipleTable->insert([                                        //write data to multi_table
+                                'name' => $this->name,
+                                'position'  => 0,
+                                'parent_id'  => $entity->id,
+                            ]);
+                        }
+                    }
+                }
+            }
+            else {                                                                      //single uploading
+                if (Request::hasFile($field)) {
+                    $file = Request::file($field);                                     //getting the file from request
+                    $file_size = $file->getSize();                                      // get the file size in bytes
+
+                    if ($this->uploader($file, $configs[$field])) {                    //if the file is saved, we will save its name in the database
+                        $entity->{$field} = $this->name;                                //write filename to main table
+
+                        !isset($configs[$field]['field_name']) ?: $entity->{$configs[$field]['field_name']} = $file->getClientOriginalName();           //if there is a field_name, write the original name
+                        !isset($configs[$field]['field_size']) ?: $entity->{$configs[$field]['field_size']} = $file_size;                               //if there is a field_size, write the $size
+                    }
                 }
             }
         }
@@ -76,7 +102,10 @@ trait FileUploader
 
         $rules = [];
         foreach ($fields as $field) {
-            $rules[$field] = $this->checkMimes($configs[$field]['validator']);
+            if(!isset($configs[$field]['multiple']) || $configs[$field]['multiple'] != true)
+            {
+                $rules[$field] = $this->checkMimes($configs[$field]['validator']);
+            }
         }
 
         $validator = Validator::make(Request::all(), $rules, $this->getUploadMessages(), $this->getUploadAttributes());
@@ -217,7 +246,7 @@ trait FileUploader
         * @param $quality - default 100
     */
     protected function convertToWebp($path, $quality = 100)
-        {
+    {
         $dir = pathinfo($path, PATHINFO_DIRNAME);
         $name = pathinfo($path, PATHINFO_FILENAME);
         $ext = pathinfo($path, PATHINFO_EXTENSION);
@@ -262,11 +291,11 @@ trait FileUploader
     */
     public function deleteFile($id, $field)
     {
-        $entity  = $this->getModel()->findOrFail($id);                              //we'll find it by id
+        $entity  = $this->getModel()->findOrFail($id);
         $configs = getModuleConfig('uploads');
         if (array_key_exists($field, $configs)) {                                   //is there a selected field in the config
             if (isset($entity->{$field})) {                                         //is there such a field in the database
-                if ($this->deleteInDirs($entity->{$field}, $configs[$field])) {     //удаляем в дирректории
+                if ($this->deleteInDirs($entity->{$field}, $configs[$field])) {     //delete from derictory
                     $entity->{$field} = null;                                       //clear the fields in the table
 
                     $entity->save();
@@ -277,6 +306,9 @@ trait FileUploader
                     $entity->save();
                 }
             }
+        }
+        else {
+            return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.no_image_field', ['field' => $field]));
         }
     }
 
@@ -291,6 +323,7 @@ trait FileUploader
         if (!isset($config['sizes']) || empty($config['sizes'])) {
             @unlink($baseDir . $filename);                                          //deleting the file
         } else {
+            dd('d');
             foreach ($config['sizes'] as $size) {                                   //let's go through all the sizes
                 $path = $baseDir . $size['path'] . $filename;
                 if(isset($size['webp']) && $size['webp'] && $size['webp'] > 0)      //if there is a webp then we will delete it
@@ -302,6 +335,25 @@ trait FileUploader
                 }
                 @unlink($path);
             }
+        }
+        return true;
+    }
+
+    public function deleteMultiImages($entity_id, $field, $image_id)
+    {
+        $entity  = $this->getModel()->findOrFail($entity_id);
+        $configs = getModuleConfig('uploads');
+
+        $entityImages = DB::table($entity->getMultipleFilesTables()[$field]);
+        $entityImagesName = $entityImages->where('id', $image_id)->pluck('name')->first();
+
+        if (array_key_exists($field, $configs)) {                                   //is there a selected field in the config
+            if ($this->deleteInDirs($entityImagesName, $configs[$field])) {         //delete from derictory
+                $entityImages->delete($image_id);
+            }
+        }
+        else {
+            return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.no_image_field', ['field' => $field]));
         }
     }
 }

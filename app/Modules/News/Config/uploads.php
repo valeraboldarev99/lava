@@ -43,10 +43,31 @@ return [
             ]
         ]
     ],
+    'multi_images' => [
+        'path'      => '/uploads/news/multi_images/',
+        'validator' => 'mimes:jpeg,jpg,png|max:10000',
+        'multiple'  => true,
+        'width'  => 500,
+        'height' => false,
+        // 'sizes'    => [
+        //     'big'  => [
+        //         'path'   => 'big/',
+        //         'webp'   => 60,
+        //         'width'  => 500,
+        //         'height' => false,
+        //     ],
+        //     'small'  => [
+        //         'path'   => 'small/',
+        //         'webp'   => false,
+        //         'width'  => 375,
+        //         'height' => false,
+        //     ]
+        // ]
+    ],
     'file' => [
         'path'      => '/uploads/news/files/',
         'validator' => 'max:50000',
         'field_name' => 'file_name',
         'field_size' => 'file_size',
-    ]
+    ],
 ];

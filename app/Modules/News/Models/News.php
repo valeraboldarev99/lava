@@ -11,4 +11,13 @@ class News extends Model {
     use Notifiable, FileUploader;
 
     protected $table = 'news';
+
+    protected $multipleFilesTables = [
+        'multi_images'  => 'news_images',
+    ];
+
+    public function images()
+    {
+    	return $this->hasMany(NewsImages::class, 'parent_id', 'id')->orderBy('position');
+    }
 }
