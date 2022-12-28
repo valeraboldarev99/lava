@@ -15,13 +15,24 @@
     <script>
         function openFiles()
         {
-           $('input[data-id="{{ $field }}"]').trigger('click');
+           $('input[data-field="{{ $field }}"]').trigger('click');
         }
         $('#{{ $field }}').change(function () {
             if ($(this).val() != '') {
                 upload(this);
             }
         });
+        function imageBlock(data)
+        {
+            $('#multi-images__items').append('<div class="multi-images__item"></div>');
+            $('.multi-images__item:last-child').append('<img src="' + data.file_path + data.file_name + '">');
+            $('.multi-images__item:last-child').append('<span   class="js-del-img del-img" \n' +
+                'data-href="' + data.delete_route + '" \n' +
+                'data-image_id="' + data.file_id + '" \n' +
+                'onclick="deleteImage.apply(this)" \n' +
+            '></span>');
+            return true;
+        }
         function upload(img)
         {
             var form_data = new FormData();
@@ -31,21 +42,14 @@
             form_data.append('_token', '{{csrf_token()}}');
             $('#loading__multi-images').css('display', 'inline-block');
             $.ajax({
-                url: "{{ url('/admin/images_uploader') }}",
+                url: "{!! route($routePrefix . 'imagesUploader') !!}",
                 data: form_data,
                 type: 'POST',
                 contentType: false,
                 processData: false,
                 success: function (data) {
                     // console.log(data);
-                    $('#multi-images__items').append('<div class="multi-images__item"></div>');
-                    $('.multi-images__item:last-child').append('<img src="' + data.file_path + data.file_name + '">');
-                    $('.multi-images__item:last-child').append('<span   class="js-del-img del-img" \n' +
-                        'data-href="' + data.delete_route + '" \n' +
-                        'data-csrf_token="{{ csrf_token() }}" \n' +
-                        'onclick="deleteImagess.apply(this)"> \n' +
-                    '></span>');
-
+                    imageBlock(data);
                     $('#loading__multi-images').css('display', 'none');
                     if($('#js-no_images').css('display') == 'block')
                     {
@@ -60,19 +64,37 @@
     </script>
 
     <script>
-        function deleteImagess() {
-            if (confirm("@lang('AdminPanel::adminpanel.delete_image_sure')")) {
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('DELETE', $(this).attr('data-href'));
-                xhr.setRequestHeader('X-CSRF-TOKEN', $(this).attr('data-csrf_token'));
-                xhr.send();
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        location.reload();
-                    }
-                }
+        function deleteImage()
+        {
+            if (confirm("@lang('AdminPanel::adminpanel.delete_image_sure')"))
+            {
+                var image = $(this);
+                var delete_form_data = new FormData();
+                delete_form_data.append('entity_id', '{{ $entity->id }}');
+                delete_form_data.append('field', '{{ $field }}');
+                delete_form_data.append('image_id', $(this).data('image_id'));
+                delete_form_data.append('_token', '{{ csrf_token() }}');
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: $(this).data('href'),
+                    data: delete_form_data,
+                    type: 'DELETE',
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function () {
+                        $('#loading__multi-images').css('display', 'inline-block');
+                    },
+                    success: function (data) {
+                        // console.log(data);
+                        $('#loading__multi-images').css('display', 'none');
+                        image.parent('.multi-images__item').remove();
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    },
+                });
             }
         }
     </script>
@@ -80,7 +102,7 @@
 <div class="multi-images__field">
     @if(isset($entity->id))
         <div class="multi-images__form">
-            {!! MyForm::file($field, (isset($label)) ? $label : trans('AdminPanel::fields.file'), $entity->{$field}, ['accept="image/*"', 'data-id="' . $field . '"']) !!}
+            {!! MyForm::file($field, (isset($label)) ? $label : trans('AdminPanel::fields.file'), $entity->{$field}, ['accept="image/*"', 'data-field="' . $field . '"']) !!}
             <span class="btn btn-success" style="margin-bottom: 15px;" onclick="openFiles()">@lang('AdminPanel::adminpanel.upload_images')</span>
             <i id="loading__multi-images" class="fa fa-spinner fa-spin fa-2x fa-fw" style="left: 200px;top: 50px;display: none"></i>
             @if(isset($helptext))
@@ -94,9 +116,9 @@
                     <div class="multi-images__item">
                         <img src="{{ $entity->getPathMultiImage($image->name, $field, $show_img_size) }}" alt="{{ $image->multi_images }}">
                         <span   class="js-del-img del-img" 
-                                data-href="{!! route($routePrefix . 'deleteMultiImages', ['entity_id' => $entity->id, 'field' => $field, 'image_id' => $image->id]) !!}" 
-                                data-csrf_token="{{ csrf_token() }}"
-                                onclick="deleteImagess.apply(this)">
+                                data-href="{!! route($routePrefix . 'deleteMultiImages', ['entity_id' => $entity->id, 'field' => $field, 'image_id' => $image->id]) !!}"
+                                data-image_id="{{ $image->id }}"
+                                onclick="deleteImage.apply(this)">
                         </span>
                     </div>
                 @endforeach

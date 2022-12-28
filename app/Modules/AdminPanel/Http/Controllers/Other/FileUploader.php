@@ -7,7 +7,7 @@ use Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Http\Request as ReqAj;
+use Illuminate\Http\Request as FileRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -318,6 +318,13 @@ trait FileUploader
         return true;
     }
 
+
+    /**
+        * Deleting multiple images (ajax)
+        * @param $entity_id
+        * @param $field
+        * @param $image_id
+    */
     public function deleteMultiImages($entity_id, $field, $image_id)
     {
         $entity  = $this->getModel()->findOrFail($entity_id);
@@ -329,6 +336,8 @@ trait FileUploader
         if (array_key_exists($field, $configs)) {                                   //is there a selected field in the config
             if ($this->deleteInDirs($entityImagesName, $configs[$field])) {         //delete from derictory
                 $entityImages->delete($image_id);
+
+                return response()->json('deleted');
             }
         }
         else {
@@ -336,7 +345,11 @@ trait FileUploader
         }
     }
 
-    public function imagesUplodaer(ReqAj $request)
+    /**
+    * Uploading multiple images (ajax)
+    * @param $request [field, entity_id, _token]
+    */
+    public function imagesUploader(FileRequest $request)
     {
         $request_array = $request->all();
 
