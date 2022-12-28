@@ -17,6 +17,8 @@ Route::group([
 
             Route::delete('/news/deleteFile/{id}/{field}', 'IndexController@deleteFile')->name('news.deleteFile');              //delete single file or image
             Route::delete('/news/deleteMultiImages/{entity_id}/{field}/{image_id}', 'IndexController@deleteMultiImages')->name('news.deleteMultiImages');   //delete multi images
+            Route::post('/images_uploader', 'IndexController@imagesUplodaer');
+
             Route::resource('/news', 'IndexController');
         });
 

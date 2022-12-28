@@ -7,6 +7,7 @@ use Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request as ReqAj;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -46,30 +47,8 @@ trait FileUploader
 
         foreach ($fields as $field)
         {
-            if(isset($configs[$field]['multiple']) && $configs[$field]['multiple'] == true && isset($entity->getMultipleFilesTables()[$field]))                 //multi uploading
-            {
-                $request = Request::all();
-
-                if(!empty($request[$field]))
-                {
-                    $multi_files = $request[$field];                                        //get all files from field
-                    $multipleTable = \DB::table($entity->getMultipleFilesTables()[$field]); //table where files will be uploaded
-                    //write it in your model: protected $multipleFilesTables = ['field_name'  => 'table_name_for_images',];
-
-                    foreach ($multi_files as $file) {
-                        if ($this->uploader($file, $configs[$field])) {                    //if the file is saved, we will save its name in the database
-                            $entity->{$field} = $this->name;                                //write filename to main table
-
-                            $multipleTable->insert([                                        //write data to multi_table
-                                'name' => $this->name,
-                                'position'  => 0,
-                                'parent_id'  => $entity->id,
-                            ]);
-                        }
-                    }
-                }
-            }
-            else {                                                                      //single uploading
+            if(!isset($configs[$field]['multiple']) && !isset($entity->getMultipleFilesTables()[$field]))                 //not multi uploading
+            {                                                                      //single uploading
                 if (Request::hasFile($field)) {
                     $file = Request::file($field);                                     //getting the file from request
                     $file_size = $file->getSize();                                      // get the file size in bytes
@@ -355,5 +334,50 @@ trait FileUploader
         else {
             return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.no_image_field', ['field' => $field]));
         }
+    }
+
+    public function imagesUplodaer(ReqAj $request)
+    {
+        $request_array = $request->all();
+
+        $configs = getModuleConfig('uploads');                                     //this is the uploads.php file in the module config
+
+        if(!isset($configs) || empty($configs))                                    //if uploads.php file is empty
+        {
+            return false;
+        }
+
+        foreach ($configs as $key => $config) {                                    //we will get the file fields from uploads.php
+            $fields[] = $key;
+        }
+
+        $entity = $this->getModel()->where('id', $request_array['entity_id'])->first();
+        $field = $request_array['field'];
+
+        if(isset($configs[$field]['multiple']) && $configs[$field]['multiple'] == true && isset($entity->getMultipleFilesTables()[$field]))                 //multi uploading
+        {
+            if(!empty($request_array[$field]))
+            {
+                $file = $request_array[$field];                                        //get all files from field
+                $multipleTable = \DB::table($entity->getMultipleFilesTables()[$field]); //table where files will be uploaded
+                //write it in your model: protected $multipleFilesTables = ['field_name'  => 'table_name_for_images',];
+
+                if ($this->uploader($file, $configs[$field])) {                    //if the file is saved, we will save its name in the database
+                    $file_id = $multipleTable->insertGetId([                                        //write data to multi_table
+                        'name' => $this->name,
+                        'position'  => 0,
+                        'parent_id'  => $entity->id,
+                    ]);
+                    $file_path = $configs[$field]['path'];
+                }
+            }
+        }
+
+        return response()->json([
+            'file_id' =>    $file_id,
+            'file_name' =>  $this->name,
+            'file_path' =>  $file_path,
+            'delete_route' =>   route($this->routePrefix . 'deleteMultiImages', ['entity_id' => $entity->id, 'field' => $field, 'image_id' => $file_id]),
+        ]);
     }
 }
