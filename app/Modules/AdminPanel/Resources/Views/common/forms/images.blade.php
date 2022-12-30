@@ -25,7 +25,7 @@
         function imageBlock(data)
         {
             $('#multi-images__items').append('<div class="multi-images__item"></div>');
-            $('.multi-images__item:last-child').append('<img src="' + data.file_path + data.file_name + '">');
+            $('.multi-images__item:last-child').append('<img src="' + data.file_path + '">');
             $('.multi-images__item:last-child').append('<span   class="js-del-img del-img" \n' +
                 'data-href="' + data.delete_route + '" \n' +
                 'data-image_id="' + data.file_id + '" \n' +
@@ -40,6 +40,7 @@
             form_data.append('entity_id', '{{$entity->id}}');
             form_data.append('{{$field}}', img.files[0]);
             form_data.append('_token', '{{csrf_token()}}');
+            form_data.append('show_img_size', '{{$show_img_size}}');
             $('#loading__multi-images').css('display', 'inline-block');
             $.ajax({
                 url: "{!! route($routePrefix . 'imagesUploader') !!}",

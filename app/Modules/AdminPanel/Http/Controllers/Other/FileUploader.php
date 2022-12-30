@@ -382,7 +382,7 @@ trait FileUploader
                         'position'  => 0,
                         'parent_id'  => $entity->id,
                     ]);
-                    $file_path = $configs[$field]['path'];
+                    $file_path = $entity->getPathMultiImage($this->name, $field, $request_array['show_img_size']);
                 }
             }
         }
