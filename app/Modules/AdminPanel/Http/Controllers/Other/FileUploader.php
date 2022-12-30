@@ -24,6 +24,9 @@ trait FileUploader
         if (getMethod() == 'store' || getMethod() == 'update') {
             $this->upload($entity);
         }
+        if(getMethod() == 'destroy') {
+            $this->deleteAllFiles($entity);
+        }
     }
 
     /**
@@ -302,7 +305,6 @@ trait FileUploader
         if (!isset($config['sizes']) || empty($config['sizes'])) {
             @unlink($baseDir . $filename);                                          //deleting the file
         } else {
-            dd('d');
             foreach ($config['sizes'] as $size) {                                   //let's go through all the sizes
                 $path = $baseDir . $size['path'] . $filename;
                 if(isset($size['webp']) && $size['webp'] && $size['webp'] > 0)      //if there is a webp then we will delete it
@@ -317,7 +319,6 @@ trait FileUploader
         }
         return true;
     }
-
 
     /**
         * Deleting multiple images (ajax)
@@ -392,5 +393,41 @@ trait FileUploader
             'file_path' =>  $file_path,
             'delete_route' =>   route($this->routePrefix . 'deleteMultiImages', ['entity_id' => $entity->id, 'field' => $field, 'image_id' => $file_id]),
         ]);
+    }
+
+    public function deleteAllFiles($entity)
+    {
+        $configs = getModuleConfig('uploads');                                     //this is the uploads.php file in the module config
+
+        if(!isset($configs) || empty($configs))                                    //if uploads.php file is empty
+        {
+            return false;
+        }
+
+        foreach ($configs as $key => $config) {                                    //we will get the file fields from uploads.php
+            $fields[] = $key;
+        }
+        foreach ($fields as $field)
+        {
+            if(!isset($configs[$field]['multiple']) && !isset($entity->getMultipleFilesTables()[$field]))
+            {
+                $this->deleteFile($entity->id, $field);
+            }
+            else {
+                $multiFiles = DB::table($entity->getMultipleFilesTables()[$field])->where('parent_id', $entity->id)->get();
+                if($multiFiles)
+                {
+                    foreach ($multiFiles as $file)
+                    {
+                        if ($this->deleteInDirs($file->name, $configs[$field]))
+                        {
+                            DB::table($entity->getMultipleFilesTables()[$field])->delete($file->id);
+                        }
+                    }
+                }
+            }
+
+        }
+        return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.destroy'));
     }
 }

@@ -78,9 +78,9 @@ abstract class AdminMainController extends Controller
     public function destroy($id)
     {
         $entity = $this->getModel()->find($id);
-        $entity->delete();
-
         $this->after($entity);
+
+        $entity->delete();
 
         return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.destroy'));
     }
