@@ -126,7 +126,7 @@ trait FileUploader
             {
                 if($field_size = getModuleConfig('uploads.' . $field . '.field_size'))  //check if there is a field for the file_size in uploads.php and get it
                 {
-                    $file_size = $this->getSize($this->{$field_size});
+                    $file_size = $this->getFileSize($this->{$field_size});
                     $file_name .= ', ' . $file_size;                                    //add file size to file name
                 }
             }
@@ -139,7 +139,7 @@ trait FileUploader
         * get the file size in bytes/kilobytes/megabytes
         * @param $file_size in bytes
     */
-    public function getSize(int $file_size)
+    public function getFileSize(int $file_size)
     {
         if($file_size < 1000) { $file_size .= trans('AdminPanel::adminpanel.file_sizes.b'); }
         if($file_size > 1000 && $file_size < 1000000) { $file_size = round($file_size / 1024, 2) . trans('AdminPanel::adminpanel.file_sizes.kb'); }

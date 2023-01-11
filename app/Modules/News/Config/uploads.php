@@ -47,8 +47,10 @@ return [
         'path'      => '/uploads/news/multi_images/',
         'validator' => 'mimes:jpeg,jpg,png|max:10000',
         'multiple'  => true,
-        'width'  => 500,
-        'height' => false,
+        'save_type' => 'as_image',
+        'field_name' => 'name',
+        // 'width'  => 500,
+        // 'height' => false,
         // 'sizes'    => [
         //     'big'  => [
         //         'path'   => 'big/',
@@ -67,6 +69,14 @@ return [
     'file' => [
         'path'      => '/uploads/news/files/',
         'validator' => 'max:50000',
+        'field_name' => 'file_name',
+        'field_size' => 'file_size',
+    ],
+    'multi_files' => [
+        'path'      => '/uploads/news/multi_files/',
+        'validator' => 'max:100000',
+        'multiple'  => true,
+        'save_type' => 'as_file',
         'field_name' => 'file_name',
         'field_size' => 'file_size',
     ],

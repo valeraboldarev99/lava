@@ -1,7 +1,7 @@
 @if (count($errors) > 0)
     <!-- Список ошибок формы -->
     <div class="alert alert-danger">
-        <strong>@lang('AdminPanel::adminpanel.form_error')</strong>
+        <strong>{{__('AdminPanel::adminpanel.form_error')}}</strong>
         <br><br>
         <ul>
             @foreach ($errors->all() as $error)

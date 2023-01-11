@@ -350,7 +350,7 @@ trait FileUploader
     * Uploading multiple images (ajax)
     * @param $request [field, entity_id, _token]
     */
-    public function imagesUploader(FileRequest $request)
+    public function multiUploader(FileRequest $request)
     {
         $request_array = $request->all();
 
@@ -376,22 +376,61 @@ trait FileUploader
                 $multipleTable = \DB::table($entity->getMultipleFilesTables()[$field]); //table where files will be uploaded
                 //write it in your model: protected $multipleFilesTables = ['field_name'  => 'table_name_for_images',];
 
+                $file_size = $file->getSize();                                      // get the file size in bytes
+
                 if ($this->uploader($file, $configs[$field])) {                    //if the file is saved, we will save its name in the database
-                    $file_id = $multipleTable->insertGetId([                                        //write data to multi_table
-                        'name' => $this->name,
-                        'position'  => 0,
-                        'parent_id'  => $entity->id,
-                    ]);
-                    $file_path = $entity->getPathMultiImage($this->name, $field, $request_array['show_img_size']);
+                    if($configs[$field]['save_type'] == 'as_image')
+                    {
+                        return $this->imagesUploader($entity, $request_array, $multipleTable);
+                    }
+                    if($configs[$field]['save_type'] == 'as_file')
+                    {
+                        $request_array['saved_name'] ? $request_array['saved_name'] : $file->getClientOriginalName();
+                        $request_array['file_size'] = $file_size;
+                        $request_array['format'] = $file->getClientOriginalExtension();
+                        return $this->filesUploader($entity, $request_array, $multipleTable);
+                    }
                 }
             }
         }
+    }
+
+    protected function imagesUploader($entity, $request_array, $multipleTable)
+    {
+        $file_id = $multipleTable->insertGetId([                                        //write data to multi_table
+            'name' => $this->name,
+            'position'  => 0,
+            'parent_id'  => $entity->id,
+        ]);
+
+        $file_path = $entity->getPathMultiImage($this->name, $request_array['field'], $request_array['show_img_size']);
 
         return response()->json([
             'file_id' =>    $file_id,
             'file_name' =>  $this->name,
             'file_path' =>  $file_path,
-            'delete_route' =>   route($this->routePrefix . 'deleteMultiImages', ['entity_id' => $entity->id, 'field' => $field, 'image_id' => $file_id]),
+            'delete_route' =>   route($this->routePrefix . 'deleteMultiImages', ['entity_id' => $entity->id, 'field' => $request_array['field'], 'image_id' => $file_id]),
+        ]);
+    }
+
+    public function filesUploader($entity, $request_array, $multipleTable)
+    {
+        $file_id = $multipleTable->insertGetId([                                        //write data to multi_table
+            'saved_name' => $request_array['saved_name'],
+            'file_name' => $this->name,
+            'file_size' => $request_array['file_size'],
+            'format' => $request_array['format'],
+            'position'  => 0,
+            'parent_id'  => $entity->id,
+        ]);
+
+        $file_path = $entity->getFilePath($request_array['field']);
+
+        return response()->json([
+            '$file_id' => $file_id,
+            'file_name' =>  $this->name,
+            'format' => $request_array['format'],
+            'file_path' =>  $file_path,
         ]);
     }
 
@@ -419,7 +458,7 @@ trait FileUploader
                 {
                     foreach ($multiFiles as $file)
                     {
-                        if ($this->deleteInDirs($file->name, $configs[$field]))
+                        if ($this->deleteInDirs($file->{$configs[$field]['field_name']}, $configs[$field]))
                         {
                             DB::table($entity->getMultipleFilesTables()[$field])->delete($file->id);
                         }

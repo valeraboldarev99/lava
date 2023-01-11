@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="auth__content">
-        <h1 style="text-align: center;">@lang('Users::index.register')</h1>
+        <h1 style="text-align: center;">{{__('Users::index.register')}}</h1>
         <p style="text-align: center;  margin: 25px 0;">
-             <a href="{{ route('login') }}" class="btn btn-primary">@lang('Users::index.login')</a>
-             <a href="{{ route('registerForm') }}" class="btn btn-primary">@lang('Users::index.register')</a>
+             <a href="{{ route('login') }}" class="btn btn-primary">{{__('Users::index.login')}}</a>
+             <a href="{{ route('registerForm') }}" class="btn btn-primary">{{__('Users::index.register')}}</a>
          </p>
         @if(session()->has('message'))
             <div class="message__block">{{ session('message') }}</div>

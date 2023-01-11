@@ -19,7 +19,7 @@
         }
         $('#{{ $field }}').change(function () {
             if ($(this).val() != '') {
-                upload(this);
+                uploadImg(this);
             }
         });
         function imageBlock(data)
@@ -33,7 +33,7 @@
             '></span>');
             return true;
         }
-        function upload(img)
+        function uploadImg(img)
         {
             var form_data = new FormData();
             form_data.append('field', '{{$field}}');
@@ -43,7 +43,7 @@
             form_data.append('show_img_size', '{{$show_img_size}}');
             $('#loading__multi-images').css('display', 'inline-block');
             $.ajax({
-                url: "{!! route($routePrefix . 'imagesUploader') !!}",
+                url: "{!! route($routePrefix . 'multiUploader') !!}",
                 data: form_data,
                 type: 'POST',
                 contentType: false,
@@ -67,7 +67,7 @@
     <script>
         function deleteImage()
         {
-            if (confirm("@lang('AdminPanel::adminpanel.delete_image_sure')"))
+            if (confirm("{{__('AdminPanel::adminpanel.delete_image_sure')}}"))
             {
                 var image = $(this);
                 var delete_form_data = new FormData();
@@ -100,11 +100,12 @@
         }
     </script>
 @endpush
+<label>{{ (isset($label)) ? $label : trans('AdminPanel::fields.multiupload_images') }}</label>
 <div class="multi-images__field">
     @if(isset($entity->id))
         <div class="multi-images__form">
-            {!! MyForm::file($field, (isset($label)) ? $label : trans('AdminPanel::fields.file'), $entity->{$field}, ['accept="image/*"', 'data-field="' . $field . '"']) !!}
-            <span class="btn btn-success" style="margin-bottom: 15px;" onclick="openFiles()">@lang('AdminPanel::adminpanel.upload_images')</span>
+            {!! MyForm::file($field, '', $entity->{$field}, ['accept="image/*"', 'data-field="' . $field . '"']) !!}
+            <span class="btn btn-success" style="margin-bottom: 15px;" onclick="openFiles()">{{__('AdminPanel::adminpanel.upload_images')}}</span>
             <i id="loading__multi-images" class="fa fa-spinner fa-spin fa-2x fa-fw" style="left: 200px;top: 50px;display: none"></i>
             @if(isset($helptext))
                 {!! MyForm::helpText($helptext) !!}

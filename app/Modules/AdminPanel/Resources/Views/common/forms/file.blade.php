@@ -8,7 +8,7 @@
 @push('js')
     <script>
         function deleteFile() {
-            if (confirm("@lang('AdminPanel::adminpanel.delete_file_sure')")) {
+            if (confirm("{{__('AdminPanel::adminpanel.delete_file_sure')}}")) {
                 var xhr = new XMLHttpRequest();
 
                 xhr.open('DELETE', $(this).attr('data-href'));

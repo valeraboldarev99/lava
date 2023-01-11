@@ -55,6 +55,14 @@
 
 /*ADMIN PANEL*/
 /*admin panel header*/
+.mt_25 {
+	margin-top: 25px;
+}
+
+.w100 {
+	width: 100%;
+}
+
 .header__items {
 	width: 100%;
 	font-size: 14px;
@@ -152,7 +160,6 @@
 }
 
 .group__header.close_group .group__btn::before {
-;
 	background: url('../img/arrow_down.svg') center no-repeat;
 	background-size: contain;
 	-moz-transform: rotate(0deg);
@@ -218,7 +225,7 @@
 
 .entities__list td img {
 	width: 100px;
-	height: 100px;
+	max-height: 100px;
 }
 
 .controls {
@@ -394,15 +401,11 @@
 }
 
 /*multi images*/
-.multi-images__field {
+.multi-images__field,
+.multi-files__field {
 	width: 100%;
-	border: 1px solid #ccc;
 	padding: 15px;
 	margin-bottom: 15px;
-}
-
-.multi-images__form {
-
 }
 
 .multi-images__form input[type="file"] {
@@ -424,4 +427,52 @@
 
 .multi-images__item img {
 	width: 100%;
+}
+
+.multi-files__form {
+	display: flex;
+	justify-content: space-between;
+}
+
+.multi-files__form-item {
+	width: 38%;
+}
+
+.multi-files__form-item:last-child {
+	width: 20%;
+}
+
+.loading__multi-images {
+	position: relative;
+	top: 15px;
+	display: none;
+}
+
+.files-list__items {
+	width: 100%;
+}
+
+.files-list__item {
+	display: flex;
+	/*justify-content: space-between;*/
+	width: 100%;
+}
+
+.files-list__item:first-child {
+	font-weight: 700;
+}
+
+.files-list__block {
+	font-size: 12px;
+	padding: 5px 10px;
+}
+
+.files-list__name {
+	flex-grow: 1;
+	width: 40%;
+}
+
+.files-list__size {
+	flex-grow: 0;
+	width: 10%;
 }

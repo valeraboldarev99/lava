@@ -80,3 +80,14 @@
 .download-file {
 	background: #196D9E url('../img/download_file.svg') center center no-repeat;
 }
+
+.multi-images__field,
+.multi-files__field {
+	border: 1px solid #ccc;
+}
+
+.files-list__block {
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}

@@ -3,7 +3,7 @@
 @section('content')
 	<div class="users__block">
 		<div class="auth__content">
-		    <h1 style="text-align: center;">@lang('Users::index.edit')</h1>
+		    <h1 style="text-align: center;">{{ __('Users::index.edit') }}</h1>
 		    @if(session()->has('message'))
     			<div class="message__block">{{ session('message') }}</div>
 		    @else

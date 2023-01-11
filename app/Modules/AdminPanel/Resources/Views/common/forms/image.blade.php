@@ -11,7 +11,7 @@
 @push('js')
     <script>
         function deleteImage() {
-            if (confirm("@lang('AdminPanel::adminpanel.delete_image_sure')")) {
+            if (confirm("{{__('AdminPanel::adminpanel.delete_image_sure')}}")) {
                 var xhr = new XMLHttpRequest();
 
                 xhr.open('DELETE', $(this).attr('data-href'));
