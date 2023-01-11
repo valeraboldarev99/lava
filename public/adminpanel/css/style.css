@@ -454,7 +454,7 @@
 
 .files-list__item {
 	display: flex;
-	/*justify-content: space-between;*/
+	align-items: stretch;
 	width: 100%;
 }
 
@@ -475,4 +475,11 @@
 .files-list__size {
 	flex-grow: 0;
 	width: 10%;
+}
+
+.files-list__controls {
+	flex-grow: 0;
+	width: 140px;
+	display: flex;
+	justify-content: space-around;
 }

@@ -28,7 +28,7 @@
             $('.multi-images__item:last-child').append('<img src="' + data.file_path + '">');
             $('.multi-images__item:last-child').append('<span   class="js-del-img del-img" \n' +
                 'data-href="' + data.delete_route + '" \n' +
-                'data-image_id="' + data.file_id + '" \n' +
+                'data-file_id="' + data.file_id + '" \n' +
                 'onclick="deleteImage.apply(this)" \n' +
             '></span>');
             return true;
@@ -73,7 +73,7 @@
                 var delete_form_data = new FormData();
                 delete_form_data.append('entity_id', '{{ $entity->id }}');
                 delete_form_data.append('field', '{{ $field }}');
-                delete_form_data.append('image_id', $(this).data('image_id'));
+                delete_form_data.append('file_id', $(this).data('file_id'));
                 delete_form_data.append('_token', '{{ csrf_token() }}');
                 $.ajax({
                     headers: {
@@ -118,8 +118,8 @@
                     <div class="multi-images__item">
                         <img src="{{ $entity->getPathMultiImage($image->name, $field, $show_img_size) }}" alt="{{ $image->multi_images }}">
                         <span   class="js-del-img del-img" 
-                                data-href="{!! route($routePrefix . 'deleteMultiImages', ['entity_id' => $entity->id, 'field' => $field, 'image_id' => $image->id]) !!}"
-                                data-image_id="{{ $image->id }}"
+                                data-href="{!! route($routePrefix . 'deleteMultiFiles', ['entity_id' => $entity->id, 'field' => $field, 'file_id' => $image->id]) !!}"
+                                data-file_id="{{ $image->id }}"
                                 onclick="deleteImage.apply(this)">
                         </span>
                     </div>

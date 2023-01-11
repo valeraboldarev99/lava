@@ -34,4 +34,5 @@ return [
     'upload_images' => 'Загрузить изображения',
     'upload_files' => 'Загрузить файлы',
     'in_first_check_file' => 'Сперва выбрите файл',
+    'controls' => 'Управление',
 ];

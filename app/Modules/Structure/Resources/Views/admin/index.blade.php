@@ -8,7 +8,7 @@
     <th>@sortablelink('name', 'Имя')</th>
     <th>@sortablelink('email', 'Slug')</th>
     <th width="150">Module</th>
-    <th>Управление</th>
+    <th>{{ __('AdminPanel::adminpanel.controls') }}</th>
 @endsection
 
 @section('td')

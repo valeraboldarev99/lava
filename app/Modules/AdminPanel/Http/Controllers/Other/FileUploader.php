@@ -324,19 +324,19 @@ trait FileUploader
         * Deleting multiple images (ajax)
         * @param $entity_id
         * @param $field
-        * @param $image_id
+        * @param $file_id
     */
-    public function deleteMultiImages($entity_id, $field, $image_id)
+    public function deleteMultiFiles($entity_id, $field, $file_id)
     {
         $entity  = $this->getModel()->findOrFail($entity_id);
         $configs = getModuleConfig('uploads');
 
         $entityImages = DB::table($entity->getMultipleFilesTables()[$field]);
-        $entityImagesName = $entityImages->where('id', $image_id)->pluck('name')->first();
+        $entityImagesName = $entityImages->where('id', $file_id)->pluck($configs[$field]['field_name'])->first();
 
         if (array_key_exists($field, $configs)) {                                   //is there a selected field in the config
             if ($this->deleteInDirs($entityImagesName, $configs[$field])) {         //delete from derictory
-                $entityImages->delete($image_id);
+                $entityImages->delete($file_id);
 
                 return response()->json('deleted');
             }
@@ -409,7 +409,7 @@ trait FileUploader
             'file_id' =>    $file_id,
             'file_name' =>  $this->name,
             'file_path' =>  $file_path,
-            'delete_route' =>   route($this->routePrefix . 'deleteMultiImages', ['entity_id' => $entity->id, 'field' => $request_array['field'], 'image_id' => $file_id]),
+            'delete_route' =>   route($this->routePrefix . 'deleteMultiFiles', ['entity_id' => $entity->id, 'field' => $request_array['field'], 'file_id' => $file_id]),
         ]);
     }
 
@@ -424,13 +424,16 @@ trait FileUploader
             'parent_id'  => $entity->id,
         ]);
 
-        $file_path = $entity->getFilePath($request_array['field']);
+        $file_path = $entity->getPathMultiFile($this->name, $request_array['field']);
 
         return response()->json([
-            '$file_id' => $file_id,
+            'file_id' => $file_id,
+            'saved_name' => $request_array['saved_name'],
             'file_name' =>  $this->name,
+            'file_size' => $entity->getFileSize($request_array['file_size']),
             'format' => $request_array['format'],
             'file_path' =>  $file_path,
+            'delete_route' =>   route($this->routePrefix . 'deleteMultiFiles', ['entity_id' => $entity->id, 'field' => $request_array['field'], 'file_id' => $file_id]),
         ]);
     }
 

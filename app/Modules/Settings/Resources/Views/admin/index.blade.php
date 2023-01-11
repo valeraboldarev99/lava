@@ -7,7 +7,7 @@
 @section('th')
     <th>@sortablelink('name', 'Имя')</th>
     <th>@sortablelink('email', 'Slug')</th>
-    <th>Управление</th>
+    <th>{{ __('AdminPanel::adminpanel.controls') }}</th>
 @endsection
 
 @section('td')

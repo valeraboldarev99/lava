@@ -376,7 +376,7 @@ class ModuleCretor extends Command
 
         $content .= "@section('th')" . "\r\n";
         $content .= "    <th>@sortablelink('title', 'Имя')</th>" . "\r\n";
-        $content .= "    <th>Управление</th>" . "\r\n";
+        $content .= "    <th>{{ __('AdminPanel::adminpanel.controls') }}</th>" . "\r\n";
         $content .= "@endsection" . "\r\n\n";
 
         $content .= "@section('td')" . "\r\n";

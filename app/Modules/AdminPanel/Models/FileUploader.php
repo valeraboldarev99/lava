@@ -93,10 +93,10 @@ trait FileUploader
     {
         $path = $this->getPath($field);
 
-        if($this->{$field} == NULL)
-        {
-            return false;
-        }
+        // if($this->{$field} == NULL)
+        // {
+        //     return false;
+        // }
         return $path . $this->{$field};
     }
 
@@ -110,6 +110,18 @@ trait FileUploader
         $path = $this->getPath($field, $size);
 
         return $path . $image_name;
+    }
+
+    /**
+        * Path to the multiple file
+        * @param $field
+        * @param $size
+    */
+    public function getPathMultiFile($file_name, $field)
+    {
+        $path = $this->getFilePath($field);
+
+        return $path . $file_name;
     }
 
     /**
