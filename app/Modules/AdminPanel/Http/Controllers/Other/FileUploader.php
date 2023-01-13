@@ -84,10 +84,10 @@ trait FileUploader
 
         $rules = [];
         foreach ($fields as $field) {
-            if(!isset($configs[$field]['multiple']) || $configs[$field]['multiple'] != true)
-            {
+            // if(!isset($configs[$field]['multiple']) || $configs[$field]['multiple'] != true)
+            // {
                 $rules[$field] = $this->checkMimes($configs[$field]['validator']);
-            }
+            // }
         }
 
         $validator = Validator::make(Request::all(), $rules, $this->getUploadMessages(), $this->getUploadAttributes());
@@ -367,6 +367,8 @@ trait FileUploader
 
         $entity = $this->getModel()->where('id', $request_array['entity_id'])->first();
         $field = $request_array['field'];
+
+        $this->fileValidator($entity, $configs, $fields);                           //file validation
 
         if(isset($configs[$field]['multiple']) && $configs[$field]['multiple'] == true && isset($entity->getMultipleFilesTables()[$field]))                 //multi uploading
         {

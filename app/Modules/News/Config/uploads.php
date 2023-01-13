@@ -45,7 +45,7 @@ return [
     ],
     'multi_images' => [
         'path'      => '/uploads/news/multi_images/',
-        'validator' => 'mimes:jpeg,jpg,png|max:10000',
+        'validator' => 'mimes:png|max:10000',
         'multiple'  => true,
         'save_type' => 'as_image',
         'field_name' => 'name',
@@ -74,6 +74,7 @@ return [
     ],
     'multi_files' => [
         'path'      => '/uploads/news/multi_files/',
+        // 'validator' => 'mimes:pdf,mp3|max:100000',
         'validator' => 'max:100000',
         'multiple'  => true,
         'save_type' => 'as_file',

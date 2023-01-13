@@ -118,6 +118,7 @@
     <script>
         function changeFileNameForm()
         {
+            document.getElementById('multi-files__form-change').scrollIntoView();
             $('#multi-files__form-change').css('display', 'flex');
             $('#new_saved_name').val($(this).attr('data-file_name'));
             $('#changeFileName').attr('data-file_id', $(this).data('file_id'));
