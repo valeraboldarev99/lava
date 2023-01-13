@@ -5,8 +5,6 @@ return [
     'goto_site'		=> 'Назад к сайту',
     'version'		=> 'Version',
     'copy'			=> 'Copyright &copy; ' . Date('Y') . '. All rights reserved. LaVA',
-    'list'			=> 'Список',
-    'add'			=> 'Создать',
     'messages' => [
 		'store' 	=> 'Запись успешно Создана',
 		'update' 	=> 'Запись успешно Обновлена',
@@ -21,6 +19,14 @@ return [
         'kb'     => ' Кб',
         'mb'     => ' Мб',
     ],
+    'buttons' => [
+        'save'          => 'Сохранить',
+        'change'        => 'Изменить',
+        'upload_images' => 'Загрузить изображения',
+        'upload_files'  => 'Загрузить файлы',
+        'list'          => 'Список',
+        'add'           => 'Создать',
+    ],
     'form_error' => 'Ошибка при сохранении формы',
     'delete_image_sure' => 'Вы уверены, что хотите удалить изображение?',
     'delete_file_sure'  => 'Вы уверены, что хотите удалить файл?',
@@ -31,8 +37,6 @@ return [
     'no_files' => 'Нет загруженных файлов',
     'save_and_upload_image' => 'Сохраните, чтобы загрузить изображения',
     'save_and_upload_files' => 'Сохраните, чтобы загрузить файлы',
-    'upload_images' => 'Загрузить изображения',
-    'upload_files' => 'Загрузить файлы',
     'in_first_check_file' => 'Сперва выбрите файл',
     'controls' => 'Управление',
 ];

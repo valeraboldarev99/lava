@@ -321,7 +321,7 @@ trait FileUploader
     }
 
     /**
-        * Deleting multiple images (ajax)
+        * Deleting multiple images or files (ajax)
         * @param $entity_id
         * @param $field
         * @param $file_id
@@ -347,8 +347,8 @@ trait FileUploader
     }
 
     /**
-    * Uploading multiple images (ajax)
-    * @param $request [field, entity_id, _token]
+    * Uploading multiple (ajax)
+    * @param $request [field, entity_id, _token ...]
     */
     public function multiUploader(FileRequest $request)
     {
@@ -395,6 +395,12 @@ trait FileUploader
         }
     }
 
+    /**
+    * Uploading multiple images (ajax)
+    * @param $entity
+    * @param $request_array
+    * @param $multipleTable
+    */
     protected function imagesUploader($entity, $request_array, $multipleTable)
     {
         $file_id = $multipleTable->insertGetId([                                        //write data to multi_table
@@ -407,12 +413,19 @@ trait FileUploader
 
         return response()->json([
             'file_id' =>    $file_id,
+            'block_id' => $request_array['field'] . '_' . $entity->id . '_' . $file_id,
             'file_name' =>  $this->name,
             'file_path' =>  $file_path,
             'delete_route' =>   route($this->routePrefix . 'deleteMultiFiles', ['entity_id' => $entity->id, 'field' => $request_array['field'], 'file_id' => $file_id]),
         ]);
     }
 
+    /**
+    * Uploading multiple files (ajax)
+    * @param $entity
+    * @param $request_array
+    * @param $multipleTable
+    */
     public function filesUploader($entity, $request_array, $multipleTable)
     {
         $file_id = $multipleTable->insertGetId([                                        //write data to multi_table
@@ -428,6 +441,7 @@ trait FileUploader
 
         return response()->json([
             'file_id' => $file_id,
+            'block_id' => $request_array['field'] . '_' . $entity->id . '_' . $file_id,
             'saved_name' => $request_array['saved_name'],
             'file_name' =>  $this->name,
             'file_size' => $entity->getFileSize($request_array['file_size']),
@@ -437,6 +451,10 @@ trait FileUploader
         ]);
     }
 
+    /**
+    * Delete all entity's files, when delete entity
+    * @param $entity
+    */
     public function deleteAllFiles($entity)
     {
         $configs = getModuleConfig('uploads');                                     //this is the uploads.php file in the module config
@@ -461,7 +479,7 @@ trait FileUploader
                 {
                     foreach ($multiFiles as $file)
                     {
-                        if ($this->deleteInDirs($file->{$configs[$field]['field_name']}, $configs[$field]))
+                        if ($this->deleteInDirs($file->{$configs[$field]['field_name']}, $configs[$field])) //file_name's field in table
                         {
                             DB::table($entity->getMultipleFilesTables()[$field])->delete($file->id);
                         }
@@ -471,5 +489,26 @@ trait FileUploader
 
         }
         return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.destroy'));
+    }
+
+    /**
+    * Change file (ajax)
+    * @param $request
+    */
+    public function changeFile(FileRequest $request)
+    {
+        $request_array = $request->all();
+        $field = $request_array['field'];
+        $file_id = $request_array['file_id'];
+        $entity = $this->getModel();
+        $file = DB::table($entity->getMultipleFilesTables()[$field])->where('id', $file_id);
+        $file->update([
+            'saved_name' => $request_array['new_saved_name'],
+        ]);
+
+        return response()->json([
+            'file' => $file->first(),
+            'block_id' => $field . '_' . $request_array['entity_id'] . '_' . $file_id,
+        ]);
     }
 }

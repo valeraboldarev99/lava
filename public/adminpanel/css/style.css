@@ -434,8 +434,17 @@
 	justify-content: space-between;
 }
 
+.multi-files__form-change {
+	display: none;
+	justify-content: flex-start;
+}
+
 .multi-files__form-item {
 	width: 38%;
+}
+
+.multi-files__form-change .multi-files__form-item:first-child {
+	margin-right: 20px;
 }
 
 .multi-files__form-item:last-child {

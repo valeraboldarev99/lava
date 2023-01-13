@@ -40,6 +40,7 @@
                     // console.log(data);
                     $('#saved_name').val('');
                     $('#{{ $field }}').val('');
+
                     fileBlock(data);
                     $('#loading__multi-files').css('display', 'none');
                 },
@@ -52,12 +53,15 @@
 
         function fileBlock(data)
         {
-            $('#files-list__items').append('<div class="files-list__item"></div>');
-            $('.files-list__item:last-child').append('<div class="files-list__block files-list__name">' + data.saved_name + '</div>');
-            $('.files-list__item:last-child').append('<div class="files-list__block files-list__size">' + data.format + '</div>');
-            $('.files-list__item:last-child').append('<div class="files-list__block files-list__size">' + data.file_size + '</div>');
-            $('.files-list__item:last-child').append('<div class="files-list__block files-list__controls"> \n' +
-                '<span class="btn btn-primary btn-sm"> \n' +
+            $('#files-list__items').append('<div id="' + data.block_id + '" class="files-list__item"></div>');
+            $('#' + data.block_id + '').append('<div class="files-list__block files-list__name">' + data.saved_name + '</div>');
+            $('#' + data.block_id + '').append('<div class="files-list__block files-list__size">' + data.format + '</div>');
+            $('#' + data.block_id + '').append('<div class="files-list__block files-list__size">' + data.file_size + '</div>');
+            $('#' + data.block_id + '').append('<div class="files-list__block files-list__controls"> \n' +
+                '<span class="btn btn-primary btn-sm" \n' +
+                    'data-file_id="' + data.file_id + '" \n' +
+                    'data-file_name="' + data.saved_name + '" \n' +
+                    'onclick="changeFileNameForm.apply(this)"> \n' +
                     '<i class="fa fa-pencil"></i> \n' +
                 '</span> \n' +
                 '<a href="' + data.file_path + '" class="btn btn-primary btn-sm" target="_blank"> \n' +
@@ -110,6 +114,45 @@
             }
         }
     </script>
+
+    <script>
+        function changeFileNameForm()
+        {
+            $('#multi-files__form-change').css('display', 'flex');
+            $('#new_saved_name').val($(this).attr('data-file_name'));
+            $('#changeFileName').attr('data-file_id', $(this).data('file_id'));
+        }
+
+        $('#changeFileName').on('click', function() {
+            var update_form_data = new FormData();
+            update_form_data.append('_token', '{{csrf_token()}}');
+            update_form_data.append('field', '{{$field}}');
+            update_form_data.append('entity_id', '{{$entity->id}}');
+            update_form_data.append('file_id', $('#changeFileName').attr('data-file_id'));
+            update_form_data.append('new_saved_name', $('#new_saved_name').val());
+            $('#loading__multi-files_update').css('display', 'inline-block');
+
+            $.ajax({
+                url: "{!! route($routePrefix . 'changeFile') !!}",
+                data: update_form_data,
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    // console.log(data);
+                    $('#' + data.block_id + ' .files-list__name').text(data.file.saved_name);
+                    $('#loading__multi-files_update').css('display', 'none');
+                    $('#multi-files__form-change').css('display', 'none');
+                    $('#' + data.block_id + ' #changeFile').attr('data-file_name', data.file.saved_name);
+                },
+                error: function (xhr, status, error) {
+                    alert('ERROR');
+                    // alert(xhr.responseText);
+                }
+            });
+        });
+
+    </script>
 @endpush
 
 <label>{{ (isset($label)) ? $label : trans('AdminPanel::fields.multiupload_files') }}</label>
@@ -123,13 +166,23 @@
                 {!! MyForm::file($field, trans('AdminPanel::fields.check_file'), $entity->{$field}) !!}
             </div>
             <div class="multi-files__form-item">
-                <span class="btn btn-success mt_25" onclick="addFile()">{{__('AdminPanel::adminpanel.upload_files')}}</span>
+                <span class="btn btn-success mt_25" onclick="addFile()">{{__('AdminPanel::adminpanel.buttons.upload_files')}}</span>
                 <i id="loading__multi-files" class="fa fa-spinner fa-spin fa-2x fa-fw loading__multi-images"></i>
             </div>
         </div>
         @if(isset($helptext))
             {!! MyForm::helpText($helptext) !!}
         @endif
+        <div id="multi-files__form-change" class="multi-files__form-change">
+            <div class="multi-files__form-item">
+                {!! MyForm::text('new_saved_name', trans('AdminPanel::fields.file_name')) !!}
+            </div>
+
+            <div class="multi-files__form-item">
+                <span id="changeFileName" class="btn btn-success mt_25">{{__('AdminPanel::adminpanel.buttons.change')}}</span>
+                <i id="loading__multi-files_update" class="fa fa-spinner fa-spin fa-2x fa-fw loading__multi-images"></i>
+            </div>
+        </div>
         <div id="files-list__items" class="files-list__items">
             @if($entity->files()->count())
                 <div class="files-list__item">
@@ -139,23 +192,26 @@
                     <div class="files-list__block files-list__controls">{{ __('AdminPanel::adminpanel.controls') }}</div>
                 </div>
                 @foreach($entity->files()->get() as $file)
-                    <div class="files-list__item">
+                    <div id="{{ $field . '_' . $entity->id . '_' . $file->id }}" class="files-list__item">
                         <div class="files-list__block files-list__name">{{ $file->saved_name }}</div>
                         <div class="files-list__block files-list__size">{{ $file->format }}</div>
                         <div class="files-list__block files-list__size">{{ $entity->getFileSize($file->file_size) }}</div>
                         <div class="files-list__block files-list__controls">
-                                <span class="btn btn-primary btn-sm" onclick="alert('Скоро')">
-                                    <i class="fa fa-pencil"></i>
-                                </span>
-                                <a href="{{$entity->getPathMultiFile($file->file_name, $field) }}" class="btn btn-primary btn-sm" target="_blank">
-                                    <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                                </a>
-                                <span class="btn btn-danger btn-sm js-del-img"
-                                    data-href="{!! route($routePrefix . 'deleteMultiFiles', ['entity_id' => $entity->id, 'field' => $field, 'file_id' => $file->id]) !!}"
-                                    data-file_id="{{ $file->id }}"
-                                    onclick="deleteFile.apply(this)">
-                                        <i class="fa fa-fw fa-close delete"></i>
-                                </span>
+                            <span id="changeFile" class="btn btn-primary btn-sm" 
+                                data-file_id="{{ $file->id }}"
+                                data-file_name="{{$file->saved_name}}"
+                                onclick="changeFileNameForm.apply(this)">
+                                <i class="fa fa-pencil"></i>
+                            </span>
+                            <a href="{{$entity->getPathMultiFile($file->file_name, $field) }}" class="btn btn-primary btn-sm" target="_blank">
+                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                            </a>
+                            <span class="btn btn-danger btn-sm js-del-img"
+                                data-href="{!! route($routePrefix . 'deleteMultiFiles', ['entity_id' => $entity->id, 'field' => $field, 'file_id' => $file->id]) !!}"
+                                data-file_id="{{ $file->id }}"
+                                onclick="deleteFile.apply(this)">
+                                    <i class="fa fa-fw fa-close delete"></i>
+                            </span>
                         </div>
                     </div>
                 @endforeach

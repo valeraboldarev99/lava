@@ -21,7 +21,7 @@
             @yield('form_content')
 
             <div class="box-footer">
-                 {!! MyForm::submit(trans('AdminPanel::fields.save')) !!}
+                 {!! MyForm::submit(trans('AdminPanel::adminpanel.buttons.save')) !!}
             </div>
 
         {!! MyForm::close() !!}

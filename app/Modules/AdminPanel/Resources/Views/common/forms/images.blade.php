@@ -24,9 +24,9 @@
         });
         function imageBlock(data)
         {
-            $('#multi-images__items').append('<div class="multi-images__item"></div>');
-            $('.multi-images__item:last-child').append('<img src="' + data.file_path + '">');
-            $('.multi-images__item:last-child').append('<span   class="js-del-img del-img" \n' +
+            $('#multi-images__items').append('<div id="' + data.block_id + '" class="multi-images__item"></div>');
+            $('#' + data.block_id + '').append('<img src="' + data.file_path + '">');
+            $('#' + data.block_id + '').append('<span   class="js-del-img del-img" \n' +
                 'data-href="' + data.delete_route + '" \n' +
                 'data-file_id="' + data.file_id + '" \n' +
                 'onclick="deleteImage.apply(this)" \n' +
@@ -105,7 +105,7 @@
     @if(isset($entity->id))
         <div class="multi-images__form">
             {!! MyForm::file($field, '', $entity->{$field}, ['accept="image/*"', 'data-field="' . $field . '"']) !!}
-            <span class="btn btn-success" style="margin-bottom: 15px;" onclick="openFiles()">{{__('AdminPanel::adminpanel.upload_images')}}</span>
+            <span class="btn btn-success" style="margin-bottom: 15px;" onclick="openFiles()">{{__('AdminPanel::adminpanel.buttons.upload_images')}}</span>
             <i id="loading__multi-images" class="fa fa-spinner fa-spin fa-2x fa-fw" style="left: 200px;top: 50px;display: none"></i>
             @if(isset($helptext))
                 {!! MyForm::helpText($helptext) !!}
@@ -115,7 +115,7 @@
         <div class="multi-images__items" id="multi-images__items">
             @if($entity->images()->count())
                 @foreach($entity->images()->get() as $image)
-                    <div class="multi-images__item">
+                    <div id="{{ $field . '_' . $entity->id . '_' . $image->id }}" class="multi-images__item">
                         <img src="{{ $entity->getPathMultiImage($image->name, $field, $show_img_size) }}" alt="{{ $image->multi_images }}">
                         <span   class="js-del-img del-img" 
                                 data-href="{!! route($routePrefix . 'deleteMultiFiles', ['entity_id' => $entity->id, 'field' => $field, 'file_id' => $image->id]) !!}"
