@@ -2,7 +2,7 @@
     <a class="btn btn-info" href="{!! route($routePrefix . 'export') !!}">
         <i class="fa fa-upload"></i> {{ __('AdminPanel::adminpanel.buttons.export')}}
     </a>
-    <a class="btn btn-info" href="{!! route($routePrefix . 'import') !!}">
+    <a class="btn btn-info" href="{!! route($routePrefix . 'importview') !!}">
         <i class="fa fa-download"></i> {{ __('AdminPanel::adminpanel.buttons.import')}}
     </a>
 @endif
