@@ -4,10 +4,6 @@
     <h2>{{ __('News::adminpanel.title') }}</h2>
 @endsection
 
-@section('topmenu')
-    @include('AdminPanel::controls.header_all')
-@endsection
-
 @section('form_content')
     {!! MyForm::open([
         'entity' => $entity,

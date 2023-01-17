@@ -4,6 +4,14 @@
     <h2>{{ __('News::adminpanel.title') }}</h2>
 @endsection
 
+@section('topmenu')
+    <div class="header-controls">
+        @include('AdminPanel::controls.main_buttons')
+        @include('AdminPanel::common.import_export')
+    </div>
+    @include('AdminPanel::common.localization')
+@endsection
+
 @section('th')
     <th>@sortablelink('title', 'Имя')</th>
     <th width="120">{{ __('AdminPanel::fields.image') }}</th>

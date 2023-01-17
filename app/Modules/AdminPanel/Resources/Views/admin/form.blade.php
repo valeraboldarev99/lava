@@ -5,7 +5,9 @@
 @endsection
 
 @section('topmenu')
-    @include('AdminPanel::controls.header_all')
+    <div class="header-controls">
+        @include('AdminPanel::controls.main_buttons')
+    </div>
 @endsection
 
 @section('form_js')

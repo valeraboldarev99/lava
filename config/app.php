@@ -177,6 +177,7 @@ return [
         App\Providers\ModulesServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,  //import and export
     ],
 
     /*
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'MyForm' => App\Helpers\MyForm::class,
         'Localization' => App\Helpers\Localization::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         // 'InterventionImage' => IIntervention\Image\ImageManager::class,
     ],
 

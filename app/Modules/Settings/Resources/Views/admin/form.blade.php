@@ -4,10 +4,6 @@
 	<h2>Настройки</h2>
 @endsection
 
-@section('topmenu')
-    @include('AdminPanel::controls.header_all')
-@endsection
-
 @section('form_js')
     @if($entity->type == 'wysiwyg')
         @include('AdminPanel::common.forms.ckeditor', [

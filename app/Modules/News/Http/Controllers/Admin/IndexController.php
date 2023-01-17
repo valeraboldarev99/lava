@@ -7,6 +7,10 @@ use App\Modules\News\Models\News;
 use App\Modules\AdminPanel\Http\Controllers\Other\FileUploader;
 use App\Modules\AdminPanel\Http\Controllers\Admin\AdminMainController;
 
+use App\Modules\AdminPanel\Http\Controllers\Other\EnExport;
+use App\Exports\ExportNews;
+use Maatwebsite\Excel\Facades\Excel;
+
 class IndexController extends AdminMainController
 {
     use FileUploader;

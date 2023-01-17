@@ -403,10 +403,6 @@ class ModuleCretor extends Command
         $content .= "    <h2>{{ __('" . ucfirst($this->argument('module_name')) . "::adminpanel.title') }}</h2>" . "\r\n";
         $content .= "@endsection" . "\r\n\n";
 
-        $content .= "@section('topmenu')" . "\r\n";
-        $content .= "    @include('AdminPanel::controls.header_all')" . "\r\n";
-        $content .= "@endsection" . "\r\n\n";
-
         $content .= "@section('form_content')" . "\r\n";
         $content .= "    {!! MyForm::open([" . "\r\n";
         $content .= "        'entity' => \$entity," . "\r\n";

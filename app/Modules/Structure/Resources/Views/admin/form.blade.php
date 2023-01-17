@@ -4,10 +4,6 @@
 	<h2>Структура сайта</h2>
 @endsection
 
-@section('topmenu')
-    @include('AdminPanel::controls.header_all')
-@endsection
-
 @section('form_content')
     {!! MyForm::open([
         'entity' => $entity,

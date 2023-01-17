@@ -26,7 +26,7 @@
 @endpush
 
 <div class="file__field">
-    @if($entity->getFilePath($field))
+    @if($entity->{$field})
         <label>{{ (isset($label)) ? $label : trans('AdminPanel::fields.file') }}</label>
         <div class="file__block">
             <span class="file__name">{{ $entity->getFileName($field, $size = true) }}</span>
