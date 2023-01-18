@@ -8,24 +8,34 @@ class MyForm
 {
 	static function open($attr)
 	{
-		$entity = $attr['entity'];
-		$method = $attr['method'];
-		isset($attr['store']) ? $store = $attr['store'] : $store = '';
-		$update = $attr['update'];
-		$methodInput = '';
-
-		Session::flash('entity', $entity);
-
-		if(isset($entity->id))
+		if(isset($attr['entity']))
 		{
-			$action = route($update, $entity->id);
-			$methodInput = '<input type="hidden" name="_method" value="PATCH">';
+			$entity = $attr['entity'];
+			isset($attr['store']) ? $store = $attr['store'] : $store = '';
+			$update = $attr['update'];
+			$methodInput = '';
+
+			Session::flash('entity', $entity);
+
+			if(isset($entity->id))
+			{
+				$action = route($update, $entity->id);
+				$methodInput = '<input type="hidden" name="_method" value="PATCH">';
+			}
+			else {
+				$action = route($store);
+			}
+		}
+
+		if(isset($attr['method']) && $attr['method'])
+		{
+			$method = $attr['method'];
 		}
 		else {
-			$action = route($store, $entity->id);
+			$method = '';
 		}
 
-		if(isset($attr['autocomplete']) && $attr['autocomplete']) 
+		if(isset($attr['autocomplete']) && $attr['autocomplete'])
 		{
 			$autocomplete = 'autocomplete="on"'; 
 		}
@@ -43,9 +53,18 @@ class MyForm
 
 		$csrf = '<input type="hidden" name="_token" value="' . csrf_token() . '">';
 
-		return '<form method="' . $method . '" action="' . $action . '" ' . $autocomplete . $files . '>' . 
+		if(isset($attr['entity']))
+		{
+			return '<form method="' . $method . '" action="' . $action . '" ' . $autocomplete . $files . '>' . 
 						$csrf .
 						$methodInput;
+		}
+
+		if(isset($attr['action']))
+		{
+			return '<form method="' . $method . '" action="' . route($attr['action']) . '" ' . $autocomplete . $files . '>' . 
+						$csrf;
+		}
 	}
 
 	public function close()

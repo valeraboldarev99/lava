@@ -10,13 +10,13 @@ class Import implements ToModel, WithHeadingRow
 {
     public function model(array $row)
     {
-    		// dd(getTableFields('news'));
-    	// foreach ($field as getTableFields()) {
-    	// }
-        return new News([
-           'lang'    	=> $row['lang'],
-           'title'    	=> $row['title'],
-           'date' 		=> $row['date'],
-        ]);
+        $tableFields = getTableFields();
+
+        $importArray = [];
+        foreach ($tableFields as $field) {
+            $importArray[$field] = $row[$field];
+        }
+
+        return new News($importArray);
     }
 }

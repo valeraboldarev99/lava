@@ -35,7 +35,7 @@ class IndexController extends AdminMainController
     public function import(Request $request)
     {
         $request_array = $request->all();
-        Excel::import(new Import, $request_array['imprt_file']);
+        Excel::import(new Import, $request_array['import_file']);
         return redirect()->route('admin.news.index')->with('success', 'All good!!!');
     }
 
