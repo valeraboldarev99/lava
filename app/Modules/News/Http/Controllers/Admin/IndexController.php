@@ -27,22 +27,25 @@ class IndexController extends AdminMainController
         return Excel::download(new Export, date('Y_m_d_H_i_s').'_news.csv');
     }
 
-    public function importview()
-    {
-        return view('News::admin.import');
-    }
-
     public function import(Request $request)
     {
         $request_array = $request->all();
-        Excel::import(new Import, $request_array['import_file']);
-        return redirect()->route('admin.news.index')->with('success', 'All good!!!');
+
+        $import = new Import();
+        $import->import($request_array['import_file']);
+
+        if($import->failures()->isNotEmpty())
+        {
+            return back()->withFailures($import->failures());
+        }
+
+        return redirect()->route('admin.news.index')->withStatus(trans('AdminPanel::adminpanel.import_success'));
     }
 
     // public function getRules($request, $id = false)
     // {
     //     return [
-    //         'image' => 'mimes:png'
+    //         // 'image' => 'mimes:png'
     //     ];
     // }
 }

@@ -492,3 +492,8 @@
 	display: flex;
 	justify-content: space-around;
 }
+
+.import_form {
+	display: none;
+	margin-top: 25px;
+}

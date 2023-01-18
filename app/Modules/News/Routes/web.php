@@ -21,7 +21,6 @@ Route::group([
             Route::post('/news/change_file', 'IndexController@changeFile')->name('news.changeFile');                                            //changeFile
 
             Route::get('/news/export/', 'IndexController@export')->name('news.export');
-            Route::get('/news/importview/', 'IndexController@importview')->name('news.importview');
             Route::post('/news/import/', 'IndexController@import')->name('news.import');
             Route::resource('/news', 'IndexController');
         });
