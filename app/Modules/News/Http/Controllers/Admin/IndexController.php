@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Modules\News\Models\News;
 use App\Modules\AdminPanel\Http\Controllers\Other\FileUploader;
 use App\Modules\AdminPanel\Http\Controllers\Admin\AdminMainController;
-
 use App\Modules\News\Http\ExportAndImport\Export;
 use App\Modules\News\Http\ExportAndImport\Import;
 use Maatwebsite\Excel\Facades\Excel;
@@ -36,8 +35,6 @@ class IndexController extends AdminMainController
     public function import(Request $request)
     {
         $request_array = $request->all();
-        // dd($request->all(), );
-        // return 'import';
         Excel::import(new Import, $request_array['imprt_file']);
         return redirect()->route('admin.news.index')->with('success', 'All good!!!');
     }

@@ -1,8 +1,13 @@
 <?php
 
 use App\Modules\Settings\Models\Settings;
+use Illuminate\Support\Facades\Schema;
 use App\Helpers\PagesStructure;
+use Illuminate\Support\Str;
 
+/**
+    * return link to homepage with current language : string
+*/
 if (!function_exists('home')) {
     function home()
     {
@@ -10,6 +15,9 @@ if (!function_exists('home')) {
     }
 }
 
+/**
+    * return all modules name : array
+*/
 if (!function_exists('modules_all')) {
     function modules_all()
     {
@@ -17,6 +25,10 @@ if (!function_exists('modules_all')) {
     }
 }
 
+/**
+    * return setting's data from Settings table : entity
+    * @param $slug - (slug field) string
+*/
 if(!function_exists('getSetting')) {
     function getSetting($slug)
     {
@@ -24,6 +36,9 @@ if(!function_exists('getSetting')) {
     }
 }
 
+/**
+    * return current language : string
+*/
 if(!function_exists('getLang')) {
     function getLang()
     {
@@ -40,6 +55,9 @@ if(!function_exists('getLang')) {
     }
 }
 
+/**
+    * return page's data from Structure table : entity
+*/
 if(!function_exists('getPage')) {
     function getPage()
     {
@@ -47,6 +65,9 @@ if(!function_exists('getPage')) {
     }
 }
 
+/**
+    * return this url without site name : string
+*/
 if(!function_exists('getUrl')) {
     function getUrl()
     {
@@ -54,6 +75,10 @@ if(!function_exists('getUrl')) {
     }
 }
 
+/**
+    * return admins localization link for language : string
+    * @param $locale - (language name, for example: 'en') string
+*/
 if(!function_exists('adminLocale')) {
     function adminLocale($locale)
     {
@@ -75,6 +100,10 @@ if(!function_exists('adminLocale')) {
     }
 }
 
+/**
+    * checks if there is localization in this module : bool
+    * @param $model_name - (module name, passed to all admin's views) string
+*/
 if(!function_exists('checkModelLocalization')) {
     function checkModelLocalization($model_name)
     {
@@ -89,6 +118,9 @@ if(!function_exists('checkModelLocalization')) {
     }
 }
 
+/**
+    * return Method name : string
+*/
 if(!function_exists('getMethod')) {
     function getMethod()
     {
@@ -99,6 +131,9 @@ if(!function_exists('getMethod')) {
     }
 }
 
+/**
+    * return module name : string
+*/
 if(!function_exists('getModule')) {
     function getModule()
     {
@@ -112,6 +147,11 @@ if(!function_exists('getModule')) {
     }
 }
 
+/**
+    * return module's configs : array
+    * @param $arg - (file name, and if you need - path to value) string
+    * @param $module - (module name) string, nullable
+*/
 if(!function_exists('getModuleConfig')) {
     function getModuleConfig($arg, $module = null)
     {
@@ -126,5 +166,39 @@ if(!function_exists('getModuleConfig')) {
         $value = $module . '.' . $arg;
 
         return config($value);
+    }
+}
+
+/**
+    * return table name : string
+    * @param $module - (module name) string, nullable
+*/
+if(!function_exists('getTableName')) {
+    function getTableName($module = null)
+    {
+        if(!$module)
+        {
+            return Str::snake(Str::pluralStudly(class_basename(getModule())));
+        }
+        else {
+            return Str::snake(Str::pluralStudly(class_basename($module)));
+        }
+    }
+}
+
+/**
+    * return table fields name : string
+    * @param $tableName - string, nullable
+*/
+if(!function_exists('getTableFields')) {
+    function getTableFields($tableName = null)
+    {
+        if(!$tableName)
+        {
+            return Schema::getColumnListing(getTableName());
+        }
+        else {
+            return Schema::getColumnListing($tableName);
+        }
     }
 }
