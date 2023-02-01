@@ -33,6 +33,7 @@
                 <div class="col-md-2">
                     {!! MyForm::submit(trans('AdminPanel::adminpanel.buttons.to_import')) !!}
                 </div>
+            </div>
 
         {!! MyForm::close() !!}
     </div>
