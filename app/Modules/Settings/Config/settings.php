@@ -5,7 +5,7 @@ return [
 		[
 			'icon' 		=> 'fa fa-tasks',
 			'route' 	=> 'admin.settings.index',
-			'group'		=> 'main_group',
+			'group'		=> 'system_group',
 			'title' 	=> trans('Settings::adminpanel.settings_list'),
 			'priority' 	=> 50,
 		],

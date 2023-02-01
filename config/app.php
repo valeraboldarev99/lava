@@ -178,6 +178,8 @@ return [
         App\Providers\ComposerServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,  //import and export
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,//laravel filemanager
+        Intervention\Image\ImageServiceProvider::class,//laravel filemanager
     ],
 
     /*
@@ -233,6 +235,7 @@ return [
         'Localization' => App\Helpers\Localization::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         // 'InterventionImage' => IIntervention\Image\ImageManager::class,
+        'Image' => Intervention\Image\Facades\Image::class,//laravel filemanager
     ],
 
 ];

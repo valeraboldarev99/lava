@@ -4,7 +4,10 @@
         @foreach($fields as $field)
                 <script>
                     CKEDITOR.replace( "{{ $field }}", {
-                        filebrowserBrowseUrl: '/ckfinder/browser',
+                        filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                        filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+                        filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                        filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token=',
                         removePlugins: ['exportpdf'],
                     } );
                 </script>
