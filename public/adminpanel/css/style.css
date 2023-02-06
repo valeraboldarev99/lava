@@ -497,3 +497,22 @@
 	display: none;
 	margin-top: 25px;
 }
+
+.input__label {
+	position: relative;
+}
+
+.choose__item {
+	position: relative;
+}
+
+.choose__item_input {
+	width: 100%;
+	padding: 6px 120px 6px 12px;
+}
+
+.btn_choose {
+	position: absolute;
+	top: 0;
+	right: 0;
+}

@@ -35,7 +35,7 @@ return [
     // Ex: The private folder of user will be named as the user id.
     'private_folder_name'      => UniSharp\LaravelFilemanager\Handlers\ConfigHandler::class,
 
-    'allow_shared_folder'      => false,
+    'allow_shared_folder'      => true,
 
     'shared_folder_name'       => 'shares',
 
@@ -192,8 +192,11 @@ return [
         'jpg'  => 'JPEG Image',
         'jpeg' => 'JPEG Image',
         'png'  => 'PNG Image',
+        'webp' => 'WEBP Image',
         'ppt'  => 'Microsoft PowerPoint',
         'pptx' => 'Microsoft PowerPoint',
+        'mp4'  => 'MP4 Video',
+        'mp3'  => 'MP3 Music',
     ],
 
     /*
