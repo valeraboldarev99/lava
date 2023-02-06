@@ -6,11 +6,11 @@
     'accept' => ['accept="image/*"'],
 ]) --}}
 @php
-    $imagePath = $entity->getImagePath($field, isset($show_img_size) ? $show_img_size : 'big');
+    $imagePath = $entity->getImagePath($field, isset($show_img_size) ? $show_img_size : null);
 @endphp
 @push('js')
     <script>
-        function deleteImage() {
+        function deleteSingleImage() {
             if (confirm("{{__('AdminPanel::adminpanel.delete_image_sure')}}")) {
                 var xhr = new XMLHttpRequest();
 
@@ -37,7 +37,7 @@
             <span   class="del-img" 
                     data-href="{!! route($routePrefix . 'deleteFile', ['id' => $entity->id, 'field' => $field]) !!}" 
                     data-csrf_token="{{ csrf_token() }}"
-                    onclick="deleteImage.apply(this)">
+                    onclick="deleteSingleImage.apply(this)">
             </span>
         </div>
         <div class="clearfix"></div>

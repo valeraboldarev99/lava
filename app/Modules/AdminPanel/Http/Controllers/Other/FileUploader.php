@@ -159,6 +159,9 @@ trait FileUploader
         if (!isset($config['sizes']) || empty($config['sizes'])) {      //if the uploads file does not specify the dimensions for the field, then we will simply save
             $file->move($path, $this->name);
 
+            if(isset($config['webp']) && $config['webp'] && $config['webp'] > 0) {    //if there is a webp field or its value is greater than 0, the value will affect the percentage of quality
+                $this->convertToWebp($path, $config['webp']);
+            }
             return true;
         }
         else {
@@ -512,5 +515,20 @@ trait FileUploader
             'file' => $file->first(),
             'block_id' => $field . '_' . $request_array['entity_id'] . '_' . $file_id,
         ]);
+    }
+
+    /**
+    * Download file
+    * @param $id
+    * @param $field
+    */
+    public function downloadFile($id, $field)
+    {
+        $entity  = $this->getModel()->findOrFail($id);
+        $configs = getModuleConfig('uploads');
+        if (array_key_exists($field, $configs)) {                                   //is there a selected field in the config
+            $baseDir = public_path() . $configs[$field]['path'] . $entity->{$field};
+        }
+        return response()->download($baseDir, $entity->{$field});
     }
 }

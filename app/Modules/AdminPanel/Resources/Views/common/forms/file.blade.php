@@ -7,7 +7,7 @@
 
 @push('js')
     <script>
-        function deleteFile() {
+        function deleteSingleFile() {
             if (confirm("{{__('AdminPanel::adminpanel.delete_file_sure')}}")) {
                 var xhr = new XMLHttpRequest();
 
@@ -31,11 +31,11 @@
         <div class="file__block">
             <span class="file__name">{{ $entity->getFileName($field, $size = true) }}</span>
 
-            <a href="{{ $entity->getFilePath($field) }}" class="download-file" target="_blank"></a>
+            <a href="{{ route('admin.news.downloadFile', ['id' => $entity->id, 'field' => $field]) }}" class="download-file"></a>
             <span   class="del-file" 
                     data-href="{!! route($routePrefix . 'deleteFile', ['id' => $entity->id, 'field' => $field]) !!}" 
                     data-csrf_token="{{ csrf_token() }}"
-                    onclick="deleteFile.apply(this)">
+                    onclick="deleteSingleFile.apply(this)">
             </span>
         </div>
         <div class="clearfix"></div>
