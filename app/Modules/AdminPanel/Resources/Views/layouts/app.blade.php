@@ -17,6 +17,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" href="{{asset('adminpanel/bower_components/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('adminpanel/bower_components/select2/dist/css/select2.css')}}">
 
     <link rel="stylesheet" href="/adminpanel/css/bootstrap.min.css">
     <link rel="stylesheet" href="/adminpanel/css/style.css">
@@ -46,6 +47,7 @@
     </div>
 
     <script src="/adminpanel/js/jquery.js"></script>
+    <script src="{{asset('adminpanel/bower_components/select2/dist/js/select2.full.js')}}"></script>
     <script src="/adminpanel/js/app.js"></script>
     @stack('js')
     @yield('js')
