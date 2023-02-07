@@ -19,7 +19,7 @@ Route::group([
             Route::delete('/news/deleteMultiFiles/{entity_id}/{field}/{file_id}', 'IndexController@deleteMultiFiles')->name('news.deleteMultiFiles');   //delete multi files
             Route::post('/news/multi_uploader', 'IndexController@multiUploader')->name('news.multiUploader');                                            //multi uploading images
             Route::post('/news/change_file', 'IndexController@changeFile')->name('news.changeFile');                                            //changeFile
-            Route::get('/download_file/{id}/{field}', 'IndexController@downloadFile')->name('news.downloadFile');                                            //downloadFile
+            Route::get('/news/download_file/{id}/{field}', 'IndexController@downloadFile')->name('news.downloadFile');                                            //downloadFile
 
             Route::get('/news/export/', 'IndexController@export')->name('news.export');
             Route::post('/news/import/', 'IndexController@import')->name('news.import');

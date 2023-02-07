@@ -31,7 +31,7 @@
         <div class="file__block">
             <span class="file__name">{{ $entity->getFileName($field, $size = true) }}</span>
 
-            <a href="{{ route('admin.news.downloadFile', ['id' => $entity->id, 'field' => $field]) }}" class="download-file"></a>
+            <a href="{{ route($routePrefix . 'downloadFile', ['id' => $entity->id, 'field' => $field]) }}" class="download-file"></a>
             <span   class="del-file" 
                     data-href="{!! route($routePrefix . 'deleteFile', ['id' => $entity->id, 'field' => $field]) !!}" 
                     data-csrf_token="{{ csrf_token() }}"
