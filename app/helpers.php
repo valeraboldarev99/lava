@@ -107,8 +107,17 @@ if(!function_exists('adminLocale')) {
 if(!function_exists('checkModelLocalization')) {
     function checkModelLocalization($model_name)
     {
+        if(config($model_name . '.settings') == NULL)
+        {
+            if(config(getModule() . '.settings') == NULL)
+            {
+                $result = false;
+            }
+            else {
+                return config(getModule() . '.settings.localization');
+            }
+        }
         $result = config($model_name . '.settings.localization');
-
         if($result == NULL)
         {
             $result = false;
