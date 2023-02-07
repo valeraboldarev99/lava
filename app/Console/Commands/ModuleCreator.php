@@ -38,7 +38,7 @@ class ModuleCretor extends Command
         ],
         'Models',
         'Resources' => [
-            'lang' => [ 'ru', 'en' ],
+            'Lang' => [ 'ru', 'en' ],
             'Views' => [
                 'admin'
             ],
@@ -183,7 +183,7 @@ class ModuleCretor extends Command
         $content .= "    'menu_items' => [" . "\r\n";
         $content .= "        [" . "\r\n";
         $content .= "            'icon'      => 'fa fa-tasks'," . "\r\n";
-        $content .= "            'route'     => 'admin." . $this->argument('module_name') . ".index'," . "\r\n";
+        $content .= "            'route'     => 'admin." . strtolower($this->argument('module_name')) . ".index'," . "\r\n";
         $content .= "            'group'     => 'main_group'," . "\r\n";
         $content .= "            'title'     => trans('" . ucfirst($this->argument('module_name')) . "::adminpanel.title')," . "\r\n";
         $content .= "            'priority'  => 10," . "\r\n";
@@ -210,7 +210,7 @@ class ModuleCretor extends Command
         $content .= "{" . "\r\n";
         $content .= "    public function up()" . "\r\n";
         $content .= "    {" . "\r\n";
-        $content .= "        Schema::create('" . $this->argument('module_name') . "', function (Blueprint \$table) {" . "\r\n";
+        $content .= "        Schema::create('" . strtolower($this->argument('module_name')) . "', function (Blueprint \$table) {" . "\r\n";
         $content .= "            \$table->bigIncrements('id');" . "\r\n";
         $content .= "            \$table->enum('lang', ['ru', 'en'])->index();" . "\r\n";
         $content .= "            \$table->string('title')->nullable();" . "\r\n";
@@ -223,7 +223,7 @@ class ModuleCretor extends Command
 
         $content .= "    public function down()" . "\r\n";
         $content .= "    {" . "\r\n";
-        $content .= "        Schema::dropIfExists('" . $this->argument('module_name') . "');" . "\r\n";
+        $content .= "        Schema::dropIfExists('" . strtolower($this->argument('module_name')) . "');" . "\r\n";
         $content .= "    }" . "\r\n";
         $content .= "}";
 
@@ -258,7 +258,7 @@ class ModuleCretor extends Command
         $content .= "                'active' => 1," . "\r\n";
         $content .= "            ]," . "\r\n";
         $content .= "        ];" . "\r\n";
-        $content .= "        DB::table('" . $this->argument('module_name') . "')->insert(\$data);" . "\r\n";
+        $content .= "        DB::table('" . strtolower($this->argument('module_name')) . "')->insert(\$data);" . "\r\n";
         $content .= "    }" . "\r\n";
 
         $content .= "}";
@@ -278,7 +278,7 @@ class ModuleCretor extends Command
         $content .= "class IndexController extends AdminMainController" . "\r\n";
         $content .= "{" . "\r\n";
         $content .= "    protected \$viewPrefix = '" . ucfirst($this->argument('module_name')) . "';" . "\r\n";
-        $content .= "    protected \$routePrefix = 'admin." . $this->argument('module_name') . ".';" . "\r\n\n";
+        $content .= "    protected \$routePrefix = 'admin." . strtolower($this->argument('module_name')) . ".';" . "\r\n\n";
 
         $content .= "    public function getModel()" . "\r\n";
         $content .= "    {" . "\r\n";
@@ -342,14 +342,15 @@ class ModuleCretor extends Command
 
         $content .= "namespace App\Modules\\" . ucfirst($this->argument('module_name')) . "\\Models;" . "\r\n\n";
 
+        $content .= "use Kyslik\ColumnSortable\Sortable;" . "\r\n";
         $content .= "use Illuminate\Notifications\Notifiable;" . "\r\n";
         $content .= "use App\Modules\AdminPanel\Models\Model;" . "\r\n\n";
 
         $content .= "class " . ucfirst($this->argument('module_name')) . " extends Model {" . "\r\n\n";
 
-        $content .= "    use Notifiable;" . "\r\n\n";
+        $content .= "    use Notifiable, Sortable;" . "\r\n\n";
 
-        $content .= "    protected \$table = '" . $this->argument('module_name') . "';" . "\r\n";
+        $content .= "    protected \$table = '" . strtolower($this->argument('module_name')) . "';" . "\r\n";
         $content .= "}";
 
         return $content;
@@ -450,11 +451,11 @@ class ModuleCretor extends Command
         $content .= "                'as' => config('cms.admin_prefix')," . "\r\n";
         $content .= "                'namespace' => 'Admin'], function() {" . "\r\n\n";
 
-        $content .= "            Route::resource('/" . $this->argument('module_name') . "', 'IndexController');" . "\r\n";
+        $content .= "            Route::resource('/" . strtolower($this->argument('module_name')) . "', 'IndexController');" . "\r\n";
         $content .= "        });" . "\r\n\n";
 
         $content .= "    //user" . "\r\n";
-        $content .= "        Route::resource('/" . $this->argument('module_name') . "', 'IndexController');" . "\r\n";
+        $content .= "        Route::resource('/" . strtolower($this->argument('module_name')) . "', 'IndexController');" . "\r\n";
         $content .= "     });" . "\r\n";
         $content .= " });" . "\r\n";
         return $content;
