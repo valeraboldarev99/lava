@@ -13,7 +13,10 @@ class Products extends Model {
 
     protected $table = 'products';
 
-    protected $sortable = ['title', 'category_id'];
+    protected $multipleFilesTables = [
+        'products_multi_images1'  => 'products_images1',
+        'products_multi_files1'   => 'products_files1',
+    ];
 
     public function productCategory()
     {
@@ -23,5 +26,15 @@ class Products extends Model {
     public function scopeOrder($query)
     {
         return $query->orderBy('title')->latest();
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductsImages1::class, 'parent_id', 'id')->orderBy('position');
+    }
+
+    public function files()
+    {
+        return $this->hasMany(ProductsFiles1::class, 'parent_id', 'id')->orderBy('position');
     }
 }

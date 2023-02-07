@@ -17,9 +17,9 @@ Route::group([
 
 // products
             Route::delete('/products/deleteFile/{id}/{field}', 'IndexController@deleteFile')->name('products.deleteFile');              //delete single file or image
-            // Route::delete('/products/deleteMultiFiles/{entity_id}/{field}/{file_id}', 'IndexController@deleteMultiFiles')->name('products.deleteMultiFiles');   //delete multi files
-            // Route::post('/products/multi_uploader', 'IndexController@multiUploader')->name('products.multiUploader');                                            //multi uploading images
-            // Route::post('/products/change_file', 'IndexController@changeFile')->name('products.changeFile');                                            //changeFile
+            Route::delete('/products/deleteMultiFiles/{entity_id}/{field}/{file_id}', 'IndexController@deleteMultiFiles')->name('products.deleteMultiFiles');   //delete multi files
+            Route::post('/products/multi_uploader', 'IndexController@multiUploader')->name('products.multiUploader');                                            //multi uploading images
+            Route::post('/products/change_file', 'IndexController@changeFile')->name('products.changeFile');                                            //changeFile
             Route::get('/products/download_file/{id}/{field}', 'IndexController@downloadFile')->name('products.downloadFile');                                            //downloadFile
             Route::resource('/products', 'IndexController');
 

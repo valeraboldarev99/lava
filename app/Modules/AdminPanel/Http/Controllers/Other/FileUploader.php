@@ -92,16 +92,19 @@ trait FileUploader
 
         $validator = Validator::make(Request::all(), $rules, $this->getUploadMessages(), $this->getUploadAttributes());
 
-        if ($validator->fails()) {
-            foreach ($fields as $field) {
-                if (array_key_exists($field, $validator->errors()->messages())) {
-                    $entity->{$field} = null;
+        if(!isset($configs[$field]['multiple']) || $configs[$field]['multiple'] != true)
+        {
+            if ($validator->fails()) {
+                foreach ($fields as $field) {
+                    if (array_key_exists($field, $validator->errors()->messages())) {
+                        $entity->{$field} = null;
+                    }
                 }
+
+                $entity->save();
+
+                throw new ValidationException($validator);
             }
-
-            $entity->save();
-
-            throw new ValidationException($validator);
         }
 
         return $fields;

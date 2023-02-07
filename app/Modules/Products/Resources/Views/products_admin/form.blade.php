@@ -64,5 +64,24 @@
                     'helptext' => trans('AdminPanel::fields.file_format', ['formats' => 'docx/doc']),
                 ])
             </div>
+
+            <div class="clearfix"></div>
+
+            <div class="col-md-12">
+                @include('AdminPanel::common.forms.files', [
+                    'field' => 'products_multi_files1',
+                    'label' => trans('AdminPanel::fields.multiupload_files'),
+                    'helptext' =>  trans('AdminPanel::fields.file_format', ['formats' => 'docx/doc']),
+                ])
+            </div>
+
+            <div class="col-md-12">
+                @include('AdminPanel::common.forms.images', [
+                    'field' => 'products_multi_images1',
+                    'label' => trans('AdminPanel::fields.multiupload_images'),
+                    'helptext' => trans('AdminPanel::fields.optimal_image_size', ['w' => 500, 'h' => 200]),
+                    'show_img_size' => 'big',
+                ])
+            </div>
         </div>
 @endsection
