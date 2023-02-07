@@ -2,12 +2,13 @@
 
 namespace App\Modules\Structure\Models;
 
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Notifications\Notifiable;
 use App\Modules\AdminPanel\Models\Model;
 
 class Structure extends Model
 {
-    use Notifiable;
+    use Notifiable, Sortable;
 
     protected $table = 'structure';
 

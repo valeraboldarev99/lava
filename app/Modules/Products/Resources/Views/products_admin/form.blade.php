@@ -19,7 +19,7 @@
             </div>
 
             <div class="col-md-4">
-                {!! MyForm::select('category_id', trans('AdminPanel::fields.category_id') , $categories) !!}
+                {!! MyForm::select('category_id', trans('Products::adminpanel.category_id') , $categories) !!}
             </div>
 
             <div class="col-md-2">

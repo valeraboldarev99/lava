@@ -27,7 +27,7 @@ class IndexController extends AdminMainController
 
         return view($this->getFormViewName(), [
             'entity' => $entity,
-            'categories' => ProductsCategories::get(),
+            'categories' => ProductsCategories::pluck('title', 'id'),
         ]);
     }
 

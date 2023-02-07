@@ -38,6 +38,7 @@ class IndexController extends AdminMainController
         $users = Users::join('user_roles', 'users.id', 'user_roles.user_id')
                         ->join('roles', 'user_roles.role_id', 'roles.id')
                         ->select('users.*', 'roles.name as role_name')
+                        ->sortable()
                         ->paginate($this->perPage);
 
         return view($this->getIndexViewName(), [

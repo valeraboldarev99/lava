@@ -138,8 +138,14 @@ trait FileUploader
             {
                 if($field_size = getModuleConfig('uploads.' . $field . '.field_size'))  //check if there is a field for the file_size in uploads.php and get it
                 {
-                    $file_size = $this->getFileSize($this->{$field_size});
-                    $file_name .= ', ' . $file_size;                                    //add file size to file name
+                    if($this->{$field_size})
+                    {
+                        $file_size = $this->getFileSize($this->{$field_size});
+                        $file_name .= ', ' . $file_size;                                    //add file size to file name
+                    }
+                    else {
+                        $file_name = 'ERROR - size';
+                    }
                 }
             }
             return $file_name;

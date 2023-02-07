@@ -17,6 +17,8 @@ return [
 	'modules' => [
 		'users' => trans('Structure::adminpanel.modules.users'),
 		'settings' => trans('Structure::adminpanel.modules.settings'),
+		'news' => trans('News::adminpanel.title'),
+		'products' => trans('Products::adminpanel.title'),
 	],
 	'templates' => [
 		'layouts.wide'	=> 'Default',

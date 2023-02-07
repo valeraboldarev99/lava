@@ -22,7 +22,7 @@ abstract class AdminMainController extends Controller
 
     public function index()
     {
-        $entities = $this->getModel()->admin()->paginate($this->perPage);
+        $entities = $this->getModel()->sortable()->admin()->paginate($this->perPage);
 
         $this->after($entities);
 

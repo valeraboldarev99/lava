@@ -5,8 +5,8 @@
 @endsection
 
 @section('th')
-    <th>@sortablelink('name', 'Имя')</th>
-    <th>@sortablelink('email', 'Slug')</th>
+    <th>@sortablelink('name', trans('AdminPanel::fields.name'))</th>
+    <th>@sortablelink('slug', trans('AdminPanel::fields.slug'))</th>
     <th>{{ __('AdminPanel::adminpanel.controls') }}</th>
 @endsection
 

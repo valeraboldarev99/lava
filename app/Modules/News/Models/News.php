@@ -2,13 +2,14 @@
 
 namespace App\Modules\News\Models;
 
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Notifications\Notifiable;
 use App\Modules\AdminPanel\Models\Model;
 use App\Modules\AdminPanel\Models\FileUploader;
 
 class News extends Model {
 
-    use Notifiable, FileUploader;
+    use Notifiable, Sortable, FileUploader;
 
     protected $table = 'news';
 

@@ -51,22 +51,22 @@ class Model extends ParentModel
         //
     }
 
-    public function scopeAdmin($query)
+    public function scopeAdmin($query)          //admin()
     {
         return $query->order();
     }
 
-    public function scopeOrder($query)
+    public function scopeOrder($query)          //order()
     {
         return $query;
     }
 
-    public function scopeActive($query)
+    public function scopeActive($query)         //active()
     {
         return $query->where('active', 1);
     }
 
-    public function scopeItems($query)
+    public function scopeItems($query)              //Structure::items()->where('depth', '<>', 0)->get();
     {
         return $query->order()->active();
     }

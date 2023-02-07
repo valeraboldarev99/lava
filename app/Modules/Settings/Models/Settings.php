@@ -2,12 +2,13 @@
 
 namespace App\Modules\Settings\Models;
 
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Notifications\Notifiable;
 use App\Modules\AdminPanel\Models\Model;
 
 class Settings extends Model
 {
-    use Notifiable;
+    use Notifiable, Sortable;
 
     protected $table = 'settings';
 

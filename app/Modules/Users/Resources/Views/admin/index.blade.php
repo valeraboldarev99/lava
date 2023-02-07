@@ -7,8 +7,8 @@
 @section('th')
     <th>@sortablelink('name', trans('AdminPanel::fields.name'))</th>
     <th>@sortablelink('email', trans('AdminPanel::fields.email'))</th>
-    <th>@sortablelink('role', trans('Users::adminpanel.role'))</th>
-    <th width="150">Control</th>
+    <th>{{ __('Users::adminpanel.role') }}</th>
+    <th width="150">{{ __('AdminPanel::adminpanel.controls') }}</th>
 @endsection
 
 @section('td')

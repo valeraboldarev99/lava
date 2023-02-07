@@ -2,12 +2,13 @@
 
 namespace App\Modules\Users\Models;
 
+use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Users extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Sortable;
 
     protected $table = 'users';
 
