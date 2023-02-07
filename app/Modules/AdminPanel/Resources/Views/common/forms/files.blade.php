@@ -3,6 +3,7 @@
         'field' => 'multi_files',
         'label' => 'Мультизагрузка файлов',
         'helptext' =>  trans('AdminPanel::fields.file_format', ['formats' => 'docx/doc']),
+        'files_method' => $entity->files(),
     ])
 </div> --}}
 
@@ -156,6 +157,10 @@
     </script>
 @endpush
 
+@php
+    $files_method = isset($files_method) ? $files_method : $entity->files();
+@endphp
+
 <label>{{ (isset($label)) ? $label : trans('AdminPanel::fields.multiupload_files') }}</label>
 <div class="multi-files__field">
     @if(isset($entity->id))
@@ -185,14 +190,14 @@
             </div>
         </div>
         <div id="files-list__items" class="files-list__items">
-            @if($entity->files()->count())
+            @if($files_method->count())
                 <div class="files-list__item">
                     <div class="files-list__block files-list__name">{{ __('AdminPanel::fields.file_name') }}</div>
                     <div class="files-list__block files-list__size">{{ __('AdminPanel::fields.format') }}</div>
                     <div class="files-list__block files-list__size">{{ __('AdminPanel::fields.size') }}</div>
                     <div class="files-list__block files-list__controls">{{ __('AdminPanel::adminpanel.controls') }}</div>
                 </div>
-                @foreach($entity->files()->get() as $file)
+                @foreach($files_method->get() as $file)
                     <div id="{{ $field . '_' . $entity->id . '_' . $file->id }}" class="files-list__item">
                         <div class="files-list__block files-list__name">{{ $file->saved_name }}</div>
                         <div class="files-list__block files-list__size">{{ $file->format }}</div>

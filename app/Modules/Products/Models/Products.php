@@ -28,12 +28,12 @@ class Products extends Model {
         return $query->orderBy('title')->latest();
     }
 
-    public function images()
+    public function images1()
     {
         return $this->hasMany(ProductsImages1::class, 'parent_id', 'id')->orderBy('position');
     }
 
-    public function files()
+    public function files1()
     {
         return $this->hasMany(ProductsFiles1::class, 'parent_id', 'id')->orderBy('position');
     }

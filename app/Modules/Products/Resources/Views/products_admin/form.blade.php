@@ -72,6 +72,7 @@
                     'field' => 'products_multi_files1',
                     'label' => trans('AdminPanel::fields.multiupload_files'),
                     'helptext' =>  trans('AdminPanel::fields.file_format', ['formats' => 'docx/doc']),
+                    'files_method' => $entity->files1(),
                 ])
             </div>
 
@@ -81,6 +82,7 @@
                     'label' => trans('AdminPanel::fields.multiupload_images'),
                     'helptext' => trans('AdminPanel::fields.optimal_image_size', ['w' => 500, 'h' => 200]),
                     'show_img_size' => 'big',
+                    'images_method' => $entity->images1(),
                 ])
             </div>
         </div>

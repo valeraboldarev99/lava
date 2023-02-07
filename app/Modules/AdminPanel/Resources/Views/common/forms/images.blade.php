@@ -3,6 +3,7 @@
     'label' => 'Мультизагрузка изображений',
     'helptext' => trans('AdminPanel::fields.optimal_image_size', ['w' => 500, 'h' => 200]),
     'show_img_size' => 'big',
+    'images_method' => $entity->images1(),
 ]) --}}
 
 @php
@@ -10,6 +11,8 @@
     {
         $show_img_size = NULL;
     }
+
+    $images_method = isset($images_method) ? $images_method : $entity->images();
 @endphp
 @push('js')
     <script>
@@ -113,8 +116,8 @@
         </div>
 
         <div class="multi-images__items" id="multi-images__items">
-            @if($entity->images()->count())
-                @foreach($entity->images()->get() as $image)
+            @if($images_method->count())
+                @foreach($images_method->get() as $image)
                     <div id="{{ $field . '_' . $entity->id . '_' . $image->id }}" class="multi-images__item">
                         <img src="{{ $entity->getPathMultiImage($image->name, $field, $show_img_size) }}" alt="{{ $image->multi_images }}">
                         <span   class="js-del-img del-img" 
