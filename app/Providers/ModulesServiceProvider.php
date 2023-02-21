@@ -13,7 +13,7 @@ class ModulesServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         //получаем список модулей, которые надо подгрузить
-        $modules = array_diff(scandir(config('modules.path')), array('.','..'));
+        $modules = modules_all();
 
         if($modules) {
             foreach ($modules as $module) {
@@ -50,7 +50,10 @@ class ModulesServiceProvider extends \Illuminate\Support\ServiceProvider
                     else {
                         foreach ($files as $file)
                         {
-                            $this->mergeConfigFrom($this->getDir($module) . '/Config/'. $file, $module . '.' . basename($file, '.php'));
+                            if(file_get_contents($this->getDir($module) . '/Config/'. $file, $module . '.' . $file . '.php'))
+                            {
+                                $this->mergeConfigFrom($this->getDir($module) . '/Config/'. $file, $module . '.' . basename($file, '.php'));
+                            }
                         }
                     }
                 }

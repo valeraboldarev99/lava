@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'ru_RU',
 
     /*
     |--------------------------------------------------------------------------
@@ -175,7 +175,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ModulesServiceProvider::class,
-
+        App\Providers\ComposerServiceProvider::class,
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,  //import and export
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,//laravel filemanager
+        Intervention\Image\ImageServiceProvider::class,//laravel filemanager
     ],
 
     /*
@@ -227,7 +231,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'MyForm' => App\Helpers\MyForm::class,
+        'Localization' => App\Helpers\Localization::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        // 'InterventionImage' => IIntervention\Image\ImageManager::class,
+        'Image' => Intervention\Image\Facades\Image::class,//laravel filemanager
     ],
 
 ];

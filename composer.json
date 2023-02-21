@@ -12,8 +12,14 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "intervention/image": "^2.7",
+        "kyslik/column-sortable": "^6.0",
         "laravel/framework": "^8.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "^3.4",
+        "laravelcollective/html": "^6.3",
+        "maatwebsite/excel": "^3.1",
+        "unisharp/laravel-filemanager": "^2.5"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

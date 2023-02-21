@@ -1,0 +1,141 @@
+@media screen and (max-width:1300px) {
+	/*auth admin page*/
+	.wrapper {
+		width: 768px;
+	}
+
+	.auth-container {
+		width: 80%;
+		border-radius: 10px;
+		padding: 25px;
+	}
+
+	.form__item {
+		margin: 10px 0;
+	}
+
+	.panel-name {
+		font-size: 18px;
+		width: 180px;
+	}
+
+	.panel-name a {
+		font-size: 18px;
+	}
+
+	.header__menu_item {
+		margin: 0 15px;
+	}
+
+	/*admin panel sidebar and main*/
+	.main-sidebar {
+		width: 180px;
+	}
+
+	.sidebar__item {
+		padding: 8px 10px;
+	}
+
+	/*main*/
+	.content-header {
+		font-size: 22px;
+	}
+
+	.content-wrapper {
+		width: 588px;
+	}
+}
+
+@media screen and (max-width:780px) {
+	.auth_page {
+		font-size: 12px;
+	}
+
+	.wrapper {
+		width: 320px;
+	}
+
+	.auth-container {
+		width: 95%;
+		padding: 10px;
+	}
+
+	.auth-label {
+		font-weight: 700;
+		width: 20%;
+	}
+
+	.auth-input {
+		width: 75%;
+		height: 25px;
+		padding: 6px;
+	}
+
+	.auth-btn {
+		margin-left: 21%;
+		height: 25px;
+		font-size: 12px;
+		padding: 4px 15px;
+	}
+
+	/*ADMIN PANEL*/
+	/*admin panel header*/
+	.header__items {
+		font-size: 12px;
+	}
+
+	.panel-name {
+		font-size: 18px;
+		text-align: center;
+		width: 40%;
+	}
+
+	.header__menu_item a {
+		margin: 0 5px;
+		padding: 20px 0;
+	}
+
+	.panel-name a {
+		font-size: 16px;
+		text-decoration: none;
+	}
+
+	/*admin panel sidebar and main*/
+
+	.main-sidebar {
+		display: none;
+	}
+
+	.content-wrapper {
+		width: 100%;
+	}
+
+	.entities__list th,
+	.entities__list td {
+		font-size: 12px;
+		padding: 2px 5px;
+	}
+
+	.controls {
+		text-align: center;
+		width: 70px;
+	}
+
+	.control__item {
+		display: block;
+		margin: 5px auto;
+		width: 36px;
+		height: 30px;
+	}
+
+	.control__item .btn-sm {
+		width: 100%;
+		height: 100%;
+	}
+
+	.main-footer {
+		height: 40px;
+		padding: 10px;
+		font-size: 10px;
+	}
+}

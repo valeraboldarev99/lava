@@ -1,0 +1,93 @@
+/*ADMIN PANEL*/
+/*admin panel header*/
+.admin-panel-page {
+	background: #E2E2E2;
+}
+
+.header__items {
+	background-color: #3c8dbc;
+	color: #fff;
+}
+
+.header__menu_item a {
+	color: #fff;
+}
+
+.panel-name a {
+	color: #fff;
+}
+
+/*admin panel sidebar and main*/
+
+.main-sidebar {
+	background: #222D32;
+	color: #b8c7ce;
+}
+
+.main-sidebar a {
+	color: #b8c7ce;
+}
+
+.content-header {
+	background-color: #ECF0F5;
+}
+
+.content-wrapper {
+	background-color: #fff;
+}
+
+.content-main {
+	border-top: 3px solid #3c8dbc;
+}
+
+.entities__list th,
+.entities__list td {
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.form-error {
+	color: red;
+}
+
+.help__block {
+	color: #777;
+}
+
+.user__drop {
+	background: #3c8dbc;
+}
+
+.localization__link,
+.localization__link:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+.file__block {
+	border: 1px solid #ccc;
+}
+
+.del-img {
+	background: #dd4b39 url('../img/delX_btn.svg') center center no-repeat;
+}
+
+.del-file {
+	background: #dd4b39 url('../img/delX_btn.svg') center center no-repeat;
+}
+
+.download-file {
+	background: #196D9E url('../img/download_file.svg') center center no-repeat;
+}
+
+.multi-images__field,
+.multi-files__field {
+	border: 1px solid #ccc;
+}
+
+.files-list__block {
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}

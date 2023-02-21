@@ -13,4 +13,4 @@ CMS on Laravel 8
 7. Идем в database/seeds/DatabaseSeeder.php и прописываем там наши логин и пароль в админку
 8. php artisan db:seed
 
-Вход в админку: url.com/login
+Вход в админку: url.com/admin_panel
