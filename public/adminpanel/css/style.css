@@ -516,3 +516,7 @@
 	top: 0;
 	right: 0;
 }
+
+.filter__block {
+    margin: 10px 0 5px 0;
+}

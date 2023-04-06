@@ -36,6 +36,7 @@
                     <div class="content-header">
                         @yield('title')
                         @yield('topmenu')
+                        @yield('filters')
                     </div>
                     <div class="content-main">
                         @yield('content')

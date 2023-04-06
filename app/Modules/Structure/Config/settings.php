@@ -19,6 +19,7 @@ return [
 		'settings' => trans('Structure::adminpanel.modules.settings'),
 		'news' => trans('News::adminpanel.title'),
 		'products' => trans('Products::adminpanel.title'),
+		'contacts' => trans('Contacts::adminpanel.title'),
 	],
 	'templates' => [
 		'layouts.wide'	=> 'Default',
