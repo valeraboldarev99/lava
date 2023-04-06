@@ -73,10 +73,33 @@ class PagesStructure
         return $pages;
     }
 
+    private function getPageUrl($pages)
+    {
+        foreach ($pages as $page)
+        {
+            if($page->redirector)
+            {
+                $page->slug = $page->redirect_url;
+            }
+            else {
+                $page->slug = '/' . $page->slug; 
+            }
+        }
+
+        return $pages;
+    }
+
     public function getMainMenu()
     {
-        $pages = Structure::items()->where('depth', '<>', 0)->get();
+        $pages = Structure::items()->where('depth', '<>', 0)->where('in_main_menu', 1)->get();
         
-        return self::getRouteNames($pages);
+        return self::getPageUrl($pages);
+    }
+
+    public function getFooterMenu()
+    {
+        $pages = Structure::items()->where('depth', '<>', 0)->where('in_bottom_menu', 1)->get();
+        
+        return self::getPageUrl($pages);
     }
 }

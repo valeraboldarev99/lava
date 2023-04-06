@@ -57,6 +57,14 @@
                 <div class="col-md-6">
                     {!! MyForm::select('template', trans('Structure::adminpanel.template'), $entity->getTemplates()) !!}
                 </div>
+
+                <div class="col-md-2">
+                    {!! MyForm::checkbox('in_main_menu', trans('AdminPanel::fields.in_main_menu'), $entity->in_main_menu) !!}
+                </div>
+
+                <div class="col-md-2">
+                    {!! MyForm::checkbox('in_bottom_menu', trans('AdminPanel::fields.in_bottom_menu'), $entity->in_bottom_menu) !!}
+                </div>
             @endif
 
             <div class="clearfix"></div>
