@@ -16,6 +16,8 @@ class Products extends Model {
     protected $multipleFilesTables = [
         'products_multi_images1'  => 'products_images1',
         'products_multi_files1'   => 'products_files1',
+        'products_multi_images2'  => 'products_images2',
+        'products_multi_files2'   => 'products_files2',
     ];
 
     public function productCategory()
@@ -36,5 +38,15 @@ class Products extends Model {
     public function files1()
     {
         return $this->hasMany(ProductsFiles1::class, 'parent_id', 'id')->orderBy('position');
+    }
+
+    public function images2()
+    {
+        return $this->hasMany(ProductsImages2::class, 'parent_id', 'id')->orderBy('position');
+    }
+
+    public function files2()
+    {
+        return $this->hasMany(ProductsFiles2::class, 'parent_id', 'id')->orderBy('position');
     }
 }

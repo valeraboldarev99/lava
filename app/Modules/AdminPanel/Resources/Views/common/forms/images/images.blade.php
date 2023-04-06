@@ -1,4 +1,4 @@
-{{-- @include('AdminPanel::common.forms.images', [
+{{-- @include('AdminPanel::common.forms.images.images', [
     'field' => 'multi_images',
     'label' => 'Мультизагрузка изображений',
     'helptext' => trans('AdminPanel::fields.optimal_image_size', ['w' => 500, 'h' => 200]),
@@ -18,33 +18,39 @@
     <script>
         function openFiles()
         {
-           $('input[data-field="{{ $field }}"]').trigger('click');
+            var field = $(this).attr('data-field');
+            $('input[data-field="' + field + '"]').trigger('click');
         }
         $('#{{ $field }}').change(function () {
-            if ($(this).val() != '') {
+            if ($('#{{ $field }}').val() != '') {
                 uploadImg(this);
             }
         });
-        function imageBlock(data)
+        function imageBlock(data, field)
         {
-            $('#multi-images__items').append('<div id="' + data.block_id + '" class="multi-images__item"></div>');
+            $('.js-multi-images__items-'+field).append('<div id="' + data.block_id + '" class="multi-images__item"></div>');
             $('#' + data.block_id + '').append('<img src="' + data.file_path + '">');
             $('#' + data.block_id + '').append('<span   class="js-del-img del-img" \n' +
                 'data-href="' + data.delete_route + '" \n' +
-                'data-file_id="' + data.file_id + '" \n' +
+                'data-file_id="' + data.file_id + '" \n' +  
+                'data-field="' + field + '" \n' +  
                 'onclick="deleteImage.apply(this)" \n' +
             '></span>');
             return true;
         }
         function uploadImg(img)
         {
+            var field = $(img).attr('data-field');
+            var size = $(img).attr('data-size');
+
             var form_data = new FormData();
-            form_data.append('field', '{{$field}}');
+            form_data.append('field', field);
             form_data.append('entity_id', '{{$entity->id}}');
-            form_data.append('{{$field}}', img.files[0]);
+            form_data.append('' + field + '', img.files[0]);
             form_data.append('_token', '{{csrf_token()}}');
-            form_data.append('show_img_size', '{{$show_img_size}}');
-            $('#loading__multi-images').css('display', 'inline-block');
+            form_data.append('show_img_size', size);
+            $('#loading__multi-images-'+field).css('display', 'inline-block');
+
             $.ajax({
                 url: "{!! route($routePrefix . 'multiUploader') !!}",
                 data: form_data,
@@ -52,9 +58,9 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    // console.log(data);
-                    imageBlock(data);
-                    $('#loading__multi-images').css('display', 'none');
+                    //console.log(data);
+                    imageBlock(data, field);
+                    $('#loading__multi-images-'+field).css('display', 'none');
                     if($('#js-no_images').css('display') == 'block')
                     {
                         $('#js-no_images').css('display', 'none');
@@ -73,9 +79,10 @@
             if (confirm("{{__('AdminPanel::adminpanel.delete_image_sure')}}"))
             {
                 var image = $(this);
+                var field = $(this).data('field');
                 var delete_form_data = new FormData();
                 delete_form_data.append('entity_id', '{{ $entity->id }}');
-                delete_form_data.append('field', '{{ $field }}');
+                delete_form_data.append('field', field);
                 delete_form_data.append('file_id', $(this).data('file_id'));
                 delete_form_data.append('_token', '{{ csrf_token() }}');
                 $.ajax({
@@ -88,11 +95,11 @@
                     contentType: false,
                     processData: false,
                     beforeSend: function () {
-                        $('#loading__multi-images').css('display', 'inline-block');
+                        $('#loading__multi-images-'+field).css('display', 'inline-block');
                     },
                     success: function (data) {
                         // console.log(data);
-                        $('#loading__multi-images').css('display', 'none');
+                        $('#loading__multi-images-'+field).css('display', 'none');
                         image.parent('.multi-images__item').remove();
                     },
                     error: function (xhr, status, error) {
@@ -104,33 +111,11 @@
     </script>
 @endpush
 <label>{{ (isset($label)) ? $label : trans('AdminPanel::fields.multiupload_images') }}</label>
-<div class="multi-images__field">
+<div id="{{ $field . '_' . $entity->id }}" class="multi-images__field">
     @if(isset($entity->id))
-        <div class="multi-images__form">
-            {!! MyForm::file($field, '', $entity->{$field}, ['accept="image/*"', 'data-field="' . $field . '"']) !!}
-            <span class="btn btn-success" style="margin-bottom: 15px;" onclick="openFiles()">{{__('AdminPanel::adminpanel.buttons.upload_images')}}</span>
-            <i id="loading__multi-images" class="fa fa-spinner fa-spin fa-2x fa-fw" style="left: 200px;top: 50px;display: none"></i>
-            @if(isset($helptext))
-                {!! MyForm::helpText($helptext) !!}
-            @endif
-        </div>
-
-        <div class="multi-images__items" id="multi-images__items">
-            @if($images_method->count())
-                @foreach($images_method->get() as $image)
-                    <div id="{{ $field . '_' . $entity->id . '_' . $image->id }}" class="multi-images__item">
-                        <img src="{{ $entity->getPathMultiImage($image->name, $field, $show_img_size) }}" alt="{{ $image->multi_images }}">
-                        <span   class="js-del-img del-img" 
-                                data-href="{!! route($routePrefix . 'deleteMultiFiles', ['entity_id' => $entity->id, 'field' => $field, 'file_id' => $image->id]) !!}"
-                                data-file_id="{{ $image->id }}"
-                                onclick="deleteImage.apply(this)">
-                        </span>
-                    </div>
-                @endforeach
-            @else
-                <span id="js-no_images">{!! MyForm::helpText(trans('AdminPanel::adminpanel.no_images')) !!}</span>
-            @endif
-        </div>
+        @include('AdminPanel::common.forms.images.images_form')
+        
+        @include('AdminPanel::common.forms.images.images_items')
     @else
         {!! MyForm::helpText(trans('AdminPanel::adminpanel.save_and_upload_image')) !!}
     @endif
