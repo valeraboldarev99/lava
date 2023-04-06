@@ -39,14 +39,19 @@ class PagesStructure
     }
 
     public function getPagesRoutes() {
-        $pages = Structure::items()->where('depth', '<>', 0)->get();
+        $pages = Structure::items()->where('depth', '<>', 0)->where('module', NULL)->get();
 
+        return self::getRouteNames($pages);
+    }
+
+    private function getRouteNames($pages)
+    {
         foreach ($pages as $key => $page) {
             if($page->parent_id == NULL)
             {
                 if($page->module)
                 {
-                    $page->route_name = $page->slug . '.index';
+                    $page->route_name = $page->module . '.index';
                 }
                 else {
                     $page->route_name = $page->slug;
@@ -65,7 +70,13 @@ class PagesStructure
                 }
             }
         }
-
         return $pages;
+    }
+
+    public function getMainMenu()
+    {
+        $pages = Structure::items()->where('depth', '<>', 0)->get();
+        
+        return self::getRouteNames($pages);
     }
 }

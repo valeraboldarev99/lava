@@ -43,7 +43,7 @@ class IndexController extends Controller
         return $this->viewPrefix . '::index';
     }
 
-    public function getRules($request, $id = false)
+    public function getRules()
     {
         return [];
     }

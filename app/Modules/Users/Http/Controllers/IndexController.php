@@ -59,7 +59,7 @@ class IndexController extends Controller
 		return redirect()->back()->with('message', 'Данные обновлены');
 	}
 
-	public function getRules($request, $id = false)
+	public function getRules()
 	{
 		return [
 			'name' => 'sometimes|required',
