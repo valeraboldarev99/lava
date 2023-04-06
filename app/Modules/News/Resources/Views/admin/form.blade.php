@@ -64,7 +64,7 @@
             </div>
 
             <div class="col-md-12">
-                @include('AdminPanel::common.forms.files', [
+                @include('AdminPanel::common.forms.files.files', [
                     'field' => 'multi_files',
                     'label' => trans('AdminPanel::fields.multiupload_files'),
                     'helptext' =>  trans('AdminPanel::fields.file_format', ['formats' => 'docx/doc']),
@@ -72,7 +72,7 @@
             </div>
 
             <div class="col-md-12">
-                @include('AdminPanel::common.forms.images', [
+                @include('AdminPanel::common.forms.images.images', [
                     'field' => 'multi_images',
                     'label' => trans('AdminPanel::fields.multiupload_images'),
                     'helptext' => trans('AdminPanel::fields.optimal_image_size', ['w' => 500, 'h' => 200]),

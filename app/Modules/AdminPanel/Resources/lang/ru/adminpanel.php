@@ -44,6 +44,7 @@ return [
     'save_and_upload_image' => 'Сохраните, чтобы загрузить изображения',
     'save_and_upload_files' => 'Сохраните, чтобы загрузить файлы',
     'in_first_check_file' => 'Сперва выбрите файл',
+    'in_first_input_name' => 'Введите имя файла',
     'controls' => 'Управление',
     'import_success' => 'Данные успешно импортированы',
     'line' => 'Строка',
