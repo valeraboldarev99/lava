@@ -31,7 +31,9 @@
         <div class="wrapper">
             @include('AdminPanel::common.header')
             <div class="main">
-                @include('AdminPanel::common.sidebar')
+                <aside class="main-sidebar">
+                    @include('AdminPanel::common.sidebar')
+                </aside>
                 <main class="content-wrapper">
                     <div class="content-header">
                         @yield('title')
@@ -46,6 +48,7 @@
             @include('AdminPanel::common.footer')
         </div>
     </div>
+    @include('AdminPanel::common.mobile-sidebar')
 
     <script src="/adminpanel/js/jquery.js"></script>
     <script src="{{asset('adminpanel/bower_components/select2/dist/js/select2.full.js')}}"></script>

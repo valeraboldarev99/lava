@@ -1,17 +1,20 @@
 <header>
     <div class="header__items">
+		<div class="mobile-hamburger sidebar-open"><span></span></div>
         <div class="header__item">
             <div class="panel-name"><a href="{{ route('admin_panel') }}">{{ config('cms.name') }}</a></div>
         </div>
         <div class="header__item header__item_menu">
             <div class="header__menu_item">
-                <i class="fa fa-home"></i>
-                <a href="{{ home() }}">{{__('AdminPanel::adminpanel.goto_site')}}</a>
+                <a href="{{ home() }}">
+                    <i class="fa fa-home"></i>
+                    <p class="header__menu_text">{{__('AdminPanel::adminpanel.goto_site')}}</p>
+                </a>
             </div>
             <div class="header__menu_item header__menu_user">
-                <i class="fa fa-user"></i>
                 <a href="#">
-                    {{ Auth::user()->name }}
+                    <i class="fa fa-user"></i>
+                    <p class="header__menu_text">{{ Auth::user()->name }}</p>
                 </a>
                 <div class="user__drop">
                    <p>
