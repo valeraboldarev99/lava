@@ -74,6 +74,7 @@
                 '<span class="btn btn-danger btn-sm js-del-img" \n' +
                     'data-href="' + data.delete_route + '" \n' +
                     'data-file_id="' + data.file_id + '" \n' +
+                    'data-file_field="' + field + '" \n' +
                     'onclick="deleteFile.apply(this)"> \n' +
                         '<i class="fa fa-fw fa-close delete"></i> \n' +
                 '</span> \n' +
@@ -89,6 +90,7 @@
             if (confirm("{{__('AdminPanel::adminpanel.delete_image_sure')}}"))
             {
                 var file = $(this);
+                var field = $(this).data('file_field');
                 var delete_form_data = new FormData();
                 delete_form_data.append('entity_id', '{{ $entity->id }}');
                 delete_form_data.append('field', '{{ $field }}');

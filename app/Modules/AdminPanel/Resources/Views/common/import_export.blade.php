@@ -26,11 +26,11 @@
             'files' => true]) !!}
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-7">
                     {!! MyForm::file('import_file', '') !!}
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 col-sm-3">
                     {!! MyForm::submit(trans('AdminPanel::adminpanel.buttons.to_import')) !!}
                 </div>
             </div>

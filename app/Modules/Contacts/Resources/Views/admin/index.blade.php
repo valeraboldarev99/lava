@@ -22,12 +22,12 @@
                 {!! MyForm::hidden('name', 'Emails для обратной связи') !!}
                 {!! MyForm::hidden('slug', 'contacts.emails') !!}
 
-                <div class="col-md-8">
+                <div class="col-md-8 col-sm-8">
                     {!! MyForm::text('content', trans('Contacts::adminpanel.contacts_email'), getSetting('contacts.emails')) !!}
                     {!! MyForm::helpText(trans('Contacts::adminpanel.emails_helper')) !!}
                 </div>
 
-                <div class="col-md-2 mt_25">
+                <div class="col-md-2 col-sm-2 mt_25 ipad_mt_33">
                     {!! MyForm::submit(trans('AdminPanel::adminpanel.buttons.save')) !!}
                 </div>
             </div>

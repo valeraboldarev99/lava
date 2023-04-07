@@ -25,6 +25,7 @@
                     <span class="btn btn-danger btn-sm js-del-img"
                         data-href="{!! route($routePrefix . 'deleteMultiFiles', ['entity_id' => $entity->id, 'field' => $field, 'file_id' => $file->id]) !!}"
                         data-file_id="{{ $file->id }}"
+                        data-file_field="{{$field}}"
                         onclick="deleteFile.apply(this)">
                             <i class="fa fa-fw fa-close delete"></i>
                     </span>
