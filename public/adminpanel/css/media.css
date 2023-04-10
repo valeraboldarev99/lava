@@ -276,21 +276,6 @@
         background-size: contain;
     }
 
-    .sidebar {
-        position: fixed;
-        z-index: 9999;
-        top: 0;
-        left: 0;
-        overflow: auto;
-        width: 100%;
-        height: 100%;
-        transition: transform 500ms ease-in-out 0ms;
-        -webkit-transform: translateX(-100%);
-        transform: translateX(-100%);
-        background: #222D32;
-        padding: 25px;
-    }
-
     .sidebar * {
         color: #fff;
     }
@@ -314,6 +299,11 @@
 		width: 100%;
 	}
 
+    .entities__list {
+        display: block;
+        overflow-y: auto;
+    }
+
 	.entities__list th,
 	.entities__list td {
 		font-size: 12px;
@@ -322,7 +312,7 @@
 
 	.controls {
 		text-align: center;
-		width: 70px;
+		width: 50px;
 	}
 
 	.control__item {
@@ -342,4 +332,59 @@
 		padding: 10px;
 		font-size: 10px;
 	}
+    
+    /*image and form field*/
+    .image__block {
+        position: relative;
+        width: 100%;
+    }
+    
+    /*multi images*/    
+    .multi-files__form-item {
+        width: 100%;
+    }
+
+    .multi-images__item {
+        max-width: 47%;
+        margin: 3px 3px;
+        position: relative;
+    }
+
+    .multi-files__form-item:last-child {
+        width: 100%;
+        margin-top: -25px;
+        margin-bottom: 15px;
+    }
+
+    .multi-files__form-change .multi-files__form-item:last-child{
+        margin-top: -20px;
+    }
+    
+    .files-list__items {
+        overflow-y: scroll;
+    }
+
+    .files-list__item {
+        width: 400px;
+    }
+
+    .files-list__block {
+        padding: 5px;
+    }
+    
+    .files-list__name {
+        width: 115px;
+    }
+    
+    .files-list__size {
+        width: 55px;
+    }
+    
+    .files-list__controls {
+        width: 130px;
+    }
+
+    .mob_mt_20 {
+        margin-top: 20px;
+    }
 }

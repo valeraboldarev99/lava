@@ -15,7 +15,7 @@
     @include('AdminPanel::common.errors')
 
     @if (count($entities) > 0)
-        <table class="entities__list">
+        <table class="table entities__list">
             <thead>
                 <tr>
                     @yield('th')

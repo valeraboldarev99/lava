@@ -27,7 +27,7 @@
                     {!! MyForm::helpText(trans('Contacts::adminpanel.emails_helper')) !!}
                 </div>
 
-                <div class="col-md-2 col-sm-2 mt_25 ipad_mt_33">
+                <div class="col-md-2 col-sm-2 mt_25 ipad_mt_33 mob_mt_20">
                     {!! MyForm::submit(trans('AdminPanel::adminpanel.buttons.save')) !!}
                 </div>
             </div>
