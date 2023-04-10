@@ -24,8 +24,21 @@ class IndexController extends Controller
 		return new Users();
 	}
 
+    public function index()
+    {
+        return view($this->getIndexViewName(), [
+            'items' => $this->getModel()->order()->filtered()->paginate($this->perPage),
+            'routePrefix' => $this->routePrefix
+        ]);
+    }
+
 	public function show($id)
 	{
+        if($id == 1)
+        {
+            return redirect()->back();
+        }
+
 		$entity =  $this->getModel()->findOrFail($id);
 		$role_id = UserRole::where('user_id', $id)->pluck('role_id')->first();
 		$entity->role = Role::where('id', $role_id)->pluck('name', 'id')->first();
@@ -39,7 +52,7 @@ class IndexController extends Controller
 
 	public function edit($id)
 	{
-		if(Auth::id() != $id)
+		if(Auth::id() != $id || $id == 1)
 		{
 			return redirect('/');
 		}

@@ -21,7 +21,7 @@
                 {{ $entity->email }}
             </td>
             <td>
-                {{ $entity->role_name }}
+                {{ $entity->roles->first()->name }}
             </td>
             <td class="controls">
                 @include('AdminPanel::controls.edit')

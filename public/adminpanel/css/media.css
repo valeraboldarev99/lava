@@ -71,6 +71,7 @@
     
     .user__drop {
         left: -42px;
+        bottom: -97px;
         padding: 15px;
         width: 120px;
     }
@@ -195,7 +196,7 @@
 
     .user__drop {
         bottom: -100px;
-        left: -85px;
+        left: -76px;
         width: 110px;
     }
 

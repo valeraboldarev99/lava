@@ -27,6 +27,21 @@ class Users extends Authenticatable
         }
     }
 
+    public function scopeFiltered($query)       //filtered()
+    {
+        return $query->where('id', '<>', 1);
+    }
+
+    public function scopeAdmin($query)          //admin()
+    {
+        return $query->order();
+    }
+
+    public function scopeOrder($query)          //order()
+    {
+        $query->orderBy('name')->orderBy('id')->latest();
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_roles', 'user_id');

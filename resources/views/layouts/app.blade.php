@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link rel="stylesheet" href="/adminpanel/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css"/>
     @stack('css')
 </head>

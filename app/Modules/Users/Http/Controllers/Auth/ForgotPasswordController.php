@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use App\Modules\Users\Models\Users;
 
 class ForgotPasswordController extends Controller
 {
@@ -29,7 +30,18 @@ class ForgotPasswordController extends Controller
 
     public function sendResetLinkEmail(Request $request)
     {
+        $request_array = $request->all();
+        $user = Users::where('email', $request_array['email'])->first();
+
         $this->validateEmail($request);
+
+        if(isset($user))
+        {
+            if($user->isAdmin())
+            {
+                return back()->withErrors(['message' => "Админ не может сбросить пароль!"]);
+            }
+        }
 
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
