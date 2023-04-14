@@ -76,9 +76,12 @@ class IndexController extends AdminMainController
 
     public function edit($id)
     {
-        if($id == 1)
+        if(Auth::id() != 1)
         {
-            return redirect()->back();
+            if($id == 1)
+            {
+                return redirect()->back();
+            }
         }
 
         $roles = Role::pluck('name', 'id');

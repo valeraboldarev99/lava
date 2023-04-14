@@ -34,9 +34,12 @@ class IndexController extends Controller
 
 	public function show($id)
 	{
-        if($id == 1)
+        if(Auth::id() != 1)
         {
-            return redirect()->back();
+            if($id == 1)
+            {
+                return redirect()->back();
+            }
         }
 
 		$entity =  $this->getModel()->findOrFail($id);
@@ -52,10 +55,13 @@ class IndexController extends Controller
 
 	public function edit($id)
 	{
-		if(Auth::id() != $id || $id == 1)
-		{
-			return redirect('/');
-		}
+        if(Auth::id() != 1)
+        {
+            if($id == 1)
+            {
+                return redirect()->back();
+            }
+        }
 		return view('Users::edit', [
 			'entity'        => $this->getModel()->findOrFail($id),
 			'routePrefix'   => $this->routePrefix,

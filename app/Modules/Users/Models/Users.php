@@ -15,6 +15,8 @@ class Users extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
     ];
+    
+    protected $dates = ['last_online_at'];
 
     protected $hidden = [
         'password', 'remember_token',
