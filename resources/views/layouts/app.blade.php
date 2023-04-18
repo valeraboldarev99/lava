@@ -18,8 +18,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/adminpanel/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/jquery-3-5-7.fancybox.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/style.css"/>
+    
     @stack('css')
 </head>
 <body>
@@ -37,6 +39,11 @@
             </section>
         </div>
     </div>
+    
+    <script src="/js/jquery-3-6-4.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> --}}
+    <script src="/js/jquery-3-5-7.fancybox.js"></script>
+    <script src="/js/contact_modal.js"></script>
     @stack('js')
 </body>
 </html>

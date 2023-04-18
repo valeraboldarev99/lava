@@ -1,0 +1,1 @@
+<a href="#" class="btn btn-success js-call-button" data-src="{!! route('contacts.modal') !!}">@lang('Contacts::index.contact_btn')</a>

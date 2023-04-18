@@ -20,5 +20,8 @@ Route::group([
 
     //user
         Route::resource('contacts', 'IndexController');
+
+        Route::post('contacts-modalForm', 'IndexController@modalForm')->name('contacts.modalForm');
+        Route::get('contacts-modal', 'IndexController@modal')->name('contacts.modal');
      });
  });

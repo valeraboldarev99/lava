@@ -24,6 +24,49 @@ class IndexController extends Controller
         return view('Contacts::index');
     }
 
+    public function modal()
+    {
+        return view('Contacts::modal-contact');
+    }
+
+    public function modalForm(Request $request)
+    {
+        $requestArray = $request->all();
+        $requestArray['phone'] = preg_replace('/\D/', '', $requestArray['phone']);
+
+        $validator = Validator::make($requestArray, $this->getRulesModal(), $this->getMessages());
+
+        if ($validator->fails()) {
+            return response()->json([
+                'state' => 'error',
+                'view' => view('Contacts::_modal', ['old' => $requestArray])
+                    ->withErrors($validator->errors())
+                    ->render()
+            ], 200);
+        }
+        $requestArray['ip'] = ip2long($request->ip());
+        $requestArray['datetime'] = date('Y-m-d H:i:s');
+
+        $entity = $this->getModel()->create($requestArray);
+
+        // $this->sendMail($entity);
+
+        return response()->json([
+            'state' => 'success',
+            'message' => trans('Contacts::index.success'),
+        ]);
+    }
+
+    public function getRulesModal()
+    {
+        return [
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'message' => 'required|max:65535',
+        ];
+    }
+
     public function store(Request $request)
     {
         $requestArray = $request->all();

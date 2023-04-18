@@ -1,7 +1,7 @@
 @extends('AdminPanel::admin.form')
 
 @section('title')
-    <h2>{{ __('News::adminpanel.title') }}</h2>
+    <h2>{{ __('Contacts::adminpanel.title') }}</h2>
 @endsection
 
 @section('content')
