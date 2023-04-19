@@ -56,6 +56,16 @@
         </div>
     @endif
 
+    <div>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <div id="modal_recaptcha" class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+        @if ($errors->has('g-recaptcha-response'))
+            <div class="form-error">
+                {{ $errors->first('g-recaptcha-response') }}
+            </div>
+        @endif
+    </div>
+
     <div class="contact__btn">
         <button id="js_call_submit" class="btn btn-success">@lang('Contacts::index.send')</button>
     </div>   

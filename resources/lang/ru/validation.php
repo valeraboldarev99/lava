@@ -118,4 +118,6 @@ return [
 
     'attributes' => [],
 
+    'recaptcha'             => 'Вы не прошли проверку',
+
 ];

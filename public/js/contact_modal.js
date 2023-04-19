@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function onFormSubmit(event) {
-            event.preventDefault()
+            event.preventDefault();
+
 
             var xhr = new XMLHttpRequest();
             var route = $form.getAttribute('action');
 
             var formData = new FormData($form);
-            // formData.append('g-recaptcha-response', grecaptcha.getResponse());
 
             xhr.open('POST', route, true);
             xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', function () {
         function onError(data) {
             $container.innerHTML = data.view;
 
-            // grecaptcha.render('call_form_recaptcha', {
-            //     'sitekey': document.querySelector('#call_form_recaptcha').getAttribute('data-sitekey'),
-            // });
+            grecaptcha.render('modal_recaptcha', {
+                'sitekey': document.querySelector('#modal_recaptcha').getAttribute('data-sitekey'),
+            });
 
             init();
         }

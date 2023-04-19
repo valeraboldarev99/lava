@@ -4,10 +4,7 @@ namespace App\Modules\Contacts\Http\Controllers;
 
 use App\Modules\Contacts\Models\Contacts;
 use App\Modules\AdminPanel\Http\Controllers\IndexController as Controller;
-
 use App\Modules\Contacts\Mail\ContactsMail;
-// use App\Modules\Settings\Facades\Settings;
-// use App\Rules\ReCaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -49,7 +46,7 @@ class IndexController extends Controller
 
         $entity = $this->getModel()->create($requestArray);
 
-        // $this->sendMail($entity);
+        $this->sendMail($entity);
 
         return response()->json([
             'state' => 'success',
@@ -64,6 +61,7 @@ class IndexController extends Controller
             'email' => 'required|email',
             'phone' => 'required',
             'message' => 'required|max:65535',
+            'g-recaptcha-response' => 'recaptcha',
         ];
     }
 
@@ -95,7 +93,7 @@ class IndexController extends Controller
             'email' => 'required|email',
             'phone' => 'required',
             'message' => 'required|max:65535',
-            // 'g-recaptcha-response' => [new ReCaptcha],
+            'g-recaptcha-response' => 'recaptcha',
         ];
     }
 

@@ -61,6 +61,15 @@
             </div>
         @endif
 
+        <div>
+            @include('common.recaptcha')
+            @if ($errors->has('g-recaptcha-response'))
+                <div class="form-error">
+                    {{ $errors->first('g-recaptcha-response') }}
+                </div>
+            @endif
+        </div>
+
         <div class="contact__btn">
             <button class="btn btn-success">@lang('Contacts::index.send')</button>
         </div>
