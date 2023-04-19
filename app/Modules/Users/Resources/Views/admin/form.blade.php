@@ -17,7 +17,7 @@
                 {!! MyForm::text('name', trans('AdminPanel::fields.name'), $entity->name) !!}
             </div>
             <div class="col-md-6">
-                {!! MyForm::text('email', trans('AdminPanel::fields.email'), $entity->email) !!}
+                {!! MyForm::text('email', trans('AdminPanel::fields.email'), $entity->email, ['disabled']) !!}
             </div>
             <div class="col-md-6">
                 {!! MyForm::password('password', trans('AdminPanel::fields.password'), '', 
