@@ -8,6 +8,7 @@
     <th>@sortablelink('name', trans('AdminPanel::fields.name'))</th>
     <th>@sortablelink('email', trans('AdminPanel::fields.email'))</th>
     <th>{{ __('Users::adminpanel.role') }}</th>
+    <th width="130">@sortablelink('last_online_at', trans('Users::adminpanel.last_online_at'))</th>
     <th width="150">{{ __('AdminPanel::adminpanel.controls') }}</th>
 @endsection
 
@@ -21,7 +22,14 @@
                 {{ $entity->email }}
             </td>
             <td>
-                {{ $entity->role_name }}
+                {{ $entity->roles->first()->name }}
+            </td>
+            <td>
+                @if($entity->last_online_at)
+                    {{ $entity->last_online_at->format('H:i:s') }}
+                    <br>
+                    {{ $entity->last_online_at->format('Y.m.d') }}
+                @endif
             </td>
             <td class="controls">
                 @include('AdminPanel::controls.edit')

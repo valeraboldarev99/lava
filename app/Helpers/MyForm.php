@@ -369,4 +369,5 @@ class MyForm
 
 	// {!! MyForm::helpText('text under input') !!}
 	// {!! MyForm::simpleText('same text', 'TEXT_LABEL') !!}
+    // {!!  MyForm::hidden($name, $value, $options = []) !!}
 }

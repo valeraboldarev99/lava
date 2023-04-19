@@ -20,6 +20,8 @@ class CreateStructureTable extends Migration
             $table->string('redirect_url')->nullable();
             $table->string('template')->nullable();
             $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('in_main_menu')->nullable()->default(0);
+            $table->tinyInteger('in_bottom_menu')->nullable()->default(0);
             $table->text('content')->nullable();
 
             $table->timestamps();

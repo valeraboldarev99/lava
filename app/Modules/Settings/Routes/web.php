@@ -16,6 +16,7 @@ Route::group([
 				'namespace' => 'Admin'], function() {
 
 			Route::resource('/settings', 'IndexController');
+			Route::post('/short_settings', 'IndexController@shortStore')->name('settings.short_store');
 		});
 
 	//user

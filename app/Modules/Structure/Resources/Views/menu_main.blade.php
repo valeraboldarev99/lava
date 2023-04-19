@@ -2,7 +2,7 @@
 	<nav class="header__menu">
 	    <ul>
 	    	@foreach($items as $item)
-	        	<li><a href="{{ route($item->route_name) }}">{{ $item->title }}</a></li>
+	        	<li><a href="{{ $item->slug }}">{{ $item->title }}</a></li>
 	    	@endforeach
 	    </ul>
 	</nav>

@@ -2,6 +2,7 @@
     @section('js')
     <script src="/adminpanel/bower_components/ckeditor4/ckeditor.js"></script>
         @foreach($fields as $field)
+            @if (Schema::hasColumn(getTableName(), $field))
                 <script>
                     CKEDITOR.replace( "{{ $field }}", {
                         filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
@@ -11,6 +12,7 @@
                         removePlugins: ['exportpdf'],
                     } );
                 </script>
+            @endif
         @endforeach
     @endsection
 @endif

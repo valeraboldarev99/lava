@@ -1,6 +1,8 @@
 @extends('layouts.wide')
 
 @section('content')
+    @include('AdminPanel::common.errors')
+
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
         <div class="form__item">

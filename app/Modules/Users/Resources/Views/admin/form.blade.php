@@ -17,7 +17,7 @@
                 {!! MyForm::text('name', trans('AdminPanel::fields.name'), $entity->name) !!}
             </div>
             <div class="col-md-6">
-                {!! MyForm::text('email', trans('AdminPanel::fields.email'), $entity->email) !!}
+                {!! MyForm::text('email', trans('AdminPanel::fields.email'), $entity->email, ['disabled']) !!}
             </div>
             <div class="col-md-6">
                 {!! MyForm::password('password', trans('AdminPanel::fields.password'), '', 
@@ -25,6 +25,14 @@
             </div>
             <div class="col-md-6">
                 {!! MyForm::select('role', trans('Users::adminpanel.role'), $roles) !!}
+            </div>
+
+            <div class="col-md-6">
+                {!! MyForm::simpleText($entity->last_online_at, trans('Users::adminpanel.last_online_at')) !!}
+            </div>
+
+            <div class="col-md-6">
+                {!! MyForm::simpleText($entity->last_login_ip, trans('Users::adminpanel.last_login_ip')) !!}
             </div>
         </div>
 @endsection

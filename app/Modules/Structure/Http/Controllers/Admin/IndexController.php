@@ -51,7 +51,7 @@ class IndexController extends AdminMainController
     public function edit($id)
     {
         $entity = $this->getModel()->findOrFail($id);
-        $parents = Structure::where('depth', '>', 0)->whereNull('parent_id')->pluck('title', 'id');
+        $parents = Structure::where('depth', '>', 0)->where('id', '<>', $id)->whereNull('parent_id')->pluck('title', 'id');
         $parents = ['' => trans('Structure::adminpanel.withoutParent')] + $parents->toArray();
 
         return view($this->getFormViewName(), [

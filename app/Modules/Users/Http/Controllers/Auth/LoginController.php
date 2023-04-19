@@ -8,6 +8,8 @@ use App\Providers\RouteServiceProvider;
 use App\Modules\Users\Models\Users;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use DB;
 
 class LoginController extends Controller
 {
@@ -28,6 +30,14 @@ class LoginController extends Controller
     public function showAdminLoginForm()
     {
         return view('AdminPanel::auth.admin_auth');
+    }
+
+    function authenticated(Request $request, $user)
+    {
+        DB::table("users")->where("id", auth()->user()->id)->update([
+            'last_online_at' => Carbon::now()->toDateTimeString(),
+            'last_login_ip' => $request->getClientIp(),
+        ]);
     }
 
     protected function redirectTo(){

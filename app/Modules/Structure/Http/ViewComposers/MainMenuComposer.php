@@ -9,7 +9,7 @@ class MainMenuComposer
 {
 	public function compose(View $view)
 	{
-		$pages = PagesStructure::getPagesRoutes();
+		$pages = PagesStructure::getMainMenu();
 
 		$view->with('items', $pages);
 	}
