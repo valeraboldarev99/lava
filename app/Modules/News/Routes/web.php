@@ -27,6 +27,8 @@ Route::group([
         });
 
     //user
-        Route::resource('/news', 'IndexController');
+        Route::get('/news', 'IndexController@index')->name('news.index');
+        Route::get('/news/{id}', 'IndexController@show')->name('news.show');
+
      });
  });

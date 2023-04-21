@@ -12,8 +12,24 @@ class IndexController extends Controller
         return new News();
     }
 
+    // public function index()
+    // {
+    //     return 'index page';
+    // }
+
     public function index()
     {
-        return 'index page';
+        return view('News::index', [
+            'items' => $this->getModel()->get(),
+            'routePrefix' => $this->routePrefix
+        ]);
+    }
+
+    public function show($id)
+    {
+        return view('News::show', [
+            'entity'        => $this->getModel()->findOrFail($id),
+            'routePrefix' => $this->routePrefix
+        ]);
     }
 }

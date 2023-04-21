@@ -6,6 +6,8 @@ return [
 
     'locales' => ['ru', 'en'],
 
+    'sitemap_locales_priority' => ['ru', 'en'],
+
     'languages' => [
         'ru' => [
             'lang'      => 'ru',

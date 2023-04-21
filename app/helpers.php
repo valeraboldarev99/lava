@@ -6,6 +6,24 @@ use App\Helpers\PagesStructure;
 use Illuminate\Support\Str;
 
 /**
+ * return full host name
+ */
+if (!function_exists('host')) {
+    function host()
+    {
+        return sprintf("%s://%s", host_protocol(), $_SERVER['SERVER_NAME']);
+    }
+}
+/**
+ * return host protocol http or https
+ */
+if (!function_exists('host_protocol')) {
+    function host_protocol()
+    {
+        return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
+    }
+}
+/**
     * return link to homepage with current language : string
 */
 if (!function_exists('home')) {
@@ -22,6 +40,22 @@ if (!function_exists('modules_all')) {
     function modules_all()
     {
         return array_diff(scandir(config('modules.path')), array('.','..'));
+    }
+}
+
+/**
+    * return all modules name : collect
+*/
+if (!function_exists('modules_collect')) {
+    function modules_collect()
+    {
+        $modules_array = array_diff(scandir(config('modules.path')), array('.','..'));
+        $modules_collect = collect();
+        foreach($modules_array as $module)
+        {
+            $modules_collect[$module] = $module;
+        }
+        return $modules_collect;
     }
 }
 
