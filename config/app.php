@@ -181,6 +181,7 @@ return [
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,//laravel filemanager
         Intervention\Image\ImageServiceProvider::class,//laravel filemanager
         Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,//ReCaptchaServiceProvider
+        Barryvdh\Debugbar\ServiceProvider::class, //debager
     ],
 
     /*
@@ -237,6 +238,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => Intervention\Image\Facades\Image::class,//laravel filemanager
         'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
     ],
 
 ];
