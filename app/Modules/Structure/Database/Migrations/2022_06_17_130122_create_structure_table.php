@@ -13,6 +13,7 @@ class CreateStructureTable extends Migration
             $table->integer('parent_id')->nullable()->index();
             $table->enum('lang', ['ru', 'en'])->index();
             $table->integer('depth')->nullable();
+            $table->integer('position')->nullable()->default(1);
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->string('module')->nullable();

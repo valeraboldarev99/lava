@@ -35,7 +35,7 @@ class IndexController extends Controller
         $items = [];
         $result = null;
 
-        //сперва Модуль структыры сайта
+        //сперва Модуль структуры сайта
         if (isset($modules[$this->structureModuleName])) {
             $structureModule = $modules->pull($this->structureModuleName);
             $modules->prepend($structureModule, $this->structureModuleName);

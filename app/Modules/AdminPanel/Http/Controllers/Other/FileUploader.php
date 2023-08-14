@@ -145,7 +145,7 @@ trait FileUploader
     */
     public function generateName($ext)
     {
-        $this->name = Date("dmy_His") . "_" . Str::random(6) . '.' . $ext;
+        $this->name = Date("ymd_His") . "_" . Str::random(6) . '.' . $ext;
         return $this->name;
     }
 

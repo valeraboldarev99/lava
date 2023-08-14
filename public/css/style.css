@@ -88,31 +88,68 @@ body {
     align-items: center;
 }
 
-.header__menu ul li {
-    list-style: none;
-    padding: 5px;
-    margin: 0;
+.header__menu_item {
     font-size: 18px;
+    list-style: none;
+    padding: 15px 10px 25px 10px;
+    margin: 0;
+	position: relative;
 }
 
-.header__menu ul li:first-child {
+.header__menu_item:first-child {
     padding-left: 0;
 }
 
-.header__menu ul li a {
+.header__menu_item a {
     color: #282828;
     text-decoration: none;
     display: inline-block;
     padding: 5px 0;
 }
 
-.header__menu ul li:hover a {
+.header__menu_item:hover a {
     color: #304b95;
 }
 
-.header__menu ul li.act a {
-    border-bottom: 1px solid #dddddd;
+a.act {
     color: #304b95;
+}
+
+.header__drop_menu {
+	display: none;
+	position: absolute;
+	background-color: #fff;
+	box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.05);
+	top: 58px;
+	left: 0;
+	padding: 10px 25px;
+	white-space: nowrap;
+	z-index: 100;
+}
+
+.header__menu_item:hover .header__drop_menu {
+	display: block;
+}
+
+.drop__menu_items {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.drop__menu_item {
+	margin: 7px 0;
+	font-size: 19px;
+}
+
+.drop__menu_link {
+	color: #393939;
+	text-decoration: none;
+}
+
+.drop__menu_link:hover {
+	color: #b89889;
+	text-decoration: none;
 }
 
 .btn {
@@ -340,3 +377,4 @@ body {
     .contacts__modal {
         width: 45%;
     }
+/*end contacts*/

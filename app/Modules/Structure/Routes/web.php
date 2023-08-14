@@ -16,7 +16,8 @@ Route::group([
 				'as' => config('cms.admin_prefix'),
 				'namespace' => 'Admin'], function() {
 
-			Route::resource('/structure', 'IndexController');
+                    Route::resource('/structure', 'IndexController');
+                    Route::post('structure/position/{id}/{direction}', 'IndexController@positionStructure')->name('structure.position');
 		});
 
 	//user

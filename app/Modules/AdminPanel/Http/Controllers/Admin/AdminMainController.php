@@ -48,7 +48,7 @@ abstract class AdminMainController extends Controller
 
         $this->after($entity);
 
-        return redirect()->route($this->routePrefix . 'edit', $entity->id)->with('message', trans('AdminPanel::adminpanel.messages.store'));
+        return redirect()->route($this->routePrefix . 'edit', $entity->id)->with('success', trans('AdminPanel::adminpanel.messages.store'));
     }
 
     public function edit($id)
@@ -72,7 +72,7 @@ abstract class AdminMainController extends Controller
 
         $this->after($entity);
 
-        return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.update'));
+        return redirect()->back()->with('success', trans('AdminPanel::adminpanel.messages.update'));
     }
 
     public function destroy($id)
@@ -82,7 +82,7 @@ abstract class AdminMainController extends Controller
 
         $entity->delete();
 
-        return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.destroy'));
+        return redirect()->back()->with('success', trans('AdminPanel::adminpanel.messages.destroy'));
     }
 
     protected function after($entity)

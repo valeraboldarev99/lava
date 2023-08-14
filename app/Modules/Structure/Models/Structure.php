@@ -15,7 +15,19 @@ class Structure extends Model
     protected $guarded = ['id'];
 
     public function children() {
-        return $this->hasMany(Structure::class, 'parent_id');
+        return $this->hasMany(Structure::class, 'parent_id', 'id');
+    }
+
+    public function getAllDescendants()
+    {
+        $descendants = $this->children;
+
+        foreach ($this->children as $child) {
+            $childDescendants = $child->getAllDescendants();
+            $descendants = $descendants->merge($childDescendants);
+        }
+
+        return $descendants;
     }
 
     public function parent() {
@@ -36,18 +48,24 @@ class Structure extends Model
 
     public function setParentIdAttribute($value)
     {
+        $parent = Structure::where('id', $value)->first();
         if ($value == NULL) {
-            $this->attributes['depth'] = 1;
+            $this->attributes['depth'] = 0;
             $this->attributes['parent_id'] = $value;
         }
         else {
-            $this->attributes['depth'] = 2;
+            $this->attributes['depth'] = ++$parent->depth;
             $this->attributes['parent_id'] = $value;
         }
     }
 
     public function scopeOrder($query)
     {
-        return $query->orderBy('depth')->orderBy('title');
+        return $query->orderBy('position')->orderBy('title');
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->orderBy('position')->orderBy('title');
     }
 }

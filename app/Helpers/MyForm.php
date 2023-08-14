@@ -62,7 +62,7 @@ class MyForm
 
 		if(isset($attr['action']))
 		{
-			return '<form method="' . $method . '" action="' . route($attr['action']) . '" ' . $autocomplete . $files . '>' . 
+			return '<form method="' . $method . '" action="' . $attr['action'] . '" ' . $autocomplete . $files . '>' . 
 						$csrf;
 		}
 	}

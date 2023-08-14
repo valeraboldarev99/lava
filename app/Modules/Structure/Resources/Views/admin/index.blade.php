@@ -7,7 +7,8 @@
 @section('th')
     <th>@sortablelink('title', trans('AdminPanel::fields.name'))</th>
     <th>@sortablelink('slug', trans('AdminPanel::fields.slug'))</th>
-    <th width="150">Module</th>
+    <th width="150">{{ __('Structure::adminpanel.module') }}</th>
+    <th width="130">{{ __('AdminPanel::adminpanel.position') }}</th>
     <th>{{ __('AdminPanel::adminpanel.controls') }}</th>
 @endsection
 
@@ -15,6 +16,7 @@
     @foreach ($entities as $entity)
         <tr {!! $entity->active == 1 ?: 'style="background:#f2dede;"' !!}>
             <td>
+                {!! str_repeat('&nbsp', $entity->depth * 4) !!}
                 {{ $entity->title }}
             </td>
             <td>
@@ -22,6 +24,11 @@
             </td>
             <td>
                 {{ $entity->module }}
+            </td>
+            <td>
+                {{-- @if($entity->depth != 0) --}}
+                    @include('AdminPanel::controls.position', ['structure' => true])
+                {{-- @endif --}}
             </td>
             <td class="controls">
                 @if($entity->depth != 0)
@@ -33,23 +40,5 @@
                @endif
             </td>
         </tr>
-        @foreach($entity->children as $child)
-            <tr {!! $child->active == 1 ?: 'style="background:#f2dede;"' !!}>
-                <td class="child_page">{{ $child->title }}</td>
-                <td>{{ $child->slug }}</td>
-                <td>
-                    {{ $entity->module }}
-                </td>
-                <td class="controls">
-                    @if($entity->depth != 0)
-                        @include('AdminPanel::controls.publish', ['entity' => $child])
-                    @endif
-                    @include('AdminPanel::controls.edit', ['entity' => $child])
-                    @if($entity->depth != 0)
-                        @include('AdminPanel::controls.destroy', ['entity' => $child])
-                    @endif
-                </td>
-            </tr>
-        @endforeach
     @endforeach
 @endsection

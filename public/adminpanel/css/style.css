@@ -94,6 +94,11 @@
 	padding: 20px 0;
 }
 
+.header__menu_item p {
+    padding: 0;
+    margin: 0;
+}
+
 .header__menu_text {
     display: inline-block;
 }
@@ -249,6 +254,16 @@
 .entities__list td img {
 	width: 100px;
 	max-height: 100px;
+}
+
+.entities__list tr:hover {
+    background: rgba(92, 184, 92, 0.4);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    
 }
 
 .controls {

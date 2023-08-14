@@ -82,7 +82,7 @@ class PagesStructure
                 $page->slug = $page->redirect_url;
             }
             else {
-                $page->slug = '/' . $page->slug; 
+                $page->slug = $page->slug; 
             }
         }
 
@@ -91,14 +91,14 @@ class PagesStructure
 
     public function getMainMenu()
     {
-        $pages = Structure::items()->where('depth', '<>', 0)->where('in_main_menu', 1)->get();
+        $pages = Structure::items()->where('depth', 1)->where('in_main_menu', 1)->get();
         
         return self::getPageUrl($pages);
     }
 
     public function getFooterMenu()
     {
-        $pages = Structure::items()->where('depth', '<>', 0)->where('in_bottom_menu', 1)->get();
+        $pages = Structure::items()->where('depth', 1)->where('in_bottom_menu', 1)->get();
         
         return self::getPageUrl($pages);
     }

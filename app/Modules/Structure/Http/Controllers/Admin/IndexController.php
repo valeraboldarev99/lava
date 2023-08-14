@@ -2,15 +2,15 @@
 
 namespace App\Modules\Structure\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Database\Eloquent\Collection;
-use App\Http\Controllers\Controller;
 use App\Modules\Structure\Models\Structure;
+use App\Modules\AdminPanel\Http\Controllers\Other\Position;
 use App\Modules\AdminPanel\Http\Controllers\Admin\AdminMainController;
 
 class IndexController extends AdminMainController
 {
+    use Position;
+
+    protected $perPage  = 100;
     protected $viewPrefix = 'Structure';
     protected $routePrefix = 'admin.structure.';
 
@@ -29,7 +29,7 @@ class IndexController extends AdminMainController
 
     public function index()
     {
-        $entities = Structure::whereNull('parent_id')->with('children')->sortable()->admin()->paginate($this->perPage);
+        $entities = Structure::with('children')->sortable()->admin()->paginate($this->perPage);
 
         return view($this->getIndexViewName(), [
             'entities' => $entities
@@ -39,25 +39,23 @@ class IndexController extends AdminMainController
     public function create()
     {
         $entity = $this->getModel();
-        $parents = Structure::where('depth', '>', 0)->whereNull('parent_id')->pluck('title', 'id');
-        $parents = ['' => trans('Structure::adminpanel.withoutParent')] + $parents->toArray();
+        $parents = Structure::orderBy('position')->orderBy('title')->get();
 
         return view($this->getFormViewName(), [
             'entity' => $entity,
-            'parents' => $parents,
+            'parents' => $this->depthFormat($parents),
         ]);
     }
 
     public function edit($id)
     {
         $entity = $this->getModel()->findOrFail($id);
-        $parents = Structure::where('depth', '>', 0)->where('id', '<>', $id)->whereNull('parent_id')->pluck('title', 'id');
-        $parents = ['' => trans('Structure::adminpanel.withoutParent')] + $parents->toArray();
+        $parents = Structure::orderBy('position')->orderBy('title')->get();
 
         return view($this->getFormViewName(), [
             'routePrefix'   => $this->routePrefix,
             'entity'        => $entity,
-            'parents' => $parents,
+            'parents'       => $this->depthFormat($parents),
         ]);
     }
 
@@ -75,6 +73,27 @@ class IndexController extends AdminMainController
 
         $this->after($entity);
 
-        return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.destroy'));
+        return redirect()->back()->with('success', trans('AdminPanel::adminpanel.messages.destroy'));
     }
+
+    protected function after($entity)
+    {
+        $this->autoPosition($entity);
+    }
+
+    private function depthFormat($items)
+    {
+        foreach($items as $item) {
+            if($item->depth == 0)
+            {
+                $result[$item->id] = $item->title;
+            }
+            if($item->depth >= 1)
+            {
+                $result[$item->id] = str_repeat('-', $item->depth) . ' ' . $item->title;
+            }
+        }
+        return $result;
+    }
+
 }
