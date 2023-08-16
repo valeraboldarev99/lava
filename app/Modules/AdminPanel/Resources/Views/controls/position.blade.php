@@ -1,8 +1,12 @@
 {{-- 
 @include('AdminPanel::controls.position', [
-    'structure' => true
+    'showPosition' => true
 ]) 
 --}}
+
+@php
+    !isset($showPosition) ? $showPosition = true : $showPosition = false;
+@endphp
 
 <div style="text-align: center; width: 100%;">
     <span style="display: inline-block;">
@@ -15,7 +19,7 @@
         {!! MyForm::close() !!}
     </span>
 
-    @if(!isset($structure))
+    @if($showPosition)
         <span class="btn btn-sm">{!! $entity->position !!}</span>
     @endif
 

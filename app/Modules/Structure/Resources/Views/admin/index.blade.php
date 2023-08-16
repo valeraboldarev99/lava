@@ -27,7 +27,7 @@
             </td>
             <td>
                 @if($entity->depth != 0)
-                    @include('AdminPanel::controls.position', ['structure' => true])
+                    @include('AdminPanel::controls.position', ['showPosition' => false])
                 @endif
             </td>
             <td class="controls">
