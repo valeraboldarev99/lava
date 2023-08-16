@@ -14,6 +14,8 @@ use Illuminate\Validation\ValidationException;
 trait FileUploader
 {
     protected $name = false;
+    // protected $fileRoutePrefix = 'admin.your-model_files.';                                   //you have to add this in your controller and in the method share()
+    // protected $imageRoutePrefix = 'admin.your-model_images.';
 
     /**
         * after saving, we call upload()
@@ -381,7 +383,7 @@ trait FileUploader
             if(!empty($request_array[$field]))
             {
                 $file = $request_array[$field];                                        //get all files from field
-                $multipleTable = \DB::table($entity->getMultipleFilesTables()[$field]); //table where files will be uploaded
+                $multipleTable = DB::table($entity->getMultipleFilesTables()[$field]); //table where files will be uploaded
                 //write it in your model: protected $multipleFilesTables = ['field_name'  => 'table_name_for_images',];
 
                 $file_size = $file->getSize();                                      // get the file size in bytes
@@ -533,5 +535,26 @@ trait FileUploader
             $baseDir = public_path() . $configs[$field]['path'] . $entity->{$field};
         }
         return response()->download($baseDir, $entity->{$field});
+    }
+
+    public function positionFile(FileRequest $request)
+    {
+        $request_array = $request->all();
+
+        $field = $request_array['field'];
+        $file_id = $request_array['file_id'];
+        $direction = $request_array['direction'];
+
+        $file = DB::table($this->getModel()->getMultipleFilesTables()[$field])->where('id', $file_id);
+        
+        if($direction == 'up')                                                              //if user clicked "up"
+        {
+            $file->update(['position' => ++$file->first()->position]);
+        }
+        elseif($direction == 'down')                                                        //if user clicked "down"
+        {
+            $file->update(['position' => --$file->first()->position]);
+        }
+        // return response()->json(['file' => $file]);
     }
 }

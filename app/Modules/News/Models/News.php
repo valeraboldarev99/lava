@@ -20,12 +20,12 @@ class News extends Model {
 
     public function images()
     {
-    	return $this->hasMany(NewsImages::class, 'parent_id', 'id')->orderBy('position');
+    	return $this->hasMany(NewsImages::class, 'parent_id', 'id')->orderBy('position', 'desc');
     }
 
     public function files()
     {
-    	return $this->hasMany(NewsFiles::class, 'parent_id', 'id')->orderBy('position');
+    	return $this->hasMany(NewsFiles::class, 'parent_id', 'id')->orderBy('position', 'desc');
     }
 
     public function scopeOrder($query)

@@ -26,6 +26,8 @@ Route::group([
             Route::resource('/news', 'IndexController');
 
             Route::post('/news/position/{id}/{direction}', 'IndexController@position')->name('news.position');
+            Route::post('/news-file/position', 'IndexController@positionFile')->name('news_files.positionFile');
+            // Route::post('/news-image/position/{entity}/{id}/{direction}', 'IndexController@positionFile')->name('news_images.positionFile');
         });
 
     //user

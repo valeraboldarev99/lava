@@ -534,6 +534,7 @@
 	width: 140px;
 	display: flex;
 	justify-content: space-around;
+    align-items: center;
 }
 
 .import_form {

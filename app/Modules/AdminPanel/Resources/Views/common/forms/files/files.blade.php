@@ -59,6 +59,7 @@
             $('#' + data.block_id + '').append('<div class="files-list__block files-list__name">' + data.saved_name + '</div>');
             $('#' + data.block_id + '').append('<div class="files-list__block files-list__size">' + data.format + '</div>');
             $('#' + data.block_id + '').append('<div class="files-list__block files-list__size">' + data.file_size + '</div>');
+            $('#' + data.block_id + '').append('<div class="files-list__block files-list__controls" style="text-align: center;">' + '{{ __("AdminPanel::adminpanel.messages.update_page") }}' + '</div>');
             $('#' + data.block_id + '').append('<div class="files-list__block files-list__controls"> \n' +
                 '<span class="btn btn-primary btn-sm" \n' +
                     'id="changeFile" \n' +

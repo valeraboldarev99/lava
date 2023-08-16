@@ -4,6 +4,7 @@ namespace App\Modules\News\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Modules\News\Models\News;
+use Illuminate\Support\Facades\View;
 use App\Modules\AdminPanel\Http\Controllers\Other\Position;
 use App\Modules\AdminPanel\Http\Controllers\Other\FileUploader;
 use App\Modules\AdminPanel\Http\Controllers\Admin\AdminMainController;
@@ -17,6 +18,8 @@ class IndexController extends AdminMainController
 
     protected $viewPrefix = 'News';
     protected $routePrefix = 'admin.news.';
+    protected $fileRoutePrefix = 'admin.news_files.';
+    protected $imageRoutePrefix = 'admin.news_images.';
 
     public function getModel()
     {
@@ -41,6 +44,14 @@ class IndexController extends AdminMainController
         }
 
         return redirect()->route('admin.news.index')->withStatus(trans('AdminPanel::adminpanel.import_success'));
+    }
+
+    protected function share()
+    {
+        View::share('routePrefix', $this->routePrefix);
+        View::share('fileRoutePrefix', $this->fileRoutePrefix);
+        View::share('imageRoutePrefix', $this->imageRoutePrefix);
+        View::share('model_name', class_basename($this->getModel()));
     }
 
     // public function getRules($request, $id = false)
