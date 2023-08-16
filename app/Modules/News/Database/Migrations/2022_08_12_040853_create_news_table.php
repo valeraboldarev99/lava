@@ -11,7 +11,7 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->enum('lang', ['ru', 'en']);
-            $table->integer('position')->nullable()->default(1);
+            $table->integer('position')->nullable()->default(0);
             $table->string('title')->nullable()->index();
             $table->string('date')->nullable();
             $table->string('image')->nullable();

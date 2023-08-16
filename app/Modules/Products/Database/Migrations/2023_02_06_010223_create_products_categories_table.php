@@ -11,7 +11,7 @@ class CreateProductsCategoriesTable extends Migration
         Schema::create('products_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->enum('lang', ['ru', 'en']);
-            $table->integer('position')->nullable()->default(1);
+            $table->integer('position')->nullable()->default(0);
             $table->string('title')->nullable()->index();
             $table->tinyInteger('active')->default(1);
             $table->string('category_image')->nullable();

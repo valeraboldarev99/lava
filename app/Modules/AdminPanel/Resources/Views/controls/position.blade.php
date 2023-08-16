@@ -1,11 +1,13 @@
 {{-- 
 @include('AdminPanel::controls.position', [
+    'entity' => $otherEntity,
+    'routePrefix' => $otherRoutePrefix,
     'showPosition' => true
 ]) 
 --}}
 
 @php
-    !isset($showPosition) ? $showPosition = true : $showPosition = false;
+    isset($showPosition) ? $showPosition = $showPosition : $showPosition = true;
 @endphp
 
 <div style="text-align: center; width: 100%;">
