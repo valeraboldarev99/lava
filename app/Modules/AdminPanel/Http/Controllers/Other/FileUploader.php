@@ -537,6 +537,9 @@ trait FileUploader
         return response()->download($baseDir, $entity->{$field});
     }
 
+    /**Change file position
+     * @param $request ['field', 'file_id', 'direction']
+     */
     public function positionFile(FileRequest $request)
     {
         $request_array = $request->all();

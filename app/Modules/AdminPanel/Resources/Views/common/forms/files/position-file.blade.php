@@ -62,6 +62,7 @@
             'title="down"',
             'onclick="changePosition.apply(this)"',
             'data-file_id="' . $entity->id . '"',
+            'data-field="' . $field . '"',
             'data-direction="down"'
         ]) !!}
     </span>

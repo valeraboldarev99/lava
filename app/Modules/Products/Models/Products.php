@@ -37,21 +37,21 @@ class Products extends Model {
 
     public function images1()
     {
-        return $this->hasMany(ProductsImages1::class, 'parent_id', 'id')->orderBy('position');
+        return $this->hasMany(ProductsImages1::class, 'parent_id', 'id')->orderBy('position', 'desc');
     }
 
     public function files1()
     {
-        return $this->hasMany(ProductsFiles1::class, 'parent_id', 'id')->orderBy('position');
+        return $this->hasMany(ProductsFiles1::class, 'parent_id', 'id')->orderBy('position', 'desc');
     }
 
     public function images2()
     {
-        return $this->hasMany(ProductsImages2::class, 'parent_id', 'id')->orderBy('position');
+        return $this->hasMany(ProductsImages2::class, 'parent_id', 'id')->orderBy('position', 'desc');
     }
 
     public function files2()
     {
-        return $this->hasMany(ProductsFiles2::class, 'parent_id', 'id')->orderBy('position');
+        return $this->hasMany(ProductsFiles2::class, 'parent_id', 'id')->orderBy('position', 'desc');
     }
 }

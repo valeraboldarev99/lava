@@ -23,7 +23,7 @@ Route::group([
             Route::get('/products/download_file/{id}/{field}', 'IndexController@downloadFile')->name('products.downloadFile');                                            //downloadFile
             Route::resource('/products', 'IndexController');
             Route::post('/products/position/{id}/{direction}', 'IndexController@position')->name('products.position');
-
+            Route::post('/products-file/position', 'IndexController@positionFile')->name('products_files.positionFile');
 // products_categories
             Route::delete('/products_categories/deleteFile/{id}/{field}', 'ProductsCategoriesController@deleteFile')->name('products_categories.deleteFile');              //delete single file or image
             Route::get('/products_categories/download_file/{id}/{field}', 'ProductsCategoriesController@downloadFile')->name('products_categories.downloadFile');                                            //downloadFile
