@@ -61,11 +61,11 @@ class Structure extends Model
 
     public function scopeOrder($query)
     {
-        return $query->orderBy('position')->orderBy('title');
+        return $query->orderBy('position');
     }
 
     public function scopeAdmin($query)
     {
-        return $query->orderBy('position')->orderBy('title');
+        return $query->orderBy('position');
     }
 }

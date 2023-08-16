@@ -2,6 +2,7 @@
 
 namespace App\Modules\Structure\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use App\Modules\Structure\Models\Structure;
 use App\Modules\AdminPanel\Http\Controllers\Other\Position;
 use App\Modules\AdminPanel\Http\Controllers\Admin\AdminMainController;
@@ -57,6 +58,30 @@ class IndexController extends AdminMainController
             'entity'        => $entity,
             'parents'       => $this->depthFormat($parents),
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, $this->getRules($request, $id), $this->getMessages(), $this->getAttributes());
+        
+        $entity = $this->getModel()->findOrFail($id);
+        
+        $originalParentId = $entity->parent_id;
+        $newParentId = $request->all()['parent_id'];
+        
+        $entity->update($request->all());
+
+        if($originalParentId != $newParentId)                                               //whether the parent has been changed
+        {
+            session(['changedParentId' => true]);
+        }
+        else {
+            session(['changedParentId' => false]);
+        }
+
+        $this->after($entity);
+
+        return redirect()->back()->with('success', trans('AdminPanel::adminpanel.messages.update'));
     }
 
     public function destroy($id)

@@ -15,7 +15,7 @@
         {!! MyForm::close() !!}
     </span>
 
-    @if(isset($structure))
+    @if(!isset($structure))
         <span class="btn btn-sm">{!! $entity->position !!}</span>
     @endif
 

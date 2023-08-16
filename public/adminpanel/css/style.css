@@ -325,6 +325,10 @@
 	width: 130px;
 }
 
+.user__drop p {
+    margin-bottom: 10px;
+}
+
 .header__menu_user:hover .user__drop {
 	display: block;
 }
