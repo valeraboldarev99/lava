@@ -4,12 +4,13 @@ namespace App\Modules\Products\Http\Controllers\Admin;
 
 use App\Modules\Products\Models\Products;
 use App\Modules\Products\Models\ProductsCategories;
+use App\Modules\AdminPanel\Http\Controllers\Other\Position;
 use App\Modules\AdminPanel\Http\Controllers\Other\FileUploader;
 use App\Modules\AdminPanel\Http\Controllers\Admin\AdminMainController;
 
 class IndexController extends AdminMainController
 {
-    use FileUploader;
+    use FileUploader, Position;
 
     protected $viewPrefix = 'Products';
     protected $routePrefix = 'admin.products.';

@@ -12,4 +12,14 @@ class ProductsCategories extends Model
 	use Notifiable, Sortable, FileUploader;
 
     protected $table = 'products_categories';
+
+    public function scopeOrder($query)
+    {
+        return $query->orderBy('position', 'desc')->orderBy('title');
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->orderBy('position', 'desc')->orderBy('title');
+    }
 }

@@ -22,10 +22,12 @@ Route::group([
             Route::post('/products/change_file', 'IndexController@changeFile')->name('products.changeFile');                                            //changeFile
             Route::get('/products/download_file/{id}/{field}', 'IndexController@downloadFile')->name('products.downloadFile');                                            //downloadFile
             Route::resource('/products', 'IndexController');
+            Route::post('/products/position/{id}/{direction}', 'IndexController@position')->name('products.position');
 
 // products_categories
             Route::delete('/products_categories/deleteFile/{id}/{field}', 'ProductsCategoriesController@deleteFile')->name('products_categories.deleteFile');              //delete single file or image
             Route::get('/products_categories/download_file/{id}/{field}', 'ProductsCategoriesController@downloadFile')->name('products_categories.downloadFile');                                            //downloadFile
+            Route::post('/products_categories/position/{id}/{direction}', 'ProductsCategoriesController@position')->name('products_categories.position');
 
             Route::resource('/products_categories', 'ProductsCategoriesController');
         });

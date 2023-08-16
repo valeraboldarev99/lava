@@ -8,6 +8,7 @@
     <th>@sortablelink('title', trans('AdminPanel::fields.name'))</th>
     <th>@sortablelink('category_id', trans('Products::adminpanel.category_id'))</th>
     <th width="120">{{ __('AdminPanel::fields.image') }}</th>
+    <th width="130">{{ __('AdminPanel::adminpanel.position') }}</th>
     <th>{{ __('AdminPanel::adminpanel.controls') }}</th>
 @endsection
 
@@ -22,6 +23,9 @@
             </td>
             <td>
                 <img src="{{ $entity->getImagePath('image', 'middle') }}" alt="{{ $entity->title }}">
+            </td>
+            <td>
+                @include('AdminPanel::controls.position')
             </td>
             <td class="controls">
                @include('AdminPanel::controls.entity_all')

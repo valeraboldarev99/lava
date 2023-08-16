@@ -27,7 +27,12 @@ class Products extends Model {
 
     public function scopeOrder($query)
     {
-        return $query->orderBy('title')->latest();
+        return $query->orderBy('position', 'desc')->orderBy('title');
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->orderBy('position', 'desc')->orderBy('title');
     }
 
     public function images1()
