@@ -27,11 +27,13 @@ trait Position
 
         if($direction == 'up')                                                              //if user clicked "up"
         {
-            return $entity->update(['position' => ++$entity->position]);
+            $entity->update(['position' => ++$entity->position]);
+            return redirect()->back();
         }
         elseif($direction == 'down')                                                        //if user clicked "down"
         {
-            return $entity->update(['position' => --$entity->position]);
+            $entity->update(['position' => --$entity->position]);
+            return redirect()->back();
         }
         else {
             return redirect()->back();

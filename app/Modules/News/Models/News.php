@@ -27,4 +27,14 @@ class News extends Model {
     {
     	return $this->hasMany(NewsFiles::class, 'parent_id', 'id')->orderBy('position');
     }
+
+    public function scopeOrder($query)
+    {
+        return $query->orderBy('position', 'desc')->orderBy('title');
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->orderBy('position', 'desc')->orderBy('title');
+    }
 }
