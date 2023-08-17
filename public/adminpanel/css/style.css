@@ -564,3 +564,9 @@
 .filter__block {
     margin: 10px 0 5px 0;
 }
+
+.emptySpace {
+    height: 100px;
+    width: 50px;
+    margin: 10px;
+}

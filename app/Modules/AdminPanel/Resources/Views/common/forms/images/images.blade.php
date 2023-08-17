@@ -109,7 +109,48 @@
             }
         }
     </script>
+
+    <script src="/adminpanel/js/jquery-ui-1_12_1.min.js"></script>
+    <script>
+        $("#multi-images__items-{{$field}}").sortable({ 
+            placeholder: 'emptySpace',                                                      //insertion area
+            //containment:'parent',                                                         //if you need to restrict movement inside the parent, you can also specify a class ...
+            update: function() {
+                var sortedItems = $("#multi-images__items-{{$field}}").sortable("toArray"); //get the id of the sorted elements
+               // console.log(sortedItems);
+                var dataFilesId = [];
+                var field;
+                $.each(sortedItems, function(index, id) {
+                    var file_id = $("#" + id).data("file_id");                              //get the data-file_id of the sorted elements
+                    field = $("#" + id).data("field");                                      //get the data-field of the sorted elements
+                    dataFilesId.push(file_id);
+                });
+
+                var form_data = new FormData();
+                form_data.append('field', field);
+                form_data.append('files_id', dataFilesId);
+                form_data.append('_token', '{{csrf_token()}}');
+                $('#loading__multi-images-'+field).css('display', 'inline-block');
+
+                $.ajax({
+                    url: "{!! route($routePrefix . 'positionImages') !!}",
+                    data: form_data,
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        console.log(data);
+                        $('#loading__multi-images-'+field).css('display', 'none');
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        });
+    </script>
 @endpush
+
 <label>{{ (isset($label)) ? $label : trans('AdminPanel::fields.multiupload_images') }}</label>
 <div id="{{ $field . '_' . $entity->id }}" class="multi-images__field">
     @if(isset($entity->id))

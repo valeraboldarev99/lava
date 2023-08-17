@@ -15,7 +15,6 @@ trait FileUploader
 {
     protected $name = false;
     // protected $fileRoutePrefix = 'admin.your-model_files.';                                   //you have to add this in your controller and in the method share()
-    // protected $imageRoutePrefix = 'admin.your-model_images.';
 
     /**
         * after saving, we call upload()
@@ -558,6 +557,23 @@ trait FileUploader
         {
             $file->update(['position' => --$file->first()->position]);
         }
-        // return response()->json(['file' => $file]);
+    }
+
+    /**Change images position
+     * @param $request ['field', 'file_id[]']
+     */
+    public function positionImage(FileRequest $request)
+    {
+        $request_array = $request->all();
+        $field = $request_array['field'];
+        $files_id = explode(",", $request_array['files_id']);                           //convert str to array
+        
+        foreach($files_id as $key => $file_id)                                          //change position all images
+        {
+            DB::table($this->getModel() 
+                                ->getMultipleFilesTables()[$field])
+                                ->where('id', $file_id)
+                                ->update(['position' => $key]);
+        }
     }
 }

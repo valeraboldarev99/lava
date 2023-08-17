@@ -388,4 +388,10 @@
     .mob_mt_20 {
         margin-top: 20px;
     }
+
+    .emptySpace {
+        height: 50px;
+        width: 20px;
+        margin: 5px;
+    }
 }

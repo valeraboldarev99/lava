@@ -37,7 +37,7 @@ class Products extends Model {
 
     public function images1()
     {
-        return $this->hasMany(ProductsImages1::class, 'parent_id', 'id')->orderBy('position', 'desc');
+        return $this->hasMany(ProductsImages1::class, 'parent_id', 'id')->orderBy('position', 'asc');
     }
 
     public function files1()
@@ -47,7 +47,7 @@ class Products extends Model {
 
     public function images2()
     {
-        return $this->hasMany(ProductsImages2::class, 'parent_id', 'id')->orderBy('position', 'desc');
+        return $this->hasMany(ProductsImages2::class, 'parent_id', 'id')->orderBy('position', 'asc');
     }
 
     public function files2()

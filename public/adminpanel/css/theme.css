@@ -91,3 +91,7 @@
 	border-right: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 }
+
+.emptySpace {
+    border: 4px dotted #ccc;
+}

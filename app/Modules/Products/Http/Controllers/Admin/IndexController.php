@@ -16,7 +16,6 @@ class IndexController extends AdminMainController
     protected $viewPrefix = 'Products';
     protected $routePrefix = 'admin.products.';
     protected $fileRoutePrefix = 'admin.products_files.';
-    // protected $imageRoutePrefix = 'admin.products_images.';
 
     public function getModel()
     {
@@ -62,7 +61,6 @@ class IndexController extends AdminMainController
     {
         View::share('routePrefix', $this->routePrefix);
         View::share('fileRoutePrefix', $this->fileRoutePrefix);
-        // View::share('imageRoutePrefix', $this->imageRoutePrefix);
         View::share('model_name', class_basename($this->getModel()));
     }
 
