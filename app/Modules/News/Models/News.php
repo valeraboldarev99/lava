@@ -20,7 +20,7 @@ class News extends Model {
 
     public function images()
     {
-    	return $this->hasMany(NewsImages::class, 'parent_id', 'id')->orderBy('position', 'desc');
+    	return $this->hasMany(NewsImages::class, 'parent_id', 'id')->orderBy('position', 'asc');
     }
 
     public function files()
