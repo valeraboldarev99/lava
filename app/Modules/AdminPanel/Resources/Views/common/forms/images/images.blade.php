@@ -139,7 +139,6 @@
                     contentType: false,
                     processData: false,
                     success: function (data) {
-                        console.log(data);
                         $('#loading__multi-images-'+field).css('display', 'none');
                     },
                     error: function (xhr, status, error) {
