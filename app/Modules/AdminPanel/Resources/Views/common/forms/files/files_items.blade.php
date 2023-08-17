@@ -15,7 +15,6 @@
                 <div class="files-list__block files-list__controls">
                     @include('AdminPanel::common.forms.files.position-file', [
                         'entity' => $file,
-                        'routePrefix' => $fileRoutePrefix,
                         'showPosition' => true
                     ])
                 </div>

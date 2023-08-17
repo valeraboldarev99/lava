@@ -17,7 +17,7 @@
             form_data.append('_token', '{{csrf_token()}}');
 
             $.ajax({
-                url: "{!! route($routePrefix . 'positionFile') !!}",
+                url: "{!! route($routePrefix . 'positionFiles') !!}",
                 data: form_data,
                 type: 'POST',
                 contentType: false,

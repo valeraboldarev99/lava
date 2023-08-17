@@ -2,7 +2,6 @@
 
 namespace App\Modules\Products\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\View;
 use App\Modules\Products\Models\Products;
 use App\Modules\Products\Models\ProductsCategories;
 use App\Modules\AdminPanel\Http\Controllers\Other\Position;
@@ -15,7 +14,6 @@ class IndexController extends AdminMainController
 
     protected $viewPrefix = 'Products';
     protected $routePrefix = 'admin.products.';
-    protected $fileRoutePrefix = 'admin.products_files.';
 
     public function getModel()
     {
@@ -56,12 +54,4 @@ class IndexController extends AdminMainController
     {
         return $this->viewPrefix . '::products_admin.form';
     }
-
-    protected function share()
-    {
-        View::share('routePrefix', $this->routePrefix);
-        View::share('fileRoutePrefix', $this->fileRoutePrefix);
-        View::share('model_name', class_basename($this->getModel()));
-    }
-
 }

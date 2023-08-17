@@ -14,7 +14,6 @@ use Illuminate\Validation\ValidationException;
 trait FileUploader
 {
     protected $name = false;
-    // protected $fileRoutePrefix = 'admin.your-model_files.';                                   //you have to add this in your controller and in the method share()
 
     /**
         * after saving, we call upload()
