@@ -2,7 +2,7 @@
     <div class="header__items">
 		<div class="mobile-hamburger sidebar-open"><span></span></div>
         <div class="header__item">
-            <div class="panel-name"><a href="{{ route('admin_panel') }}">{{ config('cms.name') }}</a></div>
+            <div class="panel-name"><a href="{{ route('admin.admin_panel') }}">{{ config('cms.name') }}</a></div>
         </div>
         <div class="header__item header__item_menu">
             <div class="header__menu_item">

@@ -20,6 +20,6 @@ Route::group([
 		});
 
 	//user
-		Route::resource('/settings', 'IndexController');
+		// Route::resource('/settings', 'IndexController');
 	});
 });

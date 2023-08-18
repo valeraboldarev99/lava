@@ -2,7 +2,7 @@
     @if(Auth::user())
     	<span>{{ Auth::user()->name }}</span>
     	@if(Auth::user()->isAdmin())
-        	<a class="btn btn-primary" href="{{ route('admin_panel') }}">{{ __('Users::index.in_adminpanel') }}</a>
+        	<a class="btn btn-primary" href="{{ route('admin.admin_panel') }}">{{ __('Users::index.in_adminpanel') }}</a>
     	@elseif(Auth::user()->isUser())
         	<a class="btn btn-primary" href="{{ route('users.show', Auth::id()) }}">{{ __('Users::index.in_useraccount') }}</a>
     	@elseif(Auth::user()->isDisabled())
