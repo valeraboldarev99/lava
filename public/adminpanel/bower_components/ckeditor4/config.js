@@ -13,6 +13,7 @@ CKEDITOR.editorConfig = function( config ) {
 	    { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
 	    { name: 'tools' },
 	    { name: 'about' },
+	    { name: 'document',    groups: [ 'doctools' ] },
 	    '/',
 	    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
 	    { name: 'colors' },
@@ -22,7 +23,6 @@ CKEDITOR.editorConfig = function( config ) {
 	    '/',
 	    { name: 'styles' },
 
-	    // { name: 'document',    groups: [ 'mode', 'document', 'doctools' ] },
-	    // { name: 'others' },
+	    //{ name: 'others' },
 	];
 };

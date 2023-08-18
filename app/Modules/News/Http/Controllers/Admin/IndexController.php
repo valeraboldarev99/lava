@@ -40,7 +40,7 @@ class IndexController extends AdminMainController
             return back()->withFailures($import->failures());
         }
 
-        return redirect()->route('admin.news.index')->withStatus(trans('AdminPanel::adminpanel.import_success'));
+        return redirect()->route($this->routePrefix . 'index')->withStatus(trans('AdminPanel::adminpanel.import_success'));
     }
 
     // public function getRules($request, $id = false)

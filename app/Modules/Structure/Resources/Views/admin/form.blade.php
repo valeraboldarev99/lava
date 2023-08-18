@@ -1,7 +1,7 @@
 @extends('AdminPanel::admin.form')
 
 @section('title')
-	<h2>Структура сайта</h2>
+    <h2>{{ __('Structure::adminpanel.structure_list') }}</h2>
 @endsection
 
 @section('form_content')

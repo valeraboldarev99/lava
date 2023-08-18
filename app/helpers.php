@@ -191,6 +191,27 @@ if(!function_exists('getModule')) {
 }
 
 /**
+    * return model path : string
+*/
+if(!function_exists('getModelPath')) {
+    function getModelPath($model = null)
+    {
+        if(!$model)
+        {
+            $uses_action =  request()->route()->action['uses'];
+            preg_match('!App\\\Modules\\\(.*)\\\!isU', $uses_action, $res);
+            if (!isset($res[1])) {
+                return false;
+            }
+            return $res[0] . 'Models\\' . $res[1];                                          //$res[0] - module path, $res[1] - module name
+        }
+        else {
+            return 'App\Modules\\'. $model .'\Models\\'. $model;
+        }
+    }
+}
+
+/**
     * return module's configs : array
     * @param $arg - (file name, and if you need - path to value) string
     * @param $module - (module name) string, nullable
@@ -221,10 +242,28 @@ if(!function_exists('getTableName')) {
     {
         if(!$module)
         {
-            return Str::snake(Str::pluralStudly(class_basename(getModule())));
+            $modelPath = getModelPath();
+            $model = new $modelPath;
+            
+            if(isset($model))
+            {
+                return $model->getTable();
+            }
+            else {
+                return Str::snake(Str::pluralStudly(class_basename(getModule())));
+            }
         }
         else {
-            return Str::snake(Str::pluralStudly(class_basename($module)));
+            $modelPath = getModelPath($module);
+            $model = new $modelPath;
+
+            if(isset($model))
+            {
+                return $model->getTable();
+            }
+            else {
+                return Str::snake(Str::pluralStudly(class_basename($module)));
+            }
         }
     }
 }

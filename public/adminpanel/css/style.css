@@ -1,3 +1,7 @@
+a:hover {
+    text-decoration: none;
+}
+
 /*auth admin page*/
 .auth_page {
 	height: 100vh;

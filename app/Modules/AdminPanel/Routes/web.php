@@ -13,6 +13,8 @@ Route::group(['namespace' => $namespace, 'middleware' => ['web']], function() {
 
         
         Route::get(config('cms.url.admin_panel'), 'IndexController@main')->name('admin_panel');
+
+        Route::get('manual/main', 'ManualController@main')->name('manual');
     });
 //user Routes ...
 });
