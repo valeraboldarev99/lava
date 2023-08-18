@@ -28,8 +28,17 @@
         });
         function imageBlock(data, field)
         {
-            $('.js-multi-images__items-'+field).append('<div id="' + data.block_id + '" class="multi-images__item"></div>');
+            $('.js-multi-images__items-'+field).append('<div id="' + data.block_id + '"\n' +
+                'class="multi-images__item ui-sortable-handle" \n' +
+                'data-file_id="' + data.file_id + '" \n' +
+                'data-field="' + field + '"\n' +
+            '></div>');
             $('#' + data.block_id + '').append('<img src="' + data.file_path + '">');
+            $('#' + data.block_id + '').append('<a href="' + data.file_path + '" \n' +
+                'data-fancybox="gallery" \n' +
+                'data-caption="' + field + '"\n' +
+                'class="open_image-gallery">\n' +
+            '</a>');
             $('#' + data.block_id + '').append('<span   class="js-del-img del-img" \n' +
                 'data-href="' + data.delete_route + '" \n' +
                 'data-file_id="' + data.file_id + '" \n' +  
@@ -117,7 +126,7 @@
             //containment:'parent',                                                         //if you need to restrict movement inside the parent, you can also specify a class ...
             update: function() {
                 var sortedItems = $("#multi-images__items-{{$field}}").sortable("toArray"); //get the id of the sorted elements
-               // console.log(sortedItems);
+                // console.log(sortedItems);
                 var dataFilesId = [];
                 var field;
                 $.each(sortedItems, function(index, id) {

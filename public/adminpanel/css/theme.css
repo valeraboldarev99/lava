@@ -1,3 +1,20 @@
+/*auth admin page*/
+.auth_page {
+	background: url(../img/bg-auth2.jpg) 0 0 no-repeat;
+}
+
+.auth-container {
+	background: #fff;
+}
+
+.auth-input {
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.auth-input:focus {
+    border-color: #66afe9;
+}
 /*ADMIN PANEL*/
 /*admin panel header*/
 .admin-panel-page {
@@ -28,6 +45,14 @@
 	color: #b8c7ce;
 }
 
+.group__header {
+	background: #121516;
+}
+
+.sidebar {
+    background: #222D32;
+}
+
 .content-header {
 	background-color: #ECF0F5;
 }
@@ -38,6 +63,10 @@
 
 .content-main {
 	border-top: 3px solid #3c8dbc;
+}
+
+.entities__list tr:hover {
+    background: rgba(92, 184, 92, 0.4);
 }
 
 .entities__list th,
@@ -75,6 +104,10 @@
 
 .del-file {
 	background: #dd4b39 url('../img/delX_btn.svg') center center no-repeat;
+}
+
+.open_image-gallery {
+    background: #337ab7 url('../img/external_link.svg') center center no-repeat;
 }
 
 .download-file {

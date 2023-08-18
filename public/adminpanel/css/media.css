@@ -351,6 +351,12 @@
         position: relative;
     }
 
+    .emptySpace {
+        height: 50px;
+        width: 47%;
+        margin: 3px;
+    }
+
     .multi-files__form-item:last-child {
         width: 100%;
         margin-top: -25px;
@@ -385,13 +391,26 @@
         width: 130px;
     }
 
-    .mob_mt_20 {
-        margin-top: 20px;
+    .del-img {
+        top: 5px;
+	    right: 5px;
+        width: 15px;
+        height: 15px;
+        background-size: 12px;
+        padding: 12px;
+    }
+    
+    .open_image-gallery {
+        top: 5px;
+        right: auto;
+        left: 10px;
+        width: 15px;
+        height: 15px;
+        background-size: 12px;
+        padding: 12px;
     }
 
-    .emptySpace {
-        height: 50px;
-        width: 20px;
-        margin: 5px;
+    .mob_mt_20 {
+        margin-top: 20px;
     }
 }

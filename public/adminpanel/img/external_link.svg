@@ -1,0 +1,11 @@
+<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="none" class="feather feather-external-link">
+
+ <g>
+  <title>Layer 1</title>
+  <g fill-opacity="0" id="svg_4">
+   <path stroke="#ffffff" fill="#cc1c1c" id="svg_1" d="m15,10l0,6a2,2 0 0 1 -2,2l-11,0a2,2 0 0 1 -2,-2l0,-11a2,2 0 0 1 2,-2l6,0"/>
+   <polyline stroke="#ffffff" fill="#cc1c1c" id="svg_2" points="12,0 18,0 18,6 "/>
+   <line stroke="#ffffff" fill="#cc1c1c" id="svg_3" y2="0" y1="11" x2="18" x1="7"/>
+  </g>
+ </g>
+</svg>

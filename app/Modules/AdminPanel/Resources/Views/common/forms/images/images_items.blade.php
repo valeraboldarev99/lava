@@ -12,6 +12,11 @@
                         data-field="{{ $field }}"
                         onclick="deleteImage.apply(this)">
                 </span>
+                <a href="{{ $entity->getPathMultiImage($image->name, $field, $show_img_size) }}"
+                    data-fancybox="gallery" 
+                    data-caption="{{ $image->name }}"
+                    class="open_image-gallery">
+                </a>
             </div>
         @endforeach
     @else
