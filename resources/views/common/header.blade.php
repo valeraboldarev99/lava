@@ -2,7 +2,7 @@
     <div class="header__left">
         <div class="logo">
             <a href="{{ home() }}">
-                <img src="/img/logo.png" alt="logo">
+                <img src="/img/logo2.png" alt="logo">
             </a>
         </div>
     </div>

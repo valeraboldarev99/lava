@@ -59,11 +59,14 @@ body {
 }
 
 .logo {
-    width: 131px;
-    height: 131px;
+    width: 200px;
     overflow: hidden;
     display: inline-block;
-    margin-bottom: 15px;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
 }
 
 .header__right {
@@ -98,6 +101,11 @@ body {
 
 .header__menu_item:first-child {
     padding-left: 0;
+}
+
+.class-name2 {
+    font-size: 55px;
+    text-align: center;
 }
 
 .header__menu_item a {
