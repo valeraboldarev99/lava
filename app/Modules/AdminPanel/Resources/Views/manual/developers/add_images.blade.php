@@ -1,7 +1,7 @@
 @extends('AdminPanel::layouts.app')
 
 @section('title')
-    <h1>Как добавить изображения и файлы в модуль</h1>
+    <h1><a href="{{route('admin.manual')}}">Как добавить изображения и файлы в модуль</a></h1>
 @endsection
 
 @section('content')

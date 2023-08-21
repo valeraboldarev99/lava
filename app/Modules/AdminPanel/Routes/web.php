@@ -14,8 +14,12 @@ Route::group(['namespace' => $namespace, 'middleware' => ['web']], function() {
         
         Route::get(config('cms.url.admin_panel'), 'IndexController@main')->name('admin_panel');
 
-        Route::get('manual/main', 'ManualController@main')->name('manual');
-        Route::get('manual/show/{type}/{name}', 'ManualController@show')->name('manual.show');
+        Route::get('manual', function(){
+            return view('AdminPanel::manual.main');
+        })->name('manual');
+        Route::get('manual/show/{type}/{name}', function($type, $name){
+            return view('AdminPanel::manual.'. $type . '.' . $name);
+        })->name('manual.show');
     });
 //user Routes ...
 });
