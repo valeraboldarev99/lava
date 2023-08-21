@@ -4,7 +4,21 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	// Define changes to default configuration here. For example:
+    config.contentsCss = [
+        '/css/bootstrap.min.css',
+        '/css/jquery-3-5-7.fancybox.css',
+        '/css/style.css',
+    ];
+    config.allowedContent = {
+        $1: {
+            // Use the ability to specify elements as an object.
+            elements: CKEDITOR.dtd,
+            attributes: true,
+            styles: true,
+            classes: true
+        }
+    };
+    config.disallowedContent = 'script; *[on*]';
 	config.language = 'ru';
 	// config.uiColor = '#fff';
 	config.toolbarGroups = [
