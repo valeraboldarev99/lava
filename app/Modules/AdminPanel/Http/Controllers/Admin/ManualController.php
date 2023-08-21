@@ -2,7 +2,6 @@
 
 namespace App\Modules\AdminPanel\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ManualController extends Controller
@@ -15,5 +14,10 @@ class ManualController extends Controller
     public function main()
     {
         return view('AdminPanel::manual.main');
+    }
+
+    public function show($type, $name)
+    {
+        return view('AdminPanel::manual.'. $type . '.' . $name);
     }
 }
