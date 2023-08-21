@@ -51,7 +51,6 @@
             <div class="col-md-6">
                 @include('AdminPanel::common.forms.file', [
                     'field' => 'file',
-                    'field_name' => 'file_name',
                     'label' => trans('AdminPanel::fields.file'),
                     'helptext' => trans('AdminPanel::fields.file_format', ['formats' => 'docx/doc']),
                 ])
