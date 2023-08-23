@@ -34,7 +34,7 @@ Route::group([
         });
 
     //user
-        // Route::resource('/products', 'IndexController');
-        // Route::resource('/products_categories', 'ProductsCategoriesController');
+        Route::get('/products', 'IndexController@index')->name('products.index');
+        Route::get('/products/{id}', 'IndexController@show')->name('products.show');
      });
  });
