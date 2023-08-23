@@ -24,5 +24,6 @@
         <li><a href="{{ route(config('cms.admin_prefix') . 'manual.show', ['type' => 'developers','name' => 'positions']) }}">Добавление позиционирования записей в модуль</a></li>
         <li><a href="{{ route(config('cms.admin_prefix') . 'manual.show', ['type' => 'developers','name' => 'sitemap']) }}">Добавление индексирования сущностей модуля в sitemap</a></li>
         <li><a href="{{ route(config('cms.admin_prefix') . 'manual.show', ['type' => 'developers','name' => 'localization']) }}">Добавление локализации модуля</a></li>
+        <li><a href="{{ route(config('cms.admin_prefix') . 'manual.show', ['type' => 'developers','name' => 'ckeditor']) }}">Настройки редактора ckeditor</a></li>
     </ul>
 @endsection
