@@ -4,6 +4,7 @@ a:hover {
 
 /*auth admin page*/
 .auth_page {
+    background: url(../img/bg-auth2.jpg) 0 0 no-repeat;
 	height: 100vh;
 	background-size: cover;
 	font-size: 14px;
@@ -17,6 +18,7 @@ a:hover {
 }
 
 .auth-container {
+    background: #fff;
 	display: inline-block;
 	margin-top: 75px;
 	width: 50%;
@@ -42,10 +44,13 @@ a:hover {
     padding: 6px 12px;
     border-radius: 4px;
     display: inline-block;
+    background-color: #fff;
+    border: 1px solid #ccc;
 }
 
 .auth-input:focus {
     outline: 0;
+    border-color: #66afe9;
 }
 
 .auth-btn {

@@ -42,7 +42,7 @@ class LoginController extends Controller
 
     protected function redirectTo(){
         if (Auth::user()->isAdmin()) {
-            return $this->redirectTo = '/'. config('cms.url.admin_panel');
+            return $this->redirectTo = '/'. config('cms.admin_prefix') .  '/' . config('cms.url.admin_panel');
         }
         else {
             return home();

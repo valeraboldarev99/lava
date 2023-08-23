@@ -1,20 +1,3 @@
-/*auth admin page*/
-.auth_page {
-	background: url(../img/bg-auth2.jpg) 0 0 no-repeat;
-}
-
-.auth-container {
-	background: #fff;
-}
-
-.auth-input {
-    background-color: #fff;
-    border: 1px solid #ccc;
-}
-
-.auth-input:focus {
-    border-color: #66afe9;
-}
 /*ADMIN PANEL*/
 /*admin panel header*/
 .admin-panel-page {
