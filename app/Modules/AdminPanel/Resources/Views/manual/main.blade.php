@@ -27,5 +27,6 @@
         <li><a href="{{ route(config('cms.admin_prefix') . 'manual.show', ['type' => 'developers','name' => 'localization']) }}">Добавление локализации модуля</a></li>
         <li><a href="{{ route(config('cms.admin_prefix') . 'manual.show', ['type' => 'developers','name' => 'ckeditor']) }}">Настройки редактора ckeditor</a></li>
         <li><a href="{{ route(config('cms.admin_prefix') . 'manual.show', ['type' => 'developers','name' => 'export']) }}">Экспорт/Импорт</a></li>
+        <li><a href="{{ route(config('cms.admin_prefix') . 'manual.show', ['type' => 'developers','name' => 'images_files_fields']) }}">Поля выбора файла/изображения с сервера</a></li>
     </ul>
 @endsection
