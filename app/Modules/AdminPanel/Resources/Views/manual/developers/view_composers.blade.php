@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h2>ДДобавление ViewComposers</h2>
+    <h2>Добавление ViewComposers</h2>
     
     <p>В вашем модуле в config/settings.php добавить:</p>
     <pre>
