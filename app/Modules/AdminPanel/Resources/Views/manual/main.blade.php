@@ -12,6 +12,9 @@
     <h3>
         <a href="#">Для пользователей</a>
     </h3>
+    <ul>
+        <li><a href="{{ route(config('cms.admin_prefix') . 'manual.show', ['type' => 'users','name' => 'about']) }}">О системе</a></li>
+    </ul>
     <h3>
         <a href="#">Для разработчиков</a>
     </h3>
