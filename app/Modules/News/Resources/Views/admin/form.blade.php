@@ -59,8 +59,7 @@
             <div class="col-md-6">
                 @include('AdminPanel::common.forms.related_entities', [
                     'field' => 'related',
-                    'routes' => 'admin.news.related',
-                    //'related_entities' => $related_entities,
+                    'routes' => $routePrefix . 'related',
                     'label' => trans('AdminPanel::fields.related_entities'),
                     'helptext' => trans('AdminPanel::fields.help_related_entities'),
                 ])
