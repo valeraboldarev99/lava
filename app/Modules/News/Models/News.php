@@ -18,6 +18,11 @@ class News extends Model {
         'multi_files'   => 'news_files',
     ];
 
+    public function relatedNews()
+    {
+        return $this->hasMany(NewsRelated::class, 'news_id', 'id');
+    }
+
     public function images()
     {
     	return $this->hasMany(NewsImages::class, 'parent_id', 'id')->orderBy('position', 'asc');
