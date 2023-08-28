@@ -48,7 +48,7 @@
 
                 <div class="clearfix"></div>
 
-                <div class="col-md-12" id="js-redirect_url" style="display: none;">
+                <div class="col-md-12" id="js-redirect_url" {!! !$entity->redirector ? "style='display: none;'" : '' !!}>
                     {!! MyForm::text('redirect_url', trans('Structure::adminpanel.redirect_url') , $entity->redirect_url) !!}
                 </div>
 
