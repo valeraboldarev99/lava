@@ -1,0 +1,13 @@
+<svg width="23" height="28.000000000000004" xmlns="http://www.w3.org/2000/svg">
+ <title/>
+
+ <g>
+  <title>Layer 1</title>
+  <g id="logout">
+   <line class="cls-1" x1="9.99" x2="22.99" y1="14" y2="14" fill="#b89889" stroke="#b89889" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" id="svg_1"/>
+   <path d="m18.12903,23l0,3l-16,0l0,-24l16,0l0,3l2,0l0,-4a1,1 0 0 0 -1,-1l-18,0a1,1 0 0 0 -1,1l0,26a1,1 0 0 0 1,1l18,0a1,1 0 0 0 1,-1l0,-4l-2,0z" id="svg_2" fill="#b89889" stroke="#b89889"/>
+   <line class="cls-1" x1="22.99" x2="18.99" y1="14" y2="18" fill="#b89889" stroke="#b89889" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" id="svg_3"/>
+   <line class="cls-1" x1="22.99" x2="18.99" y1="14" y2="10" fill="#b89889" stroke="#b89889" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" id="svg_4"/>
+  </g>
+ </g>
+</svg>

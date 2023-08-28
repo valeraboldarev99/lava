@@ -12,7 +12,8 @@ return [
 	],
 	'localization'		=> true,
 	'providers' => [
-		'App\Modules\Structure\Http\ViewComposers\MainMenuComposer' => ['Structure::menu_main'],
+		'App\Modules\Structure\Http\ViewComposers\MainMenuComposer' => ['Structure::menu_main', 'Structure::menu_mobile'],
+		'App\Modules\Structure\Http\ViewComposers\FooterMenuComposer' => ['Structure::menu_footer'],
 	],
 	'modules' => [
 		'users' => trans('Structure::adminpanel.modules.users'),
@@ -22,6 +23,7 @@ return [
 		'contacts' => trans('Contacts::adminpanel.title'),
 	],
 	'templates' => [
-		'layouts.wide'	=> 'Default',
+		'layouts.wide'	=> 'Широкий',
+		'layouts.inner'	=> 'Стандартный',
 	],
 ];

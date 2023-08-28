@@ -1,5 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.wide')
 
 @section('page_content')
-	@yield('content')
+    {!! $page->content  !!}
 @endsection
