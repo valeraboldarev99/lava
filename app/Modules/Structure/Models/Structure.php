@@ -15,7 +15,7 @@ class Structure extends Model
     protected $guarded = ['id'];
 
     public function children() {
-        return $this->hasMany(Structure::class, 'parent_id', 'id');
+        return $this->hasMany(Structure::class, 'parent_id', 'id')->items();
     }
 
     public function getAllDescendants()

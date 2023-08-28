@@ -3,7 +3,7 @@
 	    <ul class="header__menu_items">
 	    	@foreach($items as $item)
 	        	<li class="header__menu_item">
-                    <a href="{{ $item->slug }}"
+                    <a href="{{ route($item->slug) }}"
                          {!! (Request::is($item->slug) ? 'class="act"' : '') !!}
                     >
                         {{ $item->title }}
@@ -13,7 +13,7 @@
                             <ul class="drop__menu_items">
                                 @foreach($item->children as $child)
                                     <li class="drop__menu_item">
-                                        <a href="{{ $child->slug }}" class="drop__menu_link">
+                                        <a href="{{ route($child->slug) }}" class="drop__menu_link">
                                             {{ $child->title }}
                                         </a>
 
@@ -21,7 +21,7 @@
                                             <ul>
                                                 @foreach($child->children as $child)
                                                     <li>
-                                                        <a href="{{ $child->slug }}">---{{ $child->title }}</a>
+                                                        <a href="{{ route($child->slug) }}">---{{ $child->title }}</a>
                                                     </li>
                                                 @endforeach
                                             </ul>

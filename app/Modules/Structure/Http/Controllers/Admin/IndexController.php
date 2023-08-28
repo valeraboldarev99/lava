@@ -66,17 +66,23 @@ class IndexController extends AdminMainController
         
         $entity = $this->getModel()->findOrFail($id);
         
-        $originalParentId = $entity->parent_id;
-        $newParentId = $request->all()['parent_id'];
+        if(isset($request->all()['parent_id']))
+        {
+            $originalParentId = $entity->parent_id;
+            $newParentId = $request->all()['parent_id'];
+        }
         
         $entity->update($request->all());
 
-        if($originalParentId != $newParentId)                                               //whether the parent has been changed
+        if(isset($request->all()['parent_id']))
         {
-            session(['changedParentId' => true]);
-        }
-        else {
-            session(['changedParentId' => false]);
+            if($originalParentId != $newParentId)                                               //whether the parent has been changed
+            {
+                session(['changedParentId' => true]);
+            }
+            else {
+                session(['changedParentId' => false]);
+            }
         }
 
         $this->after($entity);

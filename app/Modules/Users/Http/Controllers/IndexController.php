@@ -78,6 +78,11 @@ class IndexController extends Controller
 		return redirect()->back()->with('message', 'Данные обновлены');
 	}
 
+    public function destroy($id)
+    {
+        abort(404);
+    }
+
 	public function getRules()
 	{
 		return [

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Helpers\PagesStructure;
+use App\Helpers\StructurePages;
 
 Route::group([
         'prefix' => Localization::locale(),
@@ -25,7 +26,7 @@ Route::group([
 
 	//generate page routes
 		foreach (PagesStructure::getPagesRoutes() as $route) {
-			Route::get($route->slug, 'IndexController@index')->name($route->route_name);
+			Route::get($route['slug'], 'IndexController@index')->name($route['route_name']);
 		}
 	});
 });
