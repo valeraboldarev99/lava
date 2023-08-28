@@ -30,6 +30,7 @@ Route::group([
         Route::group(['middleware' => ['auth']], function() {
     		Route::resource('users', 'IndexController');
             Route::get('/users', 'IndexController@index')->name('users');
+            Route::get('/user_account', 'IndexController@userAccount')->name('users.userAccount');
         });
 
     //admin

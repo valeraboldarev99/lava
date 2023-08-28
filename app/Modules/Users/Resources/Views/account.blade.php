@@ -18,15 +18,5 @@
                 <a class="btn btn-success" href="{{ route('login') }}">{{ __('Users::index.login_as_user') }}</a>
             @endif
         </div>
-        <div class="users__block">
-            <h1>Профиль</h1>
-            <div>Имя: {{ $entity->name }}</div>
-            <div>E-mail: {{ $entity->email }}</div>
-            @if($checkUserId)
-                <div>Статус: {{ $entity->role }}</div>
-                <br>
-                <a href="{{ route('users.edit', $entity->id) }}" class="btn btn-primary">Редактировать данные</a>
-            @endif
-    </div>
 	</div>
 @endsection
