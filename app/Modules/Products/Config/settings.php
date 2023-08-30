@@ -24,4 +24,7 @@ return [
         ],
     ],
     'localization'      => true,
+    'providers' => [
+        'App\Modules\Products\Http\ViewComposers\MainComposer' => ['Products::main'],
+    ]
 ];

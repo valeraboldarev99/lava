@@ -64,8 +64,14 @@
                     'helptext' => trans('AdminPanel::fields.help_related_entities'),
                 ])
             </div>
+            
             <div class="clearfix"></div>
 
+            <div class="col-md-12">
+                {!! MyForm::textarea('preview', trans('AdminPanel::fields.preview'), $entity->preview, ['rows="8"']) !!}
+            </div>
+
+            <div class="clearfix"></div>
 
             <div class="col-md-12">
                 {!! MyForm::textarea('content', trans('AdminPanel::fields.content'), $entity->content, ['rows="8"']) !!}

@@ -34,7 +34,10 @@ Route::group([
         });
 
     //user
-        Route::get('/products', 'IndexController@index')->name('products.index');
+        Route::get('products', 'IndexController@index')->name('products.index');
+        Route::get('products/{parent_slug}/{slug}', 'IndexController@categories')->name('products.categories');
+        Route::get('catalog/{slug}', 'IndexController@categories')->name('products.parent_categories');
+
         Route::get('/products/{id}', 'IndexController@show')->name('products.show');
      });
  });

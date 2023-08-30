@@ -9,7 +9,7 @@ class MainComposer
 {
     public function compose(View $view)
     {
-        $items = News::get();
+        $items = News::items()->whereNotNull('image')->limit(4)->get();
 
         $view->with('items', $items);
     }
