@@ -14,6 +14,13 @@ class IndexController extends Controller
 
     public function index()
     {
+        $page = getPage();
+        
+        if($page->redirector)
+        {
+            return redirect($page->redirect_url);
+        }
+
         return view('Structure::index');
     }
 }

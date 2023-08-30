@@ -3,7 +3,7 @@
 @section('content')
 	<div class="wrapper">
         <div class="contacts__info">
-            {{-- {!! $page->content !!} --}}
+            {!! $page->content !!}
         </div>
         <div class="block__block">
             <h2 class="block__block_header">

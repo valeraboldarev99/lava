@@ -24,9 +24,9 @@ Route::group([
 	//user
 		Route::resource('/structure', 'IndexController');
 
-	//generate page routes
-		foreach (PagesStructure::getPagesRoutes() as $route) {
-			Route::get($route['slug'], 'IndexController@index')->name($route['route_name']);
-		}
 	});
+//generate page routes
+    foreach (PagesStructure::getPagesRoutes() as $route) {
+        Route::get($route['slug'], $route['action'])->name($route['route_name']);
+    }
 });

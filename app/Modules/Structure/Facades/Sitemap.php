@@ -19,11 +19,11 @@ class Sitemap extends MainSitemap
         $url = '';
 
         if ($entity->lang != config('localization.locale')) {
-            $url .= $entity->lang . '/';
+            $url .= '/' . $entity->lang . '/';
         }
 
-        $url .= $entity->slug;
+        $url .= PagesStructure::getFullUrl($entity);
 
-        return host() . '/' .$url;
+        return host() . $url;
     }
 }
