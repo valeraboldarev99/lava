@@ -604,3 +604,24 @@ a:hover {
 .search__btn_block {
     display: inline-block;
 }
+
+.sidebar__search .search__input_block .form-group {
+    margin: 0;
+}
+
+.sidebar__search .search__input_block .form-control {
+    height: 34px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 0px;
+}
+
+.sidebar__search .search__input_block {
+    width: 75%;
+}
+
+.sidebar__search .btn-default {
+    height: 34px;
+    padding: 8px 20px;
+    border: none;
+}

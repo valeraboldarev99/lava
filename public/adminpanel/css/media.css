@@ -140,6 +140,14 @@
     .ipad_mt_33 {
         margin-top: 33px;
     }
+    
+    .sidebar__search .search__input_block .form-control {
+        padding: 8px 10px;
+    }
+    
+    .sidebar__search .btn-default {
+        padding: 8px 15px;
+    }
 }
 
 @media screen and (max-width:780px) {
@@ -412,5 +420,9 @@
 
     .mob_mt_20 {
         margin-top: 20px;
+    }
+
+    .sidebar__search .search__input_block {
+        width: 82%;
     }
 }

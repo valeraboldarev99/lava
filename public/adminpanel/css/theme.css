@@ -111,3 +111,16 @@
 .emptySpace {
     border: 4px dotted #ccc;
 }
+
+.sidebar__search .search__input_block .form-control {
+    background-color: #222D32;
+}
+
+.sidebar__search .search__input_block {
+    color: #fff;
+}
+
+.sidebar__search .btn-default {
+    background-color: #121516;
+    color: #b8c7ce;
+}
