@@ -591,3 +591,16 @@ a:hover {
 .filter__block {
     margin: 10px 0 5px 0;
 }
+
+.header__search {
+    margin: 25px 0;
+}
+
+.search__input_block {
+    display: inline-block;
+    width: 80%;
+}
+
+.search__btn_block {
+    display: inline-block;
+}

@@ -4,12 +4,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSearchTable extends Migration
+class CreateSearchHistoryTable extends Migration
 {
     public function up()
     {
-        Schema::create('search', function (Blueprint $table) {
+        Schema::create('search_history', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->enum('lang', ['ru', 'en'])->index();
             $table->dateTime('date')->useCurrent();
             $table->ipAddress('ip');
             $table->string('query');
@@ -19,6 +20,6 @@ class CreateSearchTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('search');
+        Schema::dropIfExists('search_history');
     }
 }
