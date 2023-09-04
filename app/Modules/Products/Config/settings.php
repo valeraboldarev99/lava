@@ -26,5 +26,23 @@ return [
     'localization'      => true,
     'providers' => [
         'App\Modules\Products\Http\ViewComposers\MainComposer' => ['Products::main'],
-    ]
+    ],
+    'search' => [
+        [
+            'model_path' => 'App\Modules\Products\Models\Products',
+            'admin_route' => 'admin.products.edit',
+            'user_route' => 'products.index',
+            'admin_search_fields' => ['title'],
+            'user_search_fields' => ['title'],
+            'sort_by_field' => 'position',
+        ],
+        [
+            'model_path' => 'App\Modules\Products\Models\ProductsCategories',
+            'admin_route' => 'admin.products_categories.edit',
+            'user_route' => 'products.index',
+            'admin_search_fields' => ['title'],
+            'user_search_fields' => ['title'],
+            'sort_by_field' => 'id',
+        ],
+    ],
 ];

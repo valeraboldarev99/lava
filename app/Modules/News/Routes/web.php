@@ -26,7 +26,7 @@ Route::group([
             
             Route::get('/news/export/', 'IndexController@export')->name('news.export');
             Route::post('/news/import/', 'IndexController@import')->name('news.import');
-            Route::resource('/news', 'IndexController');
+            Route::resource('/news', 'IndexController')->names('news');
 
             Route::get('/news_related/related','IndexController@related')->name('news.related');
         });

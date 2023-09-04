@@ -21,7 +21,7 @@ Route::group([
             Route::post('/products/multi_uploader', 'IndexController@multiUploader')->name('products.multiUploader');                                            //multi uploading images
             Route::post('/products/change_file', 'IndexController@changeFile')->name('products.changeFile');                                            //changeFile
             Route::get('/products/download_file/{id}/{field}', 'IndexController@downloadFile')->name('products.downloadFile');                                            //downloadFile
-            Route::resource('/products', 'IndexController');
+            Route::resource('/products', 'IndexController')->names('products');
             Route::post('/products/position/{id}/{direction}', 'IndexController@position')->name('products.position');
             Route::post('/products/file-position', 'IndexController@positionFile')->name('products.positionFiles');
             Route::post('/products/image-position', 'IndexController@positionImage')->name('products.positionImages');
@@ -30,7 +30,7 @@ Route::group([
             Route::get('/products_categories/download_file/{id}/{field}', 'ProductsCategoriesController@downloadFile')->name('products_categories.downloadFile');                                            //downloadFile
             Route::post('/products_categories/position/{id}/{direction}', 'ProductsCategoriesController@position')->name('products_categories.position');
 
-            Route::resource('/products_categories', 'ProductsCategoriesController');
+            Route::resource('/products_categories', 'ProductsCategoriesController')->names('products_categories');
         });
 
     //user
