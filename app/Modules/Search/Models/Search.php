@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Support\Collection parseTerms(string $terms, callable $callback = null)
  * @method static \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator get(string $terms = null)
  *
- * @see \ App\Modules\Search\Models\Searcher
+ * @see \App\Modules\Search\Models\Searcher
  */
 class Search extends Facade
 {

@@ -3,6 +3,7 @@
 namespace App\Modules\Search\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use App\Modules\Search\Models\Search;
 use Illuminate\Support\Facades\Validator;
 use App\Modules\Search\Models\SearchHistory;
@@ -18,7 +19,7 @@ class IndexController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('status');
-
+        $this->share();
         $this->fieldName = getModuleConfig('settings.field_name', 'Search');
         $this->resultLimit = getModuleConfig('settings.result_limit', 'Search');
         $this->adminContentViewName = getModuleConfig('settings.admin_search_content_view', 'Search', 'Search::admin.search_content');
@@ -150,5 +151,10 @@ class IndexController extends Controller
             'min'      => trans('Search::adminpanel.errors.short_word'),
             'max'      => trans('Search::adminpanel.errors.long_word')
         ];
+    }
+
+    protected function share()
+    {
+        View::share('model_name', class_basename(SearchHistory::class));
     }
 }

@@ -5,6 +5,8 @@
 @endsection
 
 @section('topmenu')
+    @include('AdminPanel::common.localization')
+
     <div class="header__search">
         @include('Search::admin.search')
 
