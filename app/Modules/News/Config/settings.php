@@ -17,8 +17,12 @@ return [
     'search' => [
         [
             'model_path' => 'App\Modules\News\Models\News',
-            'admin_route' => 'admin.news.edit',
-            'admin_search_fields' => ['title', 'preview', 'content'],
+            'user_route' => 'news.index',
+            'admin_route' => 'admin.news.',
+            'block_title' => trans('News::index.title'),
+            // 'user_search_content_view' => 'News::search_content',
+            // 'admin_search_content_view' => 'News::admin.search_content',
+            'admin_search_fields' => ['title', 'date', 'preview', 'content', 'created_at', 'updated_at'],
             'user_search_fields' => ['title'],
             'sort_by_field' => 'position',
         ],

@@ -10,14 +10,15 @@ use App\Modules\AdminPanel\Http\Controllers\IndexController as Controller;
 
 class IndexController extends Controller
 {
-    public $perPage = 2;
     protected $fieldName;
     protected $resultLimit;
+    protected $adminContentViewName;
 
     public function __construct()
     {
         $this->fieldName = getModuleConfig('settings.field_name', 'Search');
         $this->resultLimit = getModuleConfig('settings.result_limit', 'Search');
+        $this->adminContentViewName = getModuleConfig('settings.admin_search_content_view2', 'Search', 'Search::admin.search_content');
     }
 
     public function getModel()
@@ -38,6 +39,7 @@ class IndexController extends Controller
 
         $modules = modules_collect();
         $results = collect();
+        $total_result = 0;
 
         foreach ($modules as $module) {
             $moduleSearchItems = getModuleConfig('settings.search', $module);
@@ -47,18 +49,31 @@ class IndexController extends Controller
             
             foreach($moduleSearchItems as $item)
             {
-                $searchResult = Search::add($item['model_path'], $item['admin_search_fields'], $item['sort_by_field'])
-                                        ->beginWithWildcard()                           //добавить в начало поискового слова %
-                                        ->includeModelType()                            //добавит в коллекцию имя модели
-                                        ->includeRouteName($item['admin_route'])        //добавит в коллекцию имя роута
-                                        ->orderByDesc()
-                                        ->search($query);
+                if(isset($item['admin_search_fields']) && !empty($item['admin_search_fields']))
+                {
+                    $sortBy = isset($item['sort_by_field']) ? $item['sort_by_field'] : 'id';
+                    $contentView = isset($item['admin_search_content_view']) ? $item['admin_search_content_view'] : NULL;
+                    $blockTitle = isset($item['block_title']) ? $item['block_title'] : trans($module . '::adminpanel.title');
 
-                $results = $results->merge($searchResult);
+                    $searchResult = Search::add($item['model_path'], $item['admin_search_fields'], $sortBy)
+                                            ->beginWithWildcard()                           //добавить в начало поискового слова %
+                                            ->includeModelType()                            //добавит в коллекцию имя модели
+                                            ->includeRouteName($item['admin_route'])        //добавит в коллекцию имя роута
+                                            ->orderByDesc()
+                                            ->search($query);
+
+                    $content = $this->getContent($searchResult, $blockTitle, $contentView);
+                    $total_result += $searchResult->count();
+
+                    if ($content) {
+                        $results[$module] = $content;
+                    }
+                }
+                else {
+                    continue;
+                }
             }
         }
-
-        $total_result = $results->count();
 
         if ($total_result > $this->resultLimit) {
             $validator->errors()->add($this->fieldName, trans('Search::adminpanel.errors.many'));
@@ -82,9 +97,29 @@ class IndexController extends Controller
         ]);
     }
 
+    /**
+     * @param Collection $entities
+     * @param string $title
+     * @param string $viewName
+     * 
+     * @return string 
+     */
+    protected function getContent($entities, $title, $viewName = NULL) : string
+    {
+        $viewName = !isset($viewName) ? $this->adminContentViewName : $viewName; 
+
+        return view($viewName, ['title' => $title, 'items' => $entities])->render();
+    }
+
+    /**
+     * Search validator 
+     * @param string $query
+     * 
+     * @return \Illuminate\Validation\Validator
+     */
     protected function validator(&$query)
     {
-        $validator = Validator::make([$this->fieldName => $query], $this->getNewRules(), $this->getNewMessages());
+        $validator = Validator::make([$this->fieldName => $query], $this->getRules(), $this->getMessages());
         if ($validator->fails()) {
             return $validator;
         }
@@ -98,14 +133,14 @@ class IndexController extends Controller
         return $validator;
     }
 
-    protected function getNewRules() : array
+    public function getRules() : array
     {
         return [
             $this->fieldName => 'required|min:3|max:70'
         ];
     }
 
-    protected function getNewMessages() : array
+    public function getMessages() : array
     {
         return [
             'required' => trans('Search::adminpanel.errors.empty'),

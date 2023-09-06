@@ -30,17 +30,18 @@ return [
     'search' => [
         [
             'model_path' => 'App\Modules\Products\Models\Products',
-            'admin_route' => 'admin.products.edit',
+            'admin_route' => 'admin.products.',
             'user_route' => 'products.index',
-            'admin_search_fields' => ['title'],
+            'admin_search_fields' => ['title', 'created_at', 'updated_at'],
             'user_search_fields' => ['title'],
             'sort_by_field' => 'position',
         ],
         [
             'model_path' => 'App\Modules\Products\Models\ProductsCategories',
-            'admin_route' => 'admin.products_categories.edit',
+            'admin_route' => 'admin.products_categories.',
+            'block_title' => trans('Products::adminpanel.products_categories_title'),
             'user_route' => 'products.index',
-            'admin_search_fields' => ['title'],
+            'admin_search_fields' => ['title', 'created_at', 'updated_at'],
             'user_search_fields' => ['title'],
             'sort_by_field' => 'id',
         ],

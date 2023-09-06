@@ -215,9 +215,10 @@ if(!function_exists('getModelPath')) {
     * return module's configs : array
     * @param $arg - (file name, and if you need - path to value) string
     * @param $module - (module name) string, nullable
+    * @param $default - (default value) string, nullable
 */
 if(!function_exists('getModuleConfig')) {
-    function getModuleConfig($arg, $module = null)
+    function getModuleConfig($arg, $module = null, $default = null)
     {
         if (!$module) {
             $module = getModule();
@@ -226,8 +227,13 @@ if(!function_exists('getModuleConfig')) {
                 return false;
             }
         }
-
+        
         $value = $module . '.' . $arg;
+
+        if(config($value) == NULL)
+        {
+            return $default;
+        }
 
         return config($value);
     }

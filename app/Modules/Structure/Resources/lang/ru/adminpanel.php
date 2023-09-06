@@ -1,5 +1,6 @@
 <?php
 return [
+	'title'		            => 'Структура сайта',
 	'structure_list'		=> 'Структура сайта',
 	'parent'				=> 'Родитель',
 	'withoutParent'			=> 'Без родителя',

@@ -26,4 +26,14 @@ return [
 		'layouts.wide'	=> 'Широкий',
 		'layouts.inner'	=> 'Стандартный',
 	],
+    'search' => [
+        [
+            'model_path' => 'App\Modules\Structure\Models\Structure',
+            'admin_route' => 'admin.structure.',
+            'user_route' => 'structure.index',
+            'admin_search_fields' => ['title', 'slug', 'module', 'content', 'created_at', 'updated_at'],
+            'user_search_fields' => ['title', 'slug', 'content'],
+            'sort_by_field' => 'position',
+        ],
+    ],
 ];

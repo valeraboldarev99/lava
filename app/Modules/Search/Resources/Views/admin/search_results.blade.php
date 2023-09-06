@@ -19,7 +19,7 @@
 
     @if(isset($results) && $total_result)
         @foreach($results as $result)
-            <div><a href="{{ route($result->route_name, $result->id) }}">{{ $result->title }}</a></div>
+            {!! $result !!}
         @endforeach
     @else
         <p>
