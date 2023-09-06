@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Search\Http\Controllers;
+namespace App\Modules\Search\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Modules\Search\Models\Search;
@@ -12,13 +12,16 @@ class IndexController extends Controller
 {
     protected $fieldName;
     protected $resultLimit;
-    protected $userContentViewName;
+    protected $adminContentViewName;
 
     public function __construct()
     {
+        $this->middleware('auth');
+        $this->middleware('status');
+
         $this->fieldName = getModuleConfig('settings.field_name', 'Search');
         $this->resultLimit = getModuleConfig('settings.result_limit', 'Search');
-        $this->userContentViewName = getModuleConfig('settings.user_search_content_view2', 'Search', 'Search::user.search_content');
+        $this->adminContentViewName = getModuleConfig('settings.admin_search_content_view', 'Search', 'Search::admin.search_content');
     }
 
     public function getModel()
@@ -34,7 +37,7 @@ class IndexController extends Controller
         $validator = $this->validator($query);
         
         if ($validator->fails()) {
-            return view('Search::user.search_results')->withErrors($validator);
+            return view('Search::admin.search_results')->withErrors($validator);
         }
 
         $modules = modules_collect();
@@ -49,17 +52,16 @@ class IndexController extends Controller
             
             foreach($moduleSearchItems as $item)
             {
-                if(isset($item['user_search_fields']) && !empty($item['user_search_fields']))
+                if(isset($item['admin_search_fields']) && !empty($item['admin_search_fields']))
                 {
                     $sortBy = isset($item['sort_by_field']) ? $item['sort_by_field'] : 'id';
-                    $contentView = isset($item['user_search_content_view']) ? $item['user_search_content_view'] : NULL;
-                    $blockTitle = isset($item['block_title']) ? $item['block_title'] : trans($module . '::index.title');
-                    $userRoute = isset($item['user_route']) ? $item['user_route'] : NULL;
+                    $contentView = isset($item['admin_search_content_view']) ? $item['admin_search_content_view'] : NULL;
+                    $blockTitle = isset($item['block_title']) ? $item['block_title'] : trans($module . '::adminpanel.title');
 
-                    $searchResult = Search::add($item['model_path'], $item['user_search_fields'], $sortBy)
+                    $searchResult = Search::add($item['model_path'], $item['admin_search_fields'], $sortBy)
                                             ->beginWithWildcard()                           //добавить в начало поискового слова %
                                             ->includeModelType()                            //добавит в коллекцию имя модели
-                                            ->includeRouteName($userRoute)        //добавит в коллекцию имя роута
+                                            ->includeRouteName($item['admin_route'])        //добавит в коллекцию имя роута
                                             ->orderByDesc()
                                             ->search($query);
 
@@ -77,9 +79,9 @@ class IndexController extends Controller
         }
 
         if ($total_result > $this->resultLimit) {
-            $validator->errors()->add($this->fieldName, trans('Search::index.errors.many'));
+            $validator->errors()->add($this->fieldName, trans('Search::adminpanel.errors.many'));
 
-            return view('Search::user.search_results')->withErrors($validator);
+            return view('Search::admin.search_results')->withErrors($validator);
         }
 
         //save search results
@@ -91,7 +93,7 @@ class IndexController extends Controller
         $searchHistory->results = $total_result;
         $searchHistory->save();
 
-        return view('Search::user.search_results',[
+        return view('Search::admin.search_results',[
             'results' => $results,
             'total_result' => $total_result,
             'query' => $query,
@@ -107,7 +109,7 @@ class IndexController extends Controller
      */
     protected function getContent($entities, $title, $viewName = NULL) : string
     {
-        $viewName = !isset($viewName) ? $this->userContentViewName : $viewName; 
+        $viewName = !isset($viewName) ? $this->adminContentViewName : $viewName; 
 
         return view($viewName, ['title' => $title, 'items' => $entities])->render();
     }
@@ -127,7 +129,7 @@ class IndexController extends Controller
         $query = str_replace(['*', '%'], '', $query);
 
         if (!$query) {
-            $validator->errors()->add($this->fieldName, trans('Search::index.errors.empty'));
+            $validator->errors()->add($this->fieldName, trans('Search::adminpanel.errors.empty'));
 
             return $validator;
         }
@@ -144,9 +146,9 @@ class IndexController extends Controller
     public function getMessages() : array
     {
         return [
-            'required' => trans('Search::index.errors.empty'),
-            'min'      => trans('Search::index.errors.short_word'),
-            'max'      => trans('Search::index.errors.long_word')
+            'required' => trans('Search::adminpanel.errors.empty'),
+            'min'      => trans('Search::adminpanel.errors.short_word'),
+            'max'      => trans('Search::adminpanel.errors.long_word')
         ];
     }
 }

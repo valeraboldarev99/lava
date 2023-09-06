@@ -18,6 +18,7 @@
             </div>
             <div class="header__right">
                 <div class="header__top">
+                    @include('Search::user.search')
                     <div class="localization__block">
                         @include('common.localization')
                     </div>

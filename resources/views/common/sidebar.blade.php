@@ -14,6 +14,7 @@
                 @include('Structure::menu_mobile')
             </div>
             <div class="sidebar__contacts">
+                @include('Search::user.search')
                 <div class="header__phone">
                     @if(getSetting('phone_number'))
                         <a href="tel:{!! preg_replace('/\D+/', '', getSetting('phone_number')) !!}" class="header__phone_number" target="_blank">

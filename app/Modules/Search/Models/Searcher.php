@@ -212,7 +212,7 @@ class Searcher
         return $this;
     }
 
-    public function includeRouteName(string $route, string $key = 'route_name'): self
+    public function includeRouteName(string $route = NULL, string $key = 'route_name'): self
     {
         $this->includeRouteNameKey = $key;
         $this->includeRouteNameValue = $route;

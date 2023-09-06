@@ -8,10 +8,12 @@ Route::group(['namespace' => $namespace, 'middleware' => ['web']], function() {
 // admin
     Route::group(['middleware' => ['auth', 'status'],
             'prefix' => config('cms.url.admin_prefix'),
-            'as' => config('cms.admin_prefix')], function() {
+            'as' => config('cms.admin_prefix'),
+            'namespace' => 'Admin'], function() {
 
         Route::get('search', 'IndexController@search')->name('search');
     });
 
 //user
+    Route::get('search', 'IndexController@search')->name('user.search');
 });

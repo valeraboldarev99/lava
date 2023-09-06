@@ -30,7 +30,7 @@ return [
         [
             'model_path' => 'App\Modules\Structure\Models\Structure',
             'admin_route' => 'admin.structure.',
-            'user_route' => 'structure.index',
+            'user_search_content_view' => 'Structure::common.search_content',
             'admin_search_fields' => ['title', 'slug', 'module', 'content', 'created_at', 'updated_at'],
             'user_search_fields' => ['title', 'slug', 'content'],
             'sort_by_field' => 'position',
