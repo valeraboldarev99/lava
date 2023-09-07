@@ -61,8 +61,9 @@ class IndexController extends Controller
                                             ->includeModelType()                            //добавит в коллекцию имя модели
                                             ->includeRouteName($userRoute)        //добавит в коллекцию имя роута
                                             ->orderByDesc()
+                                            ->active()
                                             ->search($query);
-
+// dd($searchResult->where('active', 1));
                     $content = $this->getContent($searchResult, $blockTitle, $contentView);
                     $total_result += $searchResult->count();
 

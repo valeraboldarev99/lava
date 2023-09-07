@@ -50,6 +50,12 @@ class Searcher
     protected $endWithWildcard = true;
 
     /**
+     * Use filter by 'active'
+     * @var bool
+     */
+    protected $active = false;
+
+    /**
      * Where operator.
      * @var string
      */
@@ -161,6 +167,18 @@ class Searcher
     public function orderByDesc(): self
     {
         $this->orderByDirection = 'desc';
+
+        return $this;
+    }
+
+    /**
+     * Filter the results by 'active' field
+     * 
+     * @return self
+     */
+    public function active(): self
+    {
+        $this->active = true;
 
         return $this;
     }
@@ -535,6 +553,11 @@ class Searcher
                 ? $query->orWhereRaw("LOWER({$column}) {$this->whereOperator} ?", [$term])
                 : $query->orWhere($column, $this->whereOperator, $term);
         });
+
+        if($this->active)
+        {
+            $query->where('active', 1);
+        }
     }
 
     /**

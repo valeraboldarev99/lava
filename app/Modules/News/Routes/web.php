@@ -32,7 +32,7 @@ Route::group([
         });
 
     //user
-        Route::get('/news', 'IndexController@index')->name('news.index');
+        // Route::get('/news', 'IndexController@index')->name('news.index');
         Route::get('/news/{id}', 'IndexController@show')->name('news.show');
 
      });
