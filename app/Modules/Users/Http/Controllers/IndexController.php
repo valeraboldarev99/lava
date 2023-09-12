@@ -32,6 +32,16 @@ class IndexController extends Controller
         ]);
     }
 
+    public function userAccount()
+    {
+		$entity =  $this->getModel()->findOrFail(Auth::id());
+
+        return view('Users::account', [
+			'entity'        => $entity,
+			'routePrefix'   => $this->routePrefix,
+		]);
+    }
+
 	public function show($id)
 	{
         if(Auth::id() != 1)
@@ -77,6 +87,11 @@ class IndexController extends Controller
 
 		return redirect()->back()->with('message', 'Данные обновлены');
 	}
+
+    public function destroy($id)
+    {
+        abort(404);
+    }
 
 	public function getRules()
 	{

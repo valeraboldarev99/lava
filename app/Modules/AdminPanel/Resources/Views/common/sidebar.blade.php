@@ -1,4 +1,7 @@
 <section class="sidebar__items">
+    <div class="sidebar__search">
+        @include('Search::admin.search')
+    </div>
     @if(isset($items))
         @foreach($items as $group)
             <div class="group">

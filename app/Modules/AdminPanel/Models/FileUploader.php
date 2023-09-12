@@ -16,9 +16,9 @@ trait FileUploader
         * @param $field
         * @param $size
     */
-    private function getPath($field, $size = null)
+    private function getPath($field, $size = null, $module = null)
     {
-        $image = getModuleConfig('uploads.' . $field);
+        $image = getModuleConfig('uploads.' . $field, $module);
         if(!$image)                                         // there is no such field
         {
             return redirect()->back()->with('message', trans('AdminPanel::adminpanel.messages.no_image_field', ['field' => $field]));
@@ -50,9 +50,9 @@ trait FileUploader
         * @param $field
         * @param $size
     */
-    public function getImagePath($field, $size = null)
+    public function getImagePath($field, $size = null, $module = null)
     {
-        $path = $this->getPath($field, $size);
+        $path = $this->getPath($field, $size, $module);
 
         if($this->{$field} == NULL)
         {
@@ -66,10 +66,10 @@ trait FileUploader
         * @param $field
         * @param $size
     */
-    public function getImageWebpPath($field, $size = null)
+    public function getImageWebpPath($field, $size = null, $module = null)
     {
-        $image = $this->getImagePath($field, $size);
-        $uploads_data = getModuleConfig('uploads.' . $field . '.sizes.' . $size);
+        $image = $this->getImagePath($field, $size, $module);
+        $uploads_data = getModuleConfig('uploads.' . $field . '.sizes.' . $size, $module);
 
         if(!isset($uploads_data['webp']) || !$uploads_data['webp'] && $uploads_data['webp'] == 0)           //does this image have a webp version
         {

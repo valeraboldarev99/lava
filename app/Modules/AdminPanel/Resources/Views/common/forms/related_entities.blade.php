@@ -1,36 +1,12 @@
-{{-- controller --}}
-{{-- public function related(Request $request)
-{
-    $q = isset($request->q) ? htmlspecialchars(trim($request->q)) : '';
-    $data['items'] = [];
-    $news = \DB::table('news')->select('id', 'title')->where('title', 'LIKE', ["%{$q}%"])->limit(10)->get();
-    if ($news) {
-        $i = 0;
-        foreach ($news as $id => $title) {
-            $data['items'][$i]['id'] = $title->id;
-            $data['items'][$i]['text'] = $title->title;
-            $i++;
-        }
-    }
-    echo json_encode($data);
-    die;
-} --}}
-
-{{-- create additional model with table for related entities .... --}}
-
-{{-- view --}}
-{{-- <div class="col-md-6">
-    @include('AdminPanel::common.forms.related_entities', [
-        'field' => 'related',
-        'routes' => 'admin.news.related',
-        'related_entities' => $related_entities,
-        'label' => trans('AdminPanel::fields.related_entities'),
-        'helptext' => trans('AdminPanel::fields.help_related_entities'),
-    ])
-</div>
+{{-- 
+@include('AdminPanel::common.forms.related_entities', [
+    'field' => 'related',
+    'routes' => 'admin.news.related',
+    'related_entities' => $related_entities,
+    'label' => trans('AdminPanel::fields.related_entities'),
+    'helptext' => trans('AdminPanel::fields.help_related_entities'),
+])
  --}}
-{{-- route --}}
-{{-- Route::get('news/related','IndexController@related')->name('news.related'); --}}
 
 @push('js')
     <script>

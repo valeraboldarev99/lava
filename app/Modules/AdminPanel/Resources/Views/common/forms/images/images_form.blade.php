@@ -16,4 +16,5 @@
     @if(isset($helptext))
         {!! MyForm::helpText($helptext) !!}
     @endif
+    {!! MyForm::helpText(trans('AdminPanel::adminpanel.sort_images')) !!}
 </div>

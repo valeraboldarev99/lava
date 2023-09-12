@@ -20,13 +20,20 @@ Route::group([
             Route::post('/news/multi_uploader', 'IndexController@multiUploader')->name('news.multiUploader');                                            //multi uploading images
             Route::post('/news/change_file', 'IndexController@changeFile')->name('news.changeFile');                                            //changeFile
             Route::get('/news/download_file/{id}/{field}', 'IndexController@downloadFile')->name('news.downloadFile');                                            //downloadFile
-
+            Route::post('/news/position/{id}/{direction}', 'IndexController@position')->name('news.position');
+            Route::post('/news/file-position', 'IndexController@positionFile')->name('news.positionFiles');
+            Route::post('/news/image-position', 'IndexController@positionImage')->name('news.positionImages');
+            
             Route::get('/news/export/', 'IndexController@export')->name('news.export');
             Route::post('/news/import/', 'IndexController@import')->name('news.import');
-            Route::resource('/news', 'IndexController');
+            Route::resource('/news', 'IndexController')->names('news');
+
+            Route::get('/news_related/related','IndexController@related')->name('news.related');
         });
 
     //user
-        Route::resource('/news', 'IndexController');
+        // Route::get('/news', 'IndexController@index')->name('news.index');
+        Route::get('/news/{id}', 'IndexController@show')->name('news.show');
+
      });
  });

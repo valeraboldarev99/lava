@@ -140,6 +140,14 @@
     .ipad_mt_33 {
         margin-top: 33px;
     }
+    
+    .sidebar__search .search__input_block .form-control {
+        padding: 8px 10px;
+    }
+    
+    .sidebar__search .btn-default {
+        padding: 8px 15px;
+    }
 }
 
 @media screen and (max-width:780px) {
@@ -351,6 +359,12 @@
         position: relative;
     }
 
+    .emptySpace {
+        height: 50px;
+        width: 47%;
+        margin: 3px;
+    }
+
     .multi-files__form-item:last-child {
         width: 100%;
         margin-top: -25px;
@@ -385,7 +399,30 @@
         width: 130px;
     }
 
+    .del-img {
+        top: 5px;
+	    right: 5px;
+        width: 15px;
+        height: 15px;
+        background-size: 12px;
+        padding: 12px;
+    }
+    
+    .open_image-gallery {
+        top: 5px;
+        right: auto;
+        left: 10px;
+        width: 15px;
+        height: 15px;
+        background-size: 12px;
+        padding: 12px;
+    }
+
     .mob_mt_20 {
         margin-top: 20px;
+    }
+
+    .sidebar__search .search__input_block {
+        width: 82%;
     }
 }

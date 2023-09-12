@@ -21,7 +21,7 @@
     </span>
     <div class="js-import_form import_form">
         {!! MyForm::open([
-            'action' => $routePrefix . 'import',
+            'action' => route($routePrefix . 'import'),
             'method' => 'POST',
             'files' => true]) !!}
 

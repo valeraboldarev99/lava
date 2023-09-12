@@ -14,7 +14,7 @@ class CreateNewsFilesTable extends Migration
             $table->string('file_name')->nullable();
             $table->string('file_size')->nullable();
             $table->string('format')->nullable();
-            $table->integer('position');
+            $table->integer('position')->nullable()->default(0);
             $table->bigInteger('parent_id')->unsigned();
             $table->foreign('parent_id')->references('id')->on('news')->onDelete('cascade');
 

@@ -2,8 +2,8 @@
 
 namespace App\Modules\AdminPanel\Http\Controllers\Other;
 
-use DB;
-use Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
@@ -145,7 +145,7 @@ trait FileUploader
     */
     public function generateName($ext)
     {
-        $this->name = Date("dmy_His") . "_" . Str::random(6) . '.' . $ext;
+        $this->name = Date("ymd_His") . "_" . Str::random(6) . '.' . $ext;
         return $this->name;
     }
 
@@ -381,7 +381,7 @@ trait FileUploader
             if(!empty($request_array[$field]))
             {
                 $file = $request_array[$field];                                        //get all files from field
-                $multipleTable = \DB::table($entity->getMultipleFilesTables()[$field]); //table where files will be uploaded
+                $multipleTable = DB::table($entity->getMultipleFilesTables()[$field]); //table where files will be uploaded
                 //write it in your model: protected $multipleFilesTables = ['field_name'  => 'table_name_for_images',];
 
                 $file_size = $file->getSize();                                      // get the file size in bytes
@@ -533,5 +533,46 @@ trait FileUploader
             $baseDir = public_path() . $configs[$field]['path'] . $entity->{$field};
         }
         return response()->download($baseDir, $entity->{$field});
+    }
+
+    /**Change file position
+     * @param $request ['field', 'file_id', 'direction']
+     */
+    public function positionFile(FileRequest $request)
+    {
+        $request_array = $request->all();
+
+        $field = $request_array['field'];
+        $file_id = $request_array['file_id'];
+        $direction = $request_array['direction'];
+
+        $file = DB::table($this->getModel()->getMultipleFilesTables()[$field])->where('id', $file_id);
+        
+        if($direction == 'up')                                                              //if user clicked "up"
+        {
+            $file->update(['position' => ++$file->first()->position]);
+        }
+        elseif($direction == 'down')                                                        //if user clicked "down"
+        {
+            $file->update(['position' => --$file->first()->position]);
+        }
+    }
+
+    /**Change images position
+     * @param $request ['field', 'file_id[]']
+     */
+    public function positionImage(FileRequest $request)
+    {
+        $request_array = $request->all();
+        $field = $request_array['field'];
+        $files_id = explode(",", $request_array['files_id']);                           //convert str to array
+        
+        foreach($files_id as $key => $file_id)                                          //change position all images
+        {
+            DB::table($this->getModel() 
+                                ->getMultipleFilesTables()[$field])
+                                ->where('id', $file_id)
+                                ->update(['position' => $key]);
+        }
     }
 }

@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{asset('adminpanel/bower_components/select2/dist/css/select2.css')}}">
 
     <link rel="stylesheet" href="/adminpanel/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/adminpanel/css/jquery-3-5-7.fancybox.css">
     <link rel="stylesheet" href="/adminpanel/css/style.css">
     <link rel="stylesheet" href="/adminpanel/css/theme.css">
     <link rel="stylesheet" href="/adminpanel/css/media.css">
@@ -51,6 +52,7 @@
     @include('AdminPanel::common.mobile-sidebar')
 
     <script src="/adminpanel/js/jquery.js"></script>
+    <script src="/adminpanel/js/jquery-3-5-7.fancybox.js"></script>
     <script src="{{asset('adminpanel/bower_components/select2/dist/js/select2.full.js')}}"></script>
     <script src="/adminpanel/js/app.js"></script>
     @stack('js')

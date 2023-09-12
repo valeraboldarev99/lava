@@ -1,0 +1,493 @@
+.clear {
+	clear: both;
+}
+
+html {
+	height: 100%;
+	font-size: 18px;
+	line-height: 1.4;
+	color: #373737;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	background: #fff;
+}
+
+body {
+	margin: 0;
+	height: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	box-sizing: border-box;
+}
+
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 600;
+	line-height: 1.4;
+	color: #393939;
+}
+
+h1 {
+	font-size: 35px;
+	margin: 25px 0;
+}
+
+h2 {
+	font-size: 30px;
+	margin: 15px 0;
+}
+
+h3 {
+	font-size: 25px;
+	margin: 15px 0;
+}
+
+h4 {
+	font-size: 20px;
+	margin: 15px 0;
+}
+
+h5 {
+	font-size: 18px;
+	margin: 15px 0;
+}
+
+h6 {
+	font-weight: 400;
+	font-size: 15px;
+	margin: 10px 0;
+}
+
+p {
+	margin-bottom: 10px;
+}
+
+a {
+	color: #393939;
+}
+
+a:hover {
+	color: #ff6200;
+}
+
+ul,
+ol {
+	margin: 0 0 10px 30px;
+	padding: 0;
+}
+
+table,
+tr,
+th,
+td {
+	border-collapse: collapse;
+}
+
+table {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+}
+
+div {
+	vertical-align: top;
+}
+
+img {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	max-width: 100%;
+	width: 100%;
+	height: auto;
+	border-style: none;
+}
+
+textarea {
+	overflow: auto;
+	resize: vertical;
+}
+
+figure {
+	margin: 0;
+}
+
+a,
+a:hover,
+a:active,
+a:visited {
+	text-decoration: none;
+	outline: none;
+	background-color: transparent;
+	-webkit-text-decoration-skip: objects;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+i,
+em {
+	font-style: italic;
+}
+
+b,
+strong {
+	font-weight: bold;
+}
+
+dt,
+dd {
+	line-height: 1.4;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin-left: 1em;
+	margin-bottom: 1em;
+}
+
+hr {
+	box-sizing: content-box;
+	height: 0;
+	overflow: visible;
+}
+
+pre,
+code {
+	font-family: monospace, monospace;
+	font-size: 18px;
+	line-height: 1.4;
+	overflow: hidden;
+	white-space: -moz-pre-wrap;
+	white-space:   -o-pre-wrap;
+	white-space: -pre-wrap;
+	white-space:      pre-wrap;
+	word-wrap: break-word;
+	tab-size: 4;
+}
+
+code,
+kbd,
+samp {
+	font-size: 1em;
+}
+
+pre {
+	font-family: monospace, monospace;
+	font-size: 1em;
+	padding: 1em;
+	background: #eeeeee;
+	border-radius: 3px;
+}
+
+q {
+	quotes: '«' '»';
+	font-style: italic;
+}
+
+q q {
+	quotes: '„' '“';
+	font-style: italic;
+}
+
+blockquote {
+	padding: 1.5em;
+	margin: 3em;
+	border-left: 5px solid #0b61a4;
+	font-size: 1.2em;
+}
+
+blockquote p:last-child,
+blockquote ul:last-child,
+blockquote ol:last-child {
+	margin-bottom: 0;
+}
+
+blockquote p:first-child,
+blockquote ul:first-child,
+blockquote ol:first-child {
+	margin-top: 0;
+}
+
+blockquote footer,
+blockquote small {
+	display: block;
+	font-size: 80%;
+	line-height: 1.4;
+}
+
+blockquote footer:before,
+blockquote small:before {
+	content: '\2014 \00A0';
+}
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #cccccc;
+	margin: 1em 0;
+	padding: 0;
+}
+
+dfn {
+	font-style: italic;
+}
+
+mark {
+	background-color: #fff;
+	color: #373737;
+}
+
+small {
+	font-size: 80%;
+}
+
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+sup {
+	top: -0.5em;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+	vertical-align: top;
+}
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+article,
+aside,
+footer,
+header,
+nav,
+section,
+figcaption,
+figure,
+main,
+details,
+menu {
+	display: block;
+}
+
+summary {
+	display: list-item;
+}
+
+canvas {
+	display: inline-block;
+}
+
+template {
+	display: none;
+}
+
+[hidden] {
+	display: none;
+}
+
+audio,
+video {
+	display: inline-block;
+}
+
+audio:not([controls]) {
+	display: none;
+	height: 0;
+}
+
+svg:not(:root) {
+	overflow: hidden;
+}
+
+abbr[title] {
+	border-bottom: none;
+	text-decoration: underline;
+	text-decoration: underline dotted;
+}
+
+fieldset {
+	border: 1px solid #c0c0c0;
+	margin: 0 2px;
+	padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+	box-sizing: border-box;
+	color: inherit;
+	display: table;
+	max-width: 100%;
+	padding: 0;
+	white-space: normal;
+}
+
+progress {
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+	font-size: 100%;
+	line-height: 1.15;
+	margin: 0;
+}
+
+button,
+input {
+	overflow: visible;
+}
+
+button,
+select {
+	text-transform: none;
+}
+
+button,
+html [type='button'],
+[type='reset'],
+[type='submit'] {
+	-webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
+	border-style: none;
+	padding: 0;
+}
+
+button:-moz-focusring,
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring {
+	outline: 1px dotted ButtonText;
+}
+
+[type='checkbox'],
+[type='radio'] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
+	height: auto;
+}
+
+[type='search'] {
+	-webkit-appearance: textfield;
+	outline-offset: -2px;
+}
+
+[type='search']::-webkit-search-cancel-button,
+[type='search']::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+	-webkit-appearance: button;
+	font: inherit;
+}
+
+
+@media print {
+	*,
+	*:before,
+	*:after {
+		background: transparent !important;
+		color: #000000 !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
+
+	a,
+	a:visited {
+		text-decoration: underline;
+	}
+
+	a[href]:after {
+		content: ' (' attr(href) ')';
+	}
+
+	abbr[title]:after {
+		content: ' (' attr(title) ')';
+	}
+
+	a[href^='#']:after,
+	a[href^='javascript:']:after {
+		content: '';
+	}
+
+	pre,
+	blockquote {
+		border: 1px solid #373737;
+		page-break-inside: avoid;
+	}
+
+	thead {
+		display: table-header-group;
+	}
+
+	tr,
+	img {
+		page-break-inside: avoid;
+	}
+
+	img {
+		max-width: 100% !important;
+	}
+
+	p,
+	h2,
+	h3 {
+		orphans: 3;
+		widows: 3;
+	}
+
+	h2,
+	h3 {
+		page-break-after: avoid;
+	}
+}

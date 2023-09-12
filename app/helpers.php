@@ -6,6 +6,24 @@ use App\Helpers\PagesStructure;
 use Illuminate\Support\Str;
 
 /**
+ * return full host name
+ */
+if (!function_exists('host')) {
+    function host()
+    {
+        return sprintf("%s://%s", host_protocol(), $_SERVER['SERVER_NAME']);
+    }
+}
+/**
+ * return host protocol http or https
+ */
+if (!function_exists('host_protocol')) {
+    function host_protocol()
+    {
+        return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
+    }
+}
+/**
     * return link to homepage with current language : string
 */
 if (!function_exists('home')) {
@@ -22,6 +40,22 @@ if (!function_exists('modules_all')) {
     function modules_all()
     {
         return array_diff(scandir(config('modules.path')), array('.','..'));
+    }
+}
+
+/**
+    * return all modules name : collect
+*/
+if (!function_exists('modules_collect')) {
+    function modules_collect()
+    {
+        $modules_array = array_diff(scandir(config('modules.path')), array('.','..'));
+        $modules_collect = collect();
+        foreach($modules_array as $module)
+        {
+            $modules_collect[$module] = $module;
+        }
+        return $modules_collect;
     }
 }
 
@@ -157,12 +191,34 @@ if(!function_exists('getModule')) {
 }
 
 /**
+    * return model path : string
+*/
+if(!function_exists('getModelPath')) {
+    function getModelPath($model = null)
+    {
+        if(!$model)
+        {
+            $uses_action =  request()->route()->action['uses'];
+            preg_match('!App\\\Modules\\\(.*)\\\!isU', $uses_action, $res);
+            if (!isset($res[1])) {
+                return false;
+            }
+            return $res[0] . 'Models\\' . $res[1];                                          //$res[0] - module path, $res[1] - module name
+        }
+        else {
+            return 'App\Modules\\'. $model .'\Models\\'. $model;
+        }
+    }
+}
+
+/**
     * return module's configs : array
     * @param $arg - (file name, and if you need - path to value) string
     * @param $module - (module name) string, nullable
+    * @param $default - (default value) string, nullable
 */
 if(!function_exists('getModuleConfig')) {
-    function getModuleConfig($arg, $module = null)
+    function getModuleConfig($arg, $module = null, $default = null)
     {
         if (!$module) {
             $module = getModule();
@@ -171,8 +227,13 @@ if(!function_exists('getModuleConfig')) {
                 return false;
             }
         }
-
+        
         $value = $module . '.' . $arg;
+
+        if(config($value) == NULL)
+        {
+            return $default;
+        }
 
         return config($value);
     }
@@ -187,10 +248,28 @@ if(!function_exists('getTableName')) {
     {
         if(!$module)
         {
-            return Str::snake(Str::pluralStudly(class_basename(getModule())));
+            $modelPath = getModelPath();
+            $model = new $modelPath;
+            
+            if(isset($model))
+            {
+                return $model->getTable();
+            }
+            else {
+                return Str::snake(Str::pluralStudly(class_basename(getModule())));
+            }
         }
         else {
-            return Str::snake(Str::pluralStudly(class_basename($module)));
+            $modelPath = getModelPath($module);
+            $model = new $modelPath;
+
+            if(isset($model))
+            {
+                return $model->getTable();
+            }
+            else {
+                return Str::snake(Str::pluralStudly(class_basename($module)));
+            }
         }
     }
 }

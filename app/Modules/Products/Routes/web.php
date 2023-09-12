@@ -21,17 +21,23 @@ Route::group([
             Route::post('/products/multi_uploader', 'IndexController@multiUploader')->name('products.multiUploader');                                            //multi uploading images
             Route::post('/products/change_file', 'IndexController@changeFile')->name('products.changeFile');                                            //changeFile
             Route::get('/products/download_file/{id}/{field}', 'IndexController@downloadFile')->name('products.downloadFile');                                            //downloadFile
-            Route::resource('/products', 'IndexController');
-
+            Route::resource('/products', 'IndexController')->names('products');
+            Route::post('/products/position/{id}/{direction}', 'IndexController@position')->name('products.position');
+            Route::post('/products/file-position', 'IndexController@positionFile')->name('products.positionFiles');
+            Route::post('/products/image-position', 'IndexController@positionImage')->name('products.positionImages');
 // products_categories
             Route::delete('/products_categories/deleteFile/{id}/{field}', 'ProductsCategoriesController@deleteFile')->name('products_categories.deleteFile');              //delete single file or image
             Route::get('/products_categories/download_file/{id}/{field}', 'ProductsCategoriesController@downloadFile')->name('products_categories.downloadFile');                                            //downloadFile
+            Route::post('/products_categories/position/{id}/{direction}', 'ProductsCategoriesController@position')->name('products_categories.position');
 
-            Route::resource('/products_categories', 'ProductsCategoriesController');
+            Route::resource('/products_categories', 'ProductsCategoriesController')->names('products_categories');
         });
 
     //user
-        // Route::resource('/products', 'IndexController');
-        // Route::resource('/products_categories', 'ProductsCategoriesController');
+        // Route::get('products', 'IndexController@index')->name('products.index');
+        Route::get('products/{parent_slug}/{slug}', 'IndexController@categories')->name('products.categories');
+        Route::get('catalog/{slug}', 'IndexController@categories')->name('products.parent_categories');
+
+        Route::get('/products/{id}', 'IndexController@show')->name('products.show');
      });
  });

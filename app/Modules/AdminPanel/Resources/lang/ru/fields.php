@@ -42,8 +42,8 @@ return [
     'multiupload_files'     => 'Мультизагрузка файлов',
     'choose'                => 'Выбрать',
     'help_for_browsefile'   => 'Выберите файл на сервере или вставьте ссылку на источник',
-    'related_entities'      => 'Связанные товары',
-    'help_related_entities' => 'Начните вводить наименование товара...',
+    'related_entities'      => 'Связанные записи',
+    'help_related_entities' => 'Начните вводить наименование записи...',
     'in_main_menu'          => 'В главном меню',
     'in_bottom_menu'        => 'В футере',
 ];

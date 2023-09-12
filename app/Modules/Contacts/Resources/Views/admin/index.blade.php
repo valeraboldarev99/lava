@@ -14,7 +14,7 @@
 @section('filters')
     <div class="filter__block">
         {!! MyForm::open([
-            'action' => 'admin.settings.short_store',
+            'action' => route(config('cms.admin_prefix') . 'settings.short_store'),
             'method' => 'POST',
             'files' => false]) !!}
 

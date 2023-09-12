@@ -1,7 +1,8 @@
 @if (session()->has('message'))
     @lang('Contacts::index.success')
 @else
-    <form action="{{ route('contacts.store') }}" method="POST" class="order__form">
+form
+    {{-- <form action="{{ route('contacts.store') }}" method="POST" class="order__form">
         {!! csrf_field() !!}
 
         <input 
@@ -73,5 +74,5 @@
         <div class="contact__btn">
             <button class="btn btn-success">@lang('Contacts::index.send')</button>
         </div>
-    </form>
+    </form> --}}
 @endif

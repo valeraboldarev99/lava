@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Helpers\PagesStructure;
+use App\Helpers\StructurePages;
 
 Route::group([
         'prefix' => Localization::locale(),
@@ -16,15 +17,16 @@ Route::group([
 				'as' => config('cms.admin_prefix'),
 				'namespace' => 'Admin'], function() {
 
-			Route::resource('/structure', 'IndexController');
+                    Route::resource('/structure', 'IndexController');
+                    Route::post('structure/position/{id}/{direction}', 'IndexController@positionStructure')->name('structure.position');
 		});
 
 	//user
 		Route::resource('/structure', 'IndexController');
 
-	//generate page routes
-		foreach (PagesStructure::getPagesRoutes() as $route) {
-			Route::get($route->slug, 'IndexController@index')->name($route->route_name);
-		}
 	});
+//generate page routes
+    foreach (PagesStructure::getPagesRoutes() as $route) {
+        Route::get($route['slug'], $route['action'])->name($route['route_name']);
+    }
 });

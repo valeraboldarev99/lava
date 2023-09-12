@@ -13,5 +13,17 @@ return [
     'localization'      => true,
     'providers' => [
         'App\Modules\News\Http\ViewComposers\MainComposer' => ['News::main'],
-    ]
+    ],
+    'search' => [
+        [
+            'model_path' => 'App\Modules\News\Models\News',
+            'user_route' => 'news.index',
+            'admin_route' => 'admin.news.',
+            'block_title' => trans('News::index.title'),
+            'user_search_content_view' => 'News::common.search_content',
+            'admin_search_fields' => ['title', 'date', 'preview', 'content', 'created_at', 'updated_at'],
+            'user_search_fields' => ['title'],
+            'sort_by_field' => 'position',
+        ],
+    ],
 ];

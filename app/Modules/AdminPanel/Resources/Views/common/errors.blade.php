@@ -29,7 +29,7 @@
 @endif
 
 @if (session()->has('message'))
-    <div class="alert alert-info">{{ session('message') }}</div>
+    <div class="alert alert-danger">{{ session('message') }}</div>
 @endif
 
 @if (session()->has('success'))

@@ -4,6 +4,7 @@
             <div class="files-list__block files-list__name">{{ __('AdminPanel::fields.file_name') }}</div>
             <div class="files-list__block files-list__size">{{ __('AdminPanel::fields.format') }}</div>
             <div class="files-list__block files-list__size">{{ __('AdminPanel::fields.size') }}</div>
+            <div class="files-list__block files-list__controls">{{ __('AdminPanel::adminpanel.position') }}</div>
             <div class="files-list__block files-list__controls">{{ __('AdminPanel::adminpanel.controls') }}</div>
         </div>
         @foreach($files_method->get() as $file)
@@ -11,6 +12,12 @@
                 <div class="files-list__block files-list__name">{{ $file->saved_name }}</div>
                 <div class="files-list__block files-list__size">{{ $file->format }}</div>
                 <div class="files-list__block files-list__size">{{ $entity->getFileSize($file->file_size) }}</div>
+                <div class="files-list__block files-list__controls">
+                    @include('AdminPanel::common.forms.files.position-file', [
+                        'entity' => $file,
+                        'showPosition' => true
+                    ])
+                </div>
                 <div class="files-list__block files-list__controls">
                     <span id="changeFile" class="btn btn-primary btn-sm" 
                         data-file_id="{{ $file->id }}"

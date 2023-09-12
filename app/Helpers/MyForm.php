@@ -62,7 +62,7 @@ class MyForm
 
 		if(isset($attr['action']))
 		{
-			return '<form method="' . $method . '" action="' . route($attr['action']) . '" ' . $autocomplete . $files . '>' . 
+			return '<form method="' . $method . '" action="' . $attr['action'] . '" ' . $autocomplete . $files . '>' . 
 						$csrf;
 		}
 	}
@@ -209,7 +209,7 @@ class MyForm
 		$labelBlock = MyForm::label($label, $name);
 		$radioBlock = [];
 		$entity = session('entity');
-		$selectedItem = $entity->$name;
+		$selectedItem = isset($entity) ? $entity->$name : '';
 		old($name) ? $selectedItem = old($name) : $selectedItem = $selectedItem;
 
 		$style == 'stacked' ? $styleBlock = 'form-check' : $styleBlock = 'form-check form-check-inline';
@@ -272,7 +272,7 @@ class MyForm
 	public function select($name, $label = null, $value, $options = [])
 	{
 		$entity = session('entity');
-		$selectedItem = $entity->$name;
+		$selectedItem = isset($entity) ? $entity->$name : '';
 		old($name) ? $selectedItem = old($name) : $selectedItem = $selectedItem;
 
 		$label = MyForm::label($label, $name);

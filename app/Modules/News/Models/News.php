@@ -18,13 +18,28 @@ class News extends Model {
         'multi_files'   => 'news_files',
     ];
 
+    public function relatedNews()
+    {
+        return $this->hasMany(NewsRelated::class, 'news_id', 'id');
+    }
+
     public function images()
     {
-    	return $this->hasMany(NewsImages::class, 'parent_id', 'id')->orderBy('position');
+    	return $this->hasMany(NewsImages::class, 'parent_id', 'id')->orderBy('position', 'asc');
     }
 
     public function files()
     {
-    	return $this->hasMany(NewsFiles::class, 'parent_id', 'id')->orderBy('position');
+    	return $this->hasMany(NewsFiles::class, 'parent_id', 'id')->orderBy('position', 'desc');
+    }
+
+    public function scopeOrder($query)
+    {
+        return $query->orderBy('position', 'desc')->orderBy('title');
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->orderBy('position', 'desc')->orderBy('title');
     }
 }

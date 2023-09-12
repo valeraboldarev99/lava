@@ -19,7 +19,7 @@
             </div>
 
             <div class="col-md-4">
-                {!! MyForm::date('date', trans('AdminPanel::fields.date') , $entity->date ) !!}
+                {!! MyForm::date('date', trans('AdminPanel::fields.date') , $entity->date ? $entity->date : date('Y-m-d') ) !!}
             </div>
 
             <div class="col-md-2">
@@ -51,13 +51,27 @@
             <div class="col-md-6">
                 @include('AdminPanel::common.forms.file', [
                     'field' => 'file',
-                    'field_name' => 'file_name',
                     'label' => trans('AdminPanel::fields.file'),
                     'helptext' => trans('AdminPanel::fields.file_format', ['formats' => 'docx/doc']),
                 ])
             </div>
+
+            <div class="col-md-6">
+                @include('AdminPanel::common.forms.related_entities', [
+                    'field' => 'related',
+                    'routes' => $routePrefix . 'related',
+                    'label' => trans('AdminPanel::fields.related_entities'),
+                    'helptext' => trans('AdminPanel::fields.help_related_entities'),
+                ])
+            </div>
+            
             <div class="clearfix"></div>
 
+            <div class="col-md-12">
+                {!! MyForm::textarea('preview', trans('AdminPanel::fields.preview'), $entity->preview, ['rows="8"']) !!}
+            </div>
+
+            <div class="clearfix"></div>
 
             <div class="col-md-12">
                 {!! MyForm::textarea('content', trans('AdminPanel::fields.content'), $entity->content, ['rows="8"']) !!}

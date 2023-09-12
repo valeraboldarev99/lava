@@ -4,7 +4,7 @@
 return [
     'goto_site'		=> 'Назад к сайту',
     'version'		=> 'Version',
-    'copy'			=> 'Copyright &copy; ' . Date('Y') . '. All rights reserved. LaVA',
+    'copy'			=> 'Copyright ' . Date('Y') . '. All rights reserved. LaVA',
     'messages' => [
 		'store' 	=> 'Запись успешно Создана',
 		'update' 	=> 'Запись успешно Обновлена',
@@ -13,6 +13,11 @@ return [
         'no_image_field' => 'В uploads нет такоего значения ":field" изображения',
         'no_image_size' => 'В uploads нет такоего размера ":size" изображения',
         'no_image_webp' => 'В uploads нет настроек webp для этих параметров изображения',
+        'no_position_field' => 'Возможно в вашей таблице нет поля ":field"',
+        'you_cant_change_main_position' => 'Нельзя изменить позицию корневой записи',
+        'position_max_top' => 'Вы достигли максимально высокой позиции',
+        'position_max_bottom' => 'Вы достигли максимально низкой позиции',
+        'update_page' => 'Обновите страницу для изменения позиции',
     ],
     'file_sizes' => [
         'b'      => ' байт',
@@ -48,4 +53,6 @@ return [
     'controls' => 'Управление',
     'import_success' => 'Данные успешно импортированы',
     'line' => 'Строка',
+    'position' => 'Позиция',
+    'sort_images' => 'Для сортировки изображений перетаскивайте картинки между собой',
 ];

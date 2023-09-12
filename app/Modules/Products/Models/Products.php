@@ -27,26 +27,31 @@ class Products extends Model {
 
     public function scopeOrder($query)
     {
-        return $query->orderBy('title')->latest();
+        return $query->orderBy('position', 'desc')->orderBy('title');
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->orderBy('position', 'desc')->orderBy('title');
     }
 
     public function images1()
     {
-        return $this->hasMany(ProductsImages1::class, 'parent_id', 'id')->orderBy('position');
+        return $this->hasMany(ProductsImages1::class, 'parent_id', 'id')->orderBy('position', 'asc');
     }
 
     public function files1()
     {
-        return $this->hasMany(ProductsFiles1::class, 'parent_id', 'id')->orderBy('position');
+        return $this->hasMany(ProductsFiles1::class, 'parent_id', 'id')->orderBy('position', 'desc');
     }
 
     public function images2()
     {
-        return $this->hasMany(ProductsImages2::class, 'parent_id', 'id')->orderBy('position');
+        return $this->hasMany(ProductsImages2::class, 'parent_id', 'id')->orderBy('position', 'asc');
     }
 
     public function files2()
     {
-        return $this->hasMany(ProductsFiles2::class, 'parent_id', 'id')->orderBy('position');
+        return $this->hasMany(ProductsFiles2::class, 'parent_id', 'id')->orderBy('position', 'desc');
     }
 }

@@ -39,6 +39,10 @@
                     data-csrf_token="{{ csrf_token() }}"
                     onclick="deleteSingleImage.apply(this)">
             </span>
+            <a data-src="{{ $imagePath }}"
+                data-fancybox
+                class="open_image-gallery">
+            </a>
         </div>
         <div class="clearfix"></div>
     @else

@@ -12,7 +12,8 @@ return [
 	],
 	'localization'		=> true,
 	'providers' => [
-		'App\Modules\Structure\Http\ViewComposers\MainMenuComposer' => ['Structure::menu_main'],
+		'App\Modules\Structure\Http\ViewComposers\MainMenuComposer' => ['Structure::menu_main', 'Structure::menu_mobile'],
+		'App\Modules\Structure\Http\ViewComposers\FooterMenuComposer' => ['Structure::menu_footer'],
 	],
 	'modules' => [
 		'users' => trans('Structure::adminpanel.modules.users'),
@@ -22,6 +23,17 @@ return [
 		'contacts' => trans('Contacts::adminpanel.title'),
 	],
 	'templates' => [
-		'layouts.wide'	=> 'Default',
+		'layouts.wide'	=> 'Широкий',
+		'layouts.inner'	=> 'Стандартный',
 	],
+    'search' => [
+        [
+            'model_path' => 'App\Modules\Structure\Models\Structure',
+            'admin_route' => 'admin.structure.',
+            'user_search_content_view' => 'Structure::common.search_content',
+            'admin_search_fields' => ['title', 'slug', 'module', 'content', 'created_at', 'updated_at'],
+            'user_search_fields' => ['title', 'slug', 'content'],
+            'sort_by_field' => 'position',
+        ],
+    ],
 ];
