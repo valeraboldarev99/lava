@@ -10,6 +10,7 @@ use App\Modules\Backuper\Models\Backuper;
 class IndexController extends Controller
 {
     protected $routePrefix = 'admin.backuper.';
+    public    $perPage     = 15;
 
     public function __construct() {
         $this->middleware('auth');
@@ -41,8 +42,7 @@ class IndexController extends Controller
         return view('Backuper::admin.index', [
             'routePrefix' => $this->routePrefix,
             'folders' => $folders,
-            'files_entities' => $this->getModel()->where('dump_type', 'files')->order()->limit(15)->get(),
-            'db_entities' => $this->getModel()->where('dump_type', 'data_base')->order()->limit(15)->get(),
+            'entities' => $this->getModel()->order()->paginate($this->perPage),
         ]);
     }
 

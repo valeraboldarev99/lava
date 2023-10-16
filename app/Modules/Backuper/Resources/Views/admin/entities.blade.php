@@ -2,11 +2,10 @@
     <thead>
         <tr>
             <th>{{ __('Backuper::adminpanel.date') }}</th>
+            <th>{{ __('Backuper::adminpanel.dump_type') }}</th>
             <th>{{ __('Backuper::adminpanel.user_info') }}</th>
-            @if($type == 'files')
-                <th>{{ __('Backuper::adminpanel.time_period') }}</th>
-                <th>{{ __('Backuper::adminpanel.folder') }}</th>
-            @endif
+            <th>{{ __('Backuper::adminpanel.time_period') }}</th>
+            <th>{{ __('Backuper::adminpanel.folder') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -17,13 +16,17 @@
                     {{ $entity->datetime->format('Y-m-d') }}
                 </td>
                 <td>
+                    {{ $entity->dump_type }}
+                </td>
+                <td>
                     {{ $entity->user_login }} <br>
                     {{ $entity->ip }}
                 </td>
-                @if($type == 'files')
+                {{-- @if($entity->dump_type == 'files') --}}
                     <td>
                         @if($entity->all_time)
                             {{ __('Backuper::adminpanel.all_time') }}
+                        @elseif($entity->dump_type == 'data_base')
                         @else
                             {{ $entity->date_from->format('Y-m-d') . ' - ' . $entity->date_to->format('Y-m-d') }}
                         @endif
@@ -31,11 +34,12 @@
                     <td>
                         @if($entity->folder)
                             {{ $entity->folder }}
+                        @elseif($entity->dump_type == 'data_base')
                         @else
                             {{ __('Backuper::adminpanel.all_folders') }}
                         @endif
                     </td>
-                @endif
+                {{-- @endif --}}
             </tr>
         @endforeach
     </tbody>
