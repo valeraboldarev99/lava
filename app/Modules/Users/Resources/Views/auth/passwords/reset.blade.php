@@ -1,4 +1,4 @@
-@extends('layouts.wide')
+@extends('layouts.inner')
 
 @section('content')
     <form method="POST" action="{{ route('password.update') }}">

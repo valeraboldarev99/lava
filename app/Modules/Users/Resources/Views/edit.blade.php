@@ -1,4 +1,4 @@
-@extends('layouts.wide')
+@extends('layouts.inner')
 
 @section('content')
 	<div class="users__block">

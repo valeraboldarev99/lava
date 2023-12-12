@@ -1,4 +1,4 @@
-@extends('layouts.wide')
+@extends('layouts.inner')
 
 @section('content')
     @include('AdminPanel::common.errors')

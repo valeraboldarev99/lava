@@ -922,3 +922,38 @@ select {
         width: 45%;
     }
 /*end contacts*/
+
+.user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dfdfdf;
+    position: relative;
+}
+
+.user__header {
+    font-weight: 700;
+}
+
+.user__item {
+    padding: 10px;
+    width: 45%;
+    font-size: 14px;
+    border-right: 1px solid #dfdfdf;
+}
+
+.user__item:first-child {
+    width: 5%;
+}
+
+.user__item:last-child {
+    border: none;
+}
+
+.mask  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
